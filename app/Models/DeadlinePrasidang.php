@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class DeadlinePrasidang extends Model
+{
+    use HasFactory;
+    protected $table = 'deadline_prasidang';
+    protected $fillable = [
+        'prodi_id',
+        'periode_id',
+        'deadline',
+    ];
+
+    public function prodi(){
+        return $this->belongsTo('App\Models\Prodi','prodi_id')->withTrashed();
+    }
+    public function periode(){
+        return $this->belongsTo('App\Models\Periode','periode_id')->withTrashed();
+    }
+}
