@@ -52,6 +52,8 @@
                                         <tr>
                                             <th style="width: 10px">No</th>
                                             <th>Kode Mutu</th>
+                                            <th>Tahun Ajaran</th>
+                                            <th>Semester</th>
                                             <th style="width: 150px;">Nilai Minimal</th>
                                             <th style="width: 150px;">Nilai Maksimal</th>
                                             <th style="width: 150px; text-align: center">Aksi</th>
@@ -65,6 +67,8 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->index }}</td>
+                                                <td>{{ $item->tahun_ajaran }}</td>
+                                                <td>{{ $item->semester }}</td>
                                                 <td>{{ $item->nilai_min }}</td>
                                                 <td>{{ $item->nilai_maks }}</td>
                                                 <td style="text-align: center">

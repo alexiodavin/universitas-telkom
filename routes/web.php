@@ -28,6 +28,14 @@ Route::group(['middleware' => ['auth:web']], function () {
 
     Route::group(['middleware' => ['auth.admin']], function () {
         Route::prefix('admin')->group(function () {
+            Route::prefix('current_semester')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'index'])->name('backend.admin.current-semester');
+                Route::get('create', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'create'])->name('backend.admin.current-semester.create');
+                Route::post('store', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'store'])->name('backend.admin.current-semester.store');
+                Route::get('edit/{id}', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'edit'])->name('backend.admin.current-semester.edit');
+                Route::put('update/{current_semester}', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'update'])->name('backend.admin.current-semester.update');
+                Route::get('delete/{id}', [\App\Http\Controllers\Backend\CurrentSemesterController::class, 'delete'])->name('backend.admin.current-semester.delete');
+            });
             Route::prefix('periode')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Backend\PeriodeController::class, 'index'])->name('backend.admin.periode');
                 Route::get('create', [\App\Http\Controllers\Backend\PeriodeController::class, 'create'])->name('backend.admin.periode.create');
