@@ -28,6 +28,11 @@
                                     <label class="sr-only" for="tahun_ajaran">Tahun Ajaran</label>
                                     <input type="text" class="form-control mb-2" id="tahun_ajaran" name="tahun_ajaran"
                                         value="{{ $current_semester->tahun_ajaran }}">
+                                    @error('tahun_ajaran')
+                                        <div id="tahun_ajaran_error" class="text-danger text-sm">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-auto">
                                     <label class="sr-only" for="semester">Semester</label>

@@ -14,10 +14,12 @@ class CurrentSemesterController extends Controller
     }
     public function update(Request $request, CurrentSemester $current_semester)
     {
-        $data = $this->validate($request, [
-            'tahun_ajaran' => 'required',
-            'semester' => 'required',
-        ]);
+        $data = $request->validate(
+            [
+                'tahun_ajaran' => 'required',
+                'semester' => 'required',
+            ]
+        );
         $current_semester->update($data);
         return back()->with('success', 'Berhasil mengubah Semester');
     }
