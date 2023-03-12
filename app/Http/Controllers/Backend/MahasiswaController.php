@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\ImportMahasiswa;
+use App\Models\CurrentSemester;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -51,6 +52,7 @@ class MahasiswaController extends Controller
     {
         return view('backend.mahasiswa.create', [
             'prodis' => Prodi::all(),
+            'current_semester' => CurrentSemester::find(1),
             'periodes' => $this->getListPeriode(),
         ]);
     }
@@ -63,8 +65,8 @@ class MahasiswaController extends Controller
         $data = [
             'periode_id' => $periode->id,
             'prodi_id' => $request->prodi_id,
-            'tahun_ajaran' => "2021-2022",
-            'semester' => "Genap",
+            'tahun_ajaran' => "$request->tahun_ajaran",
+            'semester' => $request->semester,
         ];
 
         DB::beginTransaction();

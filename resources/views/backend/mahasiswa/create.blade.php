@@ -18,16 +18,19 @@
                     <div class="col-12">
                         <div class="card shadow">
                             <div class="card-body">
-                                <form action="{{ route('backend.admin.mahasiswa.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
+                                <form action="{{ route('backend.admin.mahasiswa.store') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Download File</label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Download File</label>
                                         <div class="col-sm-10">
-                                            <a  class="btn btn-primary" href="{{ asset('file/template_mahasiswa.xlsx') }}" download>Template Excel</a>
+                                            <a class="btn btn-primary" href="{{ asset('file/template_mahasiswa.xlsx') }}"
+                                                download>Template Excel</a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Program Studi <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Program Studi <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <select id="prodi_id" name="prodi_id" class="form-control" required>
                                                 <option value="">Pilih Program Studi</option>
@@ -41,24 +44,29 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Kode Prodi <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Kode Prodi <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <input type="text" id="kode" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Singkatan Prodi <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Singkatan Prodi <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <input type="text" id="singkatan" class="form-control" readonly>
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Periode <span style="color:red;"> *</span></label>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Periode <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <select name="tahun_ajaran" class="form-control" required>
                                                 <option value="">Pilih Periode</option>
                                                 @foreach ($periodes as $periode)
-                                                    <option value="{{ $periode->tahun_ajaran }}">{{ $periode->tahun_ajaran }}</option>
+                                                    <option value="{{ $periode->tahun_ajaran }}"
+                                                        @if ($periode->tahun_ajaran == $current_semester->tahun_ajaran) selected @endif>
+                                                        {{ $periode->tahun_ajaran }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('tahun_ajaran'))
@@ -67,20 +75,26 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Semester <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Semester <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <select name="semester" class="form-control" required>
                                                 <option value="">Pilih Semester</option>
-                                                <option value="Ganjil">Ganjil</option>
-                                                <option value="Genap">Genap</option>
+                                                <option value="Ganjil" @if ($current_semester->semester == 'Ganjil') selected @endif>
+                                                    Ganjil
+                                                </option>
+                                                <option value="Genap" @if ($current_semester->semester == 'Genap') selected @endif>
+                                                    Genap
+                                                </option>
                                             </select>
                                             @if ($errors->has('semester'))
                                                 <span style="color:red;">{{ $errors->first('semester') }}</span>
                                             @endif
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Upload File <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Upload File <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control-file" name="file" required>
                                             @if ($errors->has('file'))
@@ -88,10 +102,12 @@
                                             @endif
                                         </div>
                                     </div>
-                                <button type="submit" class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
-                                <div class="form-group row mt-2">
-                                    <label class="col-sm-2 col-form-label"><span class="font-weight-bold" style="color:red;">*</span>)Wajib Diisi</label>
-                                </div>
+                                    <button type="submit"
+                                        class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
+                                    <div class="form-group row mt-2">
+                                        <label class="col-sm-2 col-form-label"><span class="font-weight-bold"
+                                                style="color:red;">*</span>)Wajib Diisi</label>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -105,11 +121,11 @@
 @section('js')
     <script>
         $('#prodi_id').on('change', function() {
-            $.get("{{ route('api.prodi.find') }}"+'?id='+this.value, function(response){
-                if(response.data){
+            $.get("{{ route('api.prodi.find') }}" + '?id=' + this.value, function(response) {
+                if (response.data) {
                     $('#kode').val(response.data.kode)
                     $('#singkatan').val(response.data.singkatan)
-                }else{
+                } else {
                     $('#kode').val('')
                     $('#singkatan').val('')
                 }

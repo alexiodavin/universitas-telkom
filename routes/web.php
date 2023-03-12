@@ -44,6 +44,14 @@ Route::group(['middleware' => ['auth:web']], function () {
                 Route::post('update/{id}', [\App\Http\Controllers\Backend\PeriodeController::class, 'update'])->name('backend.admin.periode.update');
                 Route::get('delete/{id}', [\App\Http\Controllers\Backend\PeriodeController::class, 'delete'])->name('backend.admin.periode.delete');
             });
+            Route::prefix('periode-semester')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'index'])->name('backend.admin.periode-semester');
+                Route::get('create', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'create'])->name('backend.admin.periode-semester.create');
+                Route::post('store', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'store'])->name('backend.admin.periode-semester.store');
+                Route::get('edit/{id}', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'edit'])->name('backend.admin.periode-semester.edit');
+                Route::post('update/{id}', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'update'])->name('backend.admin.periode-semester.update');
+                Route::get('delete/{id}', [\App\Http\Controllers\Backend\PeriodeSemesterController::class, 'delete'])->name('backend.admin.periode-semester.delete');
+            });
             Route::prefix('dosen-koor-pa')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Backend\DosenKoorPAController::class, 'index'])->name('backend.admin.dosen-koor-pa');
                 Route::get('create', [\App\Http\Controllers\Backend\DosenKoorPAController::class, 'create'])->name('backend.admin.dosen-koor-pa.create');
