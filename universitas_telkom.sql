@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 07, 2023 at 02:33 PM
--- Server version: 8.0.32
--- PHP Version: 8.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 12, 2023 at 01:49 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `foto` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -48,13 +48,34 @@ INSERT INTO `admin` (`id`, `user_id`, `nama`, `telepon`, `foto`, `created_at`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `current_semester`
+--
+
+CREATE TABLE `current_semester` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `current_semester`
+--
+
+INSERT INTO `current_semester` (`id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`) VALUES
+(1, '2022-2023', 'Genap', '2023-03-10 15:56:09', '2023-03-10 17:27:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `deadline_prasidang`
 --
 
 CREATE TABLE `deadline_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -74,9 +95,9 @@ INSERT INTO `deadline_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `c
 --
 
 CREATE TABLE `deadline_proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -96,9 +117,9 @@ INSERT INTO `deadline_proposal` (`id`, `prodi_id`, `periode_id`, `deadline`, `cr
 --
 
 CREATE TABLE `deadline_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -118,9 +139,9 @@ INSERT INTO `deadline_sidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `crea
 --
 
 CREATE TABLE `detail_nilai_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nilai_prasidang_id` bigint UNSIGNED DEFAULT NULL,
-  `komponen_prasidang_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nilai_prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `komponen_prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
   `nilai` double DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -144,9 +165,9 @@ INSERT INTO `detail_nilai_prasidang` (`id`, `nilai_prasidang_id`, `komponen_pras
 --
 
 CREATE TABLE `detail_nilai_proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nilai_proposal_id` bigint UNSIGNED DEFAULT NULL,
-  `komponen_proposal_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nilai_proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `komponen_proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
   `nilai` double DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -202,9 +223,9 @@ INSERT INTO `detail_nilai_proposal` (`id`, `nilai_proposal_id`, `komponen_propos
 --
 
 CREATE TABLE `detail_nilai_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nilai_sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `komponen_sidang_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nilai_sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `komponen_sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
   `nilai` double DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -218,19 +239,19 @@ CREATE TABLE `detail_nilai_sidang` (
 --
 
 CREATE TABLE `dosen` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `dosen_import_id` bigint UNSIGNED DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nama_gelar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `foto` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `dosen_import_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `nama_gelar` varchar(255) DEFAULT NULL,
+  `nip` varchar(255) DEFAULT NULL,
+  `kode` varchar(255) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `foto` longtext DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -269,11 +290,11 @@ INSERT INTO `dosen` (`id`, `user_id`, `periode_id`, `dosen_import_id`, `nama`, `
 --
 
 CREATE TABLE `dosen_import` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -295,12 +316,12 @@ INSERT INTO `dosen_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, `sem
 --
 
 CREATE TABLE `dosen_kaprodi` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `dosen_id` bigint UNSIGNED DEFAULT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `dosen_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `awal_menjabat` date DEFAULT NULL,
   `akhir_menjabat` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -325,12 +346,12 @@ INSERT INTO `dosen_kaprodi` (`id`, `periode_id`, `dosen_id`, `prodi_id`, `tahun_
 --
 
 CREATE TABLE `dosen_koordinator_pa` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `dosen_id` bigint UNSIGNED DEFAULT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `dosen_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -353,13 +374,13 @@ INSERT INTO `dosen_koordinator_pa` (`id`, `periode_id`, `dosen_id`, `prodi_id`, 
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -369,13 +390,13 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `histori_judul_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prasidang_id` bigint UNSIGNED DEFAULT NULL,
-  `judul_indo_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_indo_baru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris_baru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `aksi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `judul_indo_lama` varchar(255) DEFAULT NULL,
+  `judul_indo_baru` varchar(255) DEFAULT NULL,
+  `judul_inggris_lama` varchar(255) DEFAULT NULL,
+  `judul_inggris_baru` varchar(255) DEFAULT NULL,
+  `aksi` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -387,13 +408,13 @@ CREATE TABLE `histori_judul_prasidang` (
 --
 
 CREATE TABLE `histori_judul_proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `proposal_id` bigint UNSIGNED DEFAULT NULL,
-  `judul_indo_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_indo_baru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris_baru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `aksi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `judul_indo_lama` varchar(255) DEFAULT NULL,
+  `judul_indo_baru` varchar(255) DEFAULT NULL,
+  `judul_inggris_lama` varchar(255) DEFAULT NULL,
+  `judul_inggris_baru` varchar(255) DEFAULT NULL,
+  `aksi` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -405,14 +426,14 @@ CREATE TABLE `histori_judul_proposal` (
 --
 
 CREATE TABLE `jadwal_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prasidang_id` bigint UNSIGNED DEFAULT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal_prasidang` date DEFAULT NULL,
-  `bulan` int DEFAULT NULL,
+  `bulan` int(11) DEFAULT NULL,
   `jam_mulai_prasidang` time DEFAULT NULL,
   `jam_selesai_prasidang` time DEFAULT NULL,
-  `ruangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -440,14 +461,14 @@ INSERT INTO `jadwal_prasidang` (`id`, `prasidang_id`, `ruangan_id`, `tanggal_pra
 --
 
 CREATE TABLE `jadwal_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal_sidang` date DEFAULT NULL,
-  `bulan` int DEFAULT NULL,
+  `bulan` int(11) DEFAULT NULL,
   `jam_mulai_sidang` time DEFAULT NULL,
   `jam_selesai_sidang` time DEFAULT NULL,
-  `ruangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -471,10 +492,10 @@ INSERT INTO `jadwal_sidang` (`id`, `sidang_id`, `ruangan_id`, `tanggal_sidang`, 
 --
 
 CREATE TABLE `komponen` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `nama_komponen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jenis_komponen` enum('proposal','prasidang','sidang') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama_komponen` varchar(255) DEFAULT NULL,
+  `jenis_komponen` enum('proposal','prasidang','sidang') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -487,16 +508,16 @@ CREATE TABLE `komponen` (
 --
 
 CREATE TABLE `komponen_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `deadline_prasidang_id` bigint UNSIGNED DEFAULT NULL,
-  `nama_komponen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `deadline_prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama_komponen` varchar(255) DEFAULT NULL,
   `persentase` double DEFAULT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `tanggal_deadline_input_nilai` date DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -527,16 +548,16 @@ INSERT INTO `komponen_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline_pras
 --
 
 CREATE TABLE `komponen_proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `deadline_proposal_id` bigint UNSIGNED DEFAULT NULL,
-  `nama_komponen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `deadline_proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama_komponen` varchar(255) DEFAULT NULL,
   `persentase` double DEFAULT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `tanggal_deadline_input_nilai` date DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -576,16 +597,16 @@ INSERT INTO `komponen_proposal` (`id`, `prodi_id`, `periode_id`, `deadline_propo
 --
 
 CREATE TABLE `komponen_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `deadline_sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `nama_komponen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `deadline_sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama_komponen` varchar(255) DEFAULT NULL,
   `persentase` double DEFAULT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `tanggal_deadline_input_nilai` date DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -613,18 +634,18 @@ INSERT INTO `komponen_sidang` (`id`, `prodi_id`, `periode_id`, `deadline_sidang_
 --
 
 CREATE TABLE `mahasiswa` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `mahasiswa_import_id` bigint UNSIGNED DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nim` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `angkatan` int DEFAULT NULL,
-  `telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `foto` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `mahasiswa_import_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `nim` varchar(255) DEFAULT NULL,
+  `angkatan` int(11) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `foto` longtext DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -635,9 +656,9 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `user_id`, `periode_id`, `mahasiswa_import_id`, `nama`, `nim`, `angkatan`, `telepon`, `alamat`, `foto`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 18, 1, 1, 'Olivia Istianah', '6701194000', NULL, '08213123121', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(2, 19, 1, 1, 'Rania Athala', '6701194001', NULL, '08123123412', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(3, 20, 1, 1, 'Rusyda Hanifan', '6701194002', NULL, '08121314124', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(1, 18, 1, 2, 'Olivia Istianah', '6701194000', NULL, '08213123121', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(2, 19, 1, 2, 'Rania Athala', '6701194001', NULL, '08123123412', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(3, 20, 1, 2, 'Rusyda Hanifan', '6701194002', NULL, '08121314124', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
 (4, 26, 1, 2, 'Emung Zakaria ', '6701204092', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
 (5, 27, 1, 2, 'Esya Oktariani', '6701200037', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
 (6, 28, 1, 2, 'Ahmad Ridho Maulana', '6701200042', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
@@ -675,11 +696,11 @@ INSERT INTO `mahasiswa` (`id`, `user_id`, `periode_id`, `mahasiswa_import_id`, `
 --
 
 CREATE TABLE `mahasiswa_import` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -691,8 +712,8 @@ CREATE TABLE `mahasiswa_import` (
 
 INSERT INTO `mahasiswa_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 1, '2021-2022', 'Genap', '2022-08-16 10:34:25', '2022-08-16 10:34:25', NULL),
-(2, 1, 1, '2021-2022', 'Genap', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(3, 1, 1, '2021-2022', 'Genap', '2022-11-10 06:54:02', '2022-11-16 04:32:13', '2022-11-16 04:32:13');
+(2, 1, 1, '2021-2022', 'Ganjil', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
+(3, 1, 1, '2022-2023', 'Genap', '2022-11-10 06:54:02', '2022-11-16 04:32:13', '2022-11-16 04:32:13');
 
 -- --------------------------------------------------------
 
@@ -701,9 +722,9 @@ INSERT INTO `mahasiswa_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, 
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -763,13 +784,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `nilai_mutu` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `index` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `index` varchar(255) DEFAULT NULL,
   `nilai_min` double DEFAULT NULL,
   `nilai_maks` double DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -803,15 +824,15 @@ INSERT INTO `nilai_mutu` (`id`, `periode_id`, `index`, `nilai_min`, `nilai_maks`
 --
 
 CREATE TABLE `nilai_prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prasidang_id` bigint UNSIGNED DEFAULT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji` enum('1','2') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji` enum('1','2') NOT NULL,
   `tanggal_penilaian` datetime DEFAULT NULL,
-  `ruangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
   `nilai_akhir` double DEFAULT NULL,
-  `catatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `file` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `catatan` text DEFAULT NULL,
+  `file` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -831,12 +852,12 @@ INSERT INTO `nilai_prasidang` (`id`, `prasidang_id`, `ruangan_id`, `penguji`, `t
 --
 
 CREATE TABLE `nilai_prasidang_final` (
-  `id` bigint UNSIGNED NOT NULL,
-  `prasidang_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prasidang_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nilai_final` double DEFAULT NULL,
-  `nilai_mutu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Lulus','Tidak Lulus') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nilai_mutu` varchar(255) DEFAULT NULL,
+  `status` enum('Lulus','Tidak Lulus') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -849,15 +870,15 @@ CREATE TABLE `nilai_prasidang_final` (
 --
 
 CREATE TABLE `nilai_proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `proposal_id` bigint UNSIGNED DEFAULT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji` enum('1','2') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji` enum('1','2') NOT NULL,
   `tanggal_penilaian` datetime DEFAULT NULL,
-  `ruangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
   `nilai_akhir` double DEFAULT NULL,
-  `catatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `file` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `catatan` text DEFAULT NULL,
+  `file` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -880,12 +901,12 @@ INSERT INTO `nilai_proposal` (`id`, `proposal_id`, `ruangan_id`, `penguji`, `tan
 --
 
 CREATE TABLE `nilai_proposal_final` (
-  `id` bigint UNSIGNED NOT NULL,
-  `proposal_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `proposal_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nilai_final` double DEFAULT NULL,
-  `nilai_mutu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Lulus','Tidak Lulus') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nilai_mutu` varchar(255) DEFAULT NULL,
+  `status` enum('Lulus','Tidak Lulus') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -898,15 +919,15 @@ CREATE TABLE `nilai_proposal_final` (
 --
 
 CREATE TABLE `nilai_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji` enum('1','2') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji` enum('1','2') NOT NULL,
   `tanggal_penilaian` datetime DEFAULT NULL,
-  `ruangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
   `nilai_akhir` double DEFAULT NULL,
-  `catatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `file` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `catatan` text DEFAULT NULL,
+  `file` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -919,13 +940,13 @@ CREATE TABLE `nilai_sidang` (
 --
 
 CREATE TABLE `nilai_sidang_final` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sidang_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nilai_final` double DEFAULT NULL,
-  `nilai_mutu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Lulus','Tidak Lulus') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `nilai_mutu` varchar(255) DEFAULT NULL,
+  `status` enum('Lulus','Tidak Lulus') NOT NULL,
+  `keterangan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -938,8 +959,8 @@ CREATE TABLE `nilai_sidang_final` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -950,18 +971,18 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `pendaftaran_sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `mahasiswa_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `mahasiswa_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal_maksimal_daftar` date DEFAULT NULL,
-  `transkip_nilai` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ksm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ktp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ijazah` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `surat_pernyataan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_pendaftaran` enum('Belum dikonfirmasi','Diterima','Ditolak') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transkip_nilai` varchar(255) DEFAULT NULL,
+  `ksm` varchar(255) DEFAULT NULL,
+  `ktp` varchar(255) DEFAULT NULL,
+  `ijazah` varchar(255) DEFAULT NULL,
+  `surat_pernyataan` varchar(255) DEFAULT NULL,
+  `status_pendaftaran` enum('Belum dikonfirmasi','Diterima','Ditolak') NOT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -974,12 +995,12 @@ CREATE TABLE `pendaftaran_sidang` (
 --
 
 CREATE TABLE `periode` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_semester_id` bigint UNSIGNED DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` enum('Ganjil','Genap') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bulan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun` int DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_semester_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` enum('Ganjil','Genap') NOT NULL,
+  `bulan` varchar(255) DEFAULT NULL,
+  `tahun` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -996,8 +1017,16 @@ INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, 
 (4, NULL, '2022-2023', 'Genap', 'Februari', 2023, '2022-11-10 04:54:40', '2022-11-10 04:54:40', NULL),
 (5, NULL, '2023-2024', 'Ganjil', 'September', 2023, '2022-11-10 06:48:52', '2022-11-10 06:48:52', NULL),
 (6, NULL, '2023-2024', 'Genap', 'Februari', 2023, '2022-11-10 06:50:27', '2022-11-10 06:50:42', NULL),
-(7, NULL, '2023-2024', 'Genap', 'Februari', 2024, '2022-11-16 04:09:58', '2022-11-16 04:10:39', NULL),
-(8, NULL, '2023-2024', 'Genap', 'Februari', 2024, '2022-11-23 15:38:30', '2022-11-23 15:38:30', NULL);
+(7, NULL, '2024-2025', 'Ganjil', 'Februari', 2024, '2022-11-16 04:09:58', '2022-11-16 04:10:39', NULL),
+(8, NULL, '2024-2025', 'Genap', 'Februari', 2024, '2022-11-23 15:38:30', '2022-11-23 15:38:30', NULL),
+(9, NULL, '2021-2022', 'Ganjil', NULL, 2021, '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
+(10, NULL, '2021-2022', 'Genap', NULL, 2022, '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
+(11, NULL, '2022-2023', 'Ganjil', NULL, 2022, '2023-03-11 10:27:53', '2023-03-11 10:29:45', NULL),
+(12, NULL, '2022-2023', 'Genap', NULL, 2023, '2023-03-11 10:28:12', '2023-03-11 10:29:37', NULL),
+(13, NULL, '2023-2024', 'Ganjil', NULL, 2023, '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
+(14, NULL, '2023-2024', 'Genap', NULL, 2024, '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
+(15, NULL, '2024-2025', 'Ganjil', NULL, 2024, '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
+(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -1006,11 +1035,11 @@ INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, 
 --
 
 CREATE TABLE `periode_semester` (
-  `id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1021,19 +1050,19 @@ CREATE TABLE `periode_semester` (
 --
 
 CREATE TABLE `prasidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `mahasiswa_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing1_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing2_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji1_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji2_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `judul_indo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jumlah_penguji` int NOT NULL DEFAULT '2',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mahasiswa_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `judul_indo` varchar(255) DEFAULT NULL,
+  `judul_inggris` varchar(255) DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1058,16 +1087,16 @@ INSERT INTO `prasidang` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id
 --
 
 CREATE TABLE `prodi` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `koor_id` bigint UNSIGNED DEFAULT NULL,
-  `kaprodi_id` bigint UNSIGNED DEFAULT NULL,
-  `kode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `singkatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `koor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `kaprodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `kode` varchar(255) DEFAULT NULL,
+  `singkatan` varchar(255) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1096,18 +1125,18 @@ INSERT INTO `prodi` (`id`, `periode_id`, `koor_id`, `kaprodi_id`, `kode`, `singk
 --
 
 CREATE TABLE `proposal` (
-  `id` bigint UNSIGNED NOT NULL,
-  `mahasiswa_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing1_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing2_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji1_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji2_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `judul_indo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jumlah_penguji` int NOT NULL DEFAULT '2',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mahasiswa_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `judul_indo` varchar(255) DEFAULT NULL,
+  `judul_inggris` varchar(255) DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
+  `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1213,9 +1242,9 @@ INSERT INTO `proposal` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`
 --
 
 CREATE TABLE `revisi` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `catatan_revisi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `catatan_revisi` text DEFAULT NULL,
   `nilai_akhir` double DEFAULT NULL,
   `tanggal_pengumpulan_revisi` datetime DEFAULT NULL,
   `tanggal_approve_pembimbing1` datetime DEFAULT NULL,
@@ -1234,8 +1263,8 @@ CREATE TABLE `revisi` (
 --
 
 CREATE TABLE `role` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1257,12 +1286,12 @@ INSERT INTO `role` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALU
 --
 
 CREATE TABLE `role_dosen` (
-  `id` bigint UNSIGNED NOT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `kode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `kode` varchar(255) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1275,11 +1304,11 @@ CREATE TABLE `role_dosen` (
 --
 
 CREATE TABLE `ruangan` (
-  `id` bigint UNSIGNED NOT NULL,
-  `kode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kode` varchar(255) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1302,13 +1331,13 @@ INSERT INTO `ruangan` (`id`, `kode`, `nama`, `keterangan`, `is_active`, `created
 --
 
 CREATE TABLE `ruangan_terpakai` (
-  `id` bigint UNSIGNED NOT NULL,
-  `ruangan_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ruangan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `jam_mulai` time DEFAULT NULL,
   `jam_selesai` time DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1326,19 +1355,19 @@ INSERT INTO `ruangan_terpakai` (`id`, `ruangan_id`, `tanggal`, `jam_mulai`, `jam
 --
 
 CREATE TABLE `sidang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pendaftaran_sidang_id` bigint UNSIGNED DEFAULT NULL,
-  `mahasiswa_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing1_id` bigint UNSIGNED DEFAULT NULL,
-  `pembimbing2_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji1_id` bigint UNSIGNED DEFAULT NULL,
-  `penguji2_id` bigint UNSIGNED DEFAULT NULL,
-  `periode_id` bigint UNSIGNED DEFAULT NULL,
-  `judul_indo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `judul_inggris` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun_ajaran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `semester` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jumlah_penguji` int NOT NULL DEFAULT '2',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pendaftaran_sidang_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `mahasiswa_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `pembimbing2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji1_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `penguji2_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `judul_indo` varchar(255) DEFAULT NULL,
+  `judul_inggris` varchar(255) DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` varchar(255) DEFAULT NULL,
+  `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1358,13 +1387,13 @@ INSERT INTO `sidang` (`id`, `pendaftaran_sidang_id`, `mahasiswa_id`, `pembimbing
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED DEFAULT NULL,
-  `prodi_id` bigint UNSIGNED DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1439,6 +1468,12 @@ INSERT INTO `users` (`id`, `role_id`, `prodi_id`, `username`, `email`, `password
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `current_semester`
+--
+ALTER TABLE `current_semester`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `deadline_prasidang`
@@ -1797,259 +1832,265 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `current_semester`
+--
+ALTER TABLE `current_semester`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deadline_prasidang`
 --
 ALTER TABLE `deadline_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deadline_proposal`
 --
 ALTER TABLE `deadline_proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deadline_sidang`
 --
 ALTER TABLE `deadline_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_prasidang`
 --
 ALTER TABLE `detail_nilai_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_proposal`
 --
 ALTER TABLE `detail_nilai_proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_sidang`
 --
 ALTER TABLE `detail_nilai_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `dosen_import`
 --
 ALTER TABLE `dosen_import`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `dosen_kaprodi`
 --
 ALTER TABLE `dosen_kaprodi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dosen_koordinator_pa`
 --
 ALTER TABLE `dosen_koordinator_pa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `histori_judul_prasidang`
 --
 ALTER TABLE `histori_judul_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `histori_judul_proposal`
 --
 ALTER TABLE `histori_judul_proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jadwal_prasidang`
 --
 ALTER TABLE `jadwal_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `jadwal_sidang`
 --
 ALTER TABLE `jadwal_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `komponen`
 --
 ALTER TABLE `komponen`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `komponen_prasidang`
 --
 ALTER TABLE `komponen_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `komponen_proposal`
 --
 ALTER TABLE `komponen_proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `komponen_sidang`
 --
 ALTER TABLE `komponen_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa_import`
 --
 ALTER TABLE `mahasiswa_import`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `nilai_mutu`
 --
 ALTER TABLE `nilai_mutu`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `nilai_prasidang`
 --
 ALTER TABLE `nilai_prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `nilai_prasidang_final`
 --
 ALTER TABLE `nilai_prasidang_final`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nilai_proposal`
 --
 ALTER TABLE `nilai_proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nilai_proposal_final`
 --
 ALTER TABLE `nilai_proposal_final`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nilai_sidang`
 --
 ALTER TABLE `nilai_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nilai_sidang_final`
 --
 ALTER TABLE `nilai_sidang_final`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pendaftaran_sidang`
 --
 ALTER TABLE `pendaftaran_sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `periode_semester`
 --
 ALTER TABLE `periode_semester`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `prasidang`
 --
 ALTER TABLE `prasidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `prodi`
 --
 ALTER TABLE `prodi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `revisi`
 --
 ALTER TABLE `revisi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `role_dosen`
 --
 ALTER TABLE `role_dosen`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ruangan_terpakai`
 --
 ALTER TABLE `ruangan_terpakai`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sidang`
 --
 ALTER TABLE `sidang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Constraints for dumped tables
