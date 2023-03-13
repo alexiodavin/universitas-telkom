@@ -26,9 +26,16 @@ class PeriodeController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        Periode::create($data);
-        return redirect()->route('backend.admin.periode')->with('success', 'Berhasil menambahkan data');
+        $check = Periode::where('tahun_ajaran', $request->tahun_ajaran)
+            ->where('semester', $request->semester)
+            ->where('bulan', $request->bulan)->first();
+        if (!$check) {
+            $data = $request->all();
+            Periode::create($data);
+            return redirect()->route('backend.admin.periode')->with('success', 'Berhasil menambahkan data');
+        } else {
+            return redirect()->route('backend.admin.periode')->with('failed', 'Periode sudah tersedia');
+        }
     }
 
     public function edit($id)
@@ -41,10 +48,21 @@ class PeriodeController extends Controller
 
     public function update(Request $request, $id)
     {
+        $check = Periode::where('tahun_ajaran', $request->tahun_ajaran)
+            ->where('semester', $request->semester)
+            ->where('bulan', $request->bulan)->first();
         $item = Periode::find($id);
-        $data = $request->all();
-        Periode::find($id)->update($data);
-        return redirect()->route('backend.admin.periode')->with('success', 'Berhasil mengubah data');
+        if ($request->tahun_ajaran == $item->tahun_ajaran && $request->semester == $item->semester && $request->bulan == $item->bulan) {
+            $data = $request->all();
+            Periode::find($id)->update($data);
+            return redirect()->route('backend.admin.periode')->with('success', 'Berhasil mengubah data');
+        } elseif (!$check) {
+            $data = $request->all();
+            Periode::find($id)->update($data);
+            return redirect()->route('backend.admin.periode')->with('success', 'Berhasil mengubah data');
+        } else {
+            return redirect()->route('backend.admin.periode')->with('failed', 'Periode sudah tersedia');
+        }
     }
 
     public function delete($id)
