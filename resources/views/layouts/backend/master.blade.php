@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,8 @@
     <link rel="icon" href="{{ asset('photo/logo.png') }}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/jqvmap/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
@@ -22,29 +24,36 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
-        .nav-header{
+        .nav-header {
             color: white !important;
         }
+
         .page-item.active .page-link {
             z-index: 3;
             color: #fff;
             background-color: #343434 !important;
             border-color: #343434 !important;
         }
-        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+
+        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+        .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
             background-color: #343434;
-            color: white ;
+            color: white;
         }
+
         [class*=sidebar-dark-] .sidebar a {
             color: white;
         }
+
         [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
             color: white;
         }
 
-        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
-            background-color: #343434 !important ;
-            color: #fff ;
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus,
+        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+            background-color: #343434 !important;
+            color: #fff;
         }
 
         .btn-primary {
@@ -59,39 +68,45 @@
             border-color: #343434 !important;
         }
 
-        .btn-primary:focus, .btn-primary.focus {
+        .btn-primary:focus,
+        .btn-primary.focus {
             box-shadow: none, 0 0 0 0 #343434 !important;
         }
 
-        .btn-primary.disabled, .btn-primary:disabled {
+        .btn-primary.disabled,
+        .btn-primary:disabled {
             color: #fff;
             background-color: #343434 !important;
             border-color: #343434 !important;
         }
 
-        .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-        .show > .btn-primary.dropdown-toggle {
+        .btn-primary:not(:disabled):not(.disabled):active,
+        .btn-primary:not(:disabled):not(.disabled).active,
+        .show>.btn-primary.dropdown-toggle {
             color: #fff;
             background-color: #343434 !important;
             border-color: #343434 !important;
         }
 
-        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-        .show > .btn-primary.dropdown-toggle:focus {
+        .btn-primary:not(:disabled):not(.disabled):active:focus,
+        .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .show>.btn-primary.dropdown-toggle:focus {
             box-shadow: 0 0 0 0 #343434 !important;
             background-color: #343434 !important;
         }
 
-        .borderless td, .borderless th {
+        .borderless td,
+        .borderless th {
             border: none;
         }
 
-        .new-shadow{
-            transition: box-shadow .3s; /* Animation */
+        .new-shadow {
+            transition: box-shadow .3s;
+            /* Animation */
         }
 
-        .new-shadow:hover{
-            box-shadow: 0 0 10px rgba(33,33,33,.6);
+        .new-shadow:hover {
+            box-shadow: 0 0 10px rgba(33, 33, 33, .6);
         }
 
         [class*=sidebar-dark] .user-panel {
@@ -125,7 +140,7 @@
             background-color: #343434;
             box-shadow: none;
         }
-        
+
         select:focus,
         textarea:focus,
         input[type="text"]:focus,
@@ -142,19 +157,22 @@
         input[type="search"]:focus,
         input[type="tel"]:focus,
         input[type="color"]:focus,
-        .uneditable-input:focus {   
+        .uneditable-input:focus {
             border-color: #b6252a !important;
             box-shadow: 0 0 1px #b6252a inset, 0 0 3px #b6252a !important;
             outline: 0 none;
         }
     </style>
+
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b6252a;">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="{{ route('backend.logout') }}"><i class="nav-icon fas fa-sign-out-alt"></i> Logout</a>
+                    <a class="btn btn-primary" href="{{ route('backend.logout') }}"><i
+                            class="nav-icon fas fa-sign-out-alt"></i> Logout</a>
                 </li>
             </ul>
         </nav>
@@ -199,13 +217,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
-        $(function () {
+        $(function() {
             $("#example1").DataTable();
 
         });
     </script>
 
-    @if(session('success'))
+    @if (session('success'))
         <script>
             swal.fire({
                 title: 'Success!',
@@ -216,7 +234,7 @@
         </script>
     @endif
 
-    @if(session('failed'))
+    @if (session('failed'))
         <script>
             swal.fire({
                 title: 'Failed!',
@@ -227,7 +245,7 @@
         </script>
     @endif
 
-    @if(session('warning'))
+    @if (session('warning'))
         <script>
             swal.fire({
                 title: 'Warning!',
@@ -244,8 +262,8 @@
             messages: {
                 'default': '',
                 'replace': '',
-                'remove':  'Remove',
-                'error':   'Ooops, something wrong happended.'
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong happended.'
             }
         });
     </script>
@@ -256,8 +274,9 @@
             theme: 'bootstrap4'
         })
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @yield('js')
 </body>
+
 </html>

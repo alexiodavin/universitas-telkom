@@ -61,6 +61,7 @@
                                             <th style="width: 150px">Prodi</th>
                                             <th style="width: 150px">Tahun Ajaran</th>
                                             <th style="width: 150px">Semester</th>
+                                            <th style="width: 150px">Keterangan</th>
                                             <th style="width: 150px; text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -69,13 +70,18 @@
                                             $no = 1;
                                         @endphp
                                         @foreach ($items as $item)
-                                            <tr>
+                                            <tr @if ($item->tahun_ajaran == $tahun_ajaran && $item->semester == $semester) class="table table-success" @endif>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->dosen->kode }}</td>
                                                 <td>{{ $item->dosen->nama_gelar }}</td>
                                                 <td>{{ $item->prodi->nama }}</td>
                                                 <td>{{ $item->tahun_ajaran }}</td>
                                                 <td>{{ $item->semester }}</td>
+                                                <td>
+                                                    @if ($item->tahun_ajaran == $tahun_ajaran && $item->semester == $semester)
+                                                        Masih Menjabat
+                                                    @endif
+                                                </td>
                                                 <td style="text-align: center">
                                                     <a href="{{ route('backend.admin.dosen-koor-pa.edit', ['id' => $item->id]) }}"
                                                         class="btn btn-primary shadow bg-primary"> <i

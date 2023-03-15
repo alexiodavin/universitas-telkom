@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentSemester;
 use Illuminate\Http\Request;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\Periode;
 use App\Models\DosenKoordinatorPA;
+
+use function App\Helpers\semester;
+use function App\Helpers\tahunAjaran;
 
 class DosenKoorPAController extends Controller
 {
@@ -37,6 +41,8 @@ class DosenKoorPAController extends Controller
         }
         return view('backend.dosen-koor-pa.index', [
             'periodes' => $periodes,
+            'tahun_ajaran' => tahunAjaran(),
+            'semester' => semester(),
             'items' => DosenKoordinatorPA::where('tahun_ajaran', 'like', '%' . request()->periode . '%')->latest()->get()
         ]);
     }
@@ -52,8 +58,11 @@ class DosenKoorPAController extends Controller
 
     public function store(Request $request)
     {
-        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->first()) {
+        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->whereNull('bulan')->first()) {
             return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
+        }
+        if (DosenKoordinatorPA::where('periode_id', $periode->id)) {
+            return redirect()->back()->with('warning', 'Posisi koordinator PA untuk periode ini sudah tersedia');
         }
         $data = [
             'dosen_id' => $request->dosen_id,
@@ -78,8 +87,14 @@ class DosenKoorPAController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->first()) {
+        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->whereNull('bulan')->first()) {
             return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
+        }
+        $koordinator = DosenKoordinatorPA::find($id);
+        if ($koordinator->tahun_ajaran != $request->tahun_ajaran || $koordinator->semester != $request->semester) {
+            if (DosenKoordinatorPA::where('periode_id', $periode->id)) {
+                return redirect()->back()->with('warning', 'Posisi koordinator PA untuk periode ini sudah tersedia');
+            }
         }
         $data = [
             'dosen_id' => $request->dosen_id,
