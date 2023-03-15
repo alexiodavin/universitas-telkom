@@ -61,7 +61,7 @@ class DosenKoorPAController extends Controller
         if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->whereNull('bulan')->first()) {
             return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
         }
-        if (DosenKoordinatorPA::where('periode_id', $periode->id)) {
+        if (DosenKoordinatorPA::where('periode_id', $periode->id)->where('prodi_id', $request->prodi_id)->first()) {
             return redirect()->back()->with('warning', 'Posisi koordinator PA untuk periode ini sudah tersedia');
         }
         $data = [
@@ -91,8 +91,8 @@ class DosenKoorPAController extends Controller
             return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
         }
         $koordinator = DosenKoordinatorPA::find($id);
-        if ($koordinator->tahun_ajaran != $request->tahun_ajaran || $koordinator->semester != $request->semester) {
-            if (DosenKoordinatorPA::where('periode_id', $periode->id)) {
+        if ($koordinator->tahun_ajaran != $request->tahun_ajaran || $koordinator->semester != $request->semester || $koordinator->prodi_id != $request->prodi_id) {
+            if (DosenKoordinatorPA::where('periode_id', $periode->id)->where('prodi_id', $request->prodi_id)->first()) {
                 return redirect()->back()->with('warning', 'Posisi koordinator PA untuk periode ini sudah tersedia');
             }
         }
