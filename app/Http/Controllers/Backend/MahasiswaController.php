@@ -17,6 +17,9 @@ use App\Models\Mahasiswa;
 use App\Models\MahasiswaImport;
 use Illuminate\Support\Facades\DB;
 
+use function App\Helpers\semester;
+use function App\Helpers\tahunAjaran;
+
 class MahasiswaController extends Controller
 {
     public function getListPeriode()
@@ -36,15 +39,21 @@ class MahasiswaController extends Controller
     {
         $tahun_ajaran = [];
         $periodes = [];
-        foreach (Periode::all() as $periode) {
+        foreach (Periode::whereNull('bulan')->get() as $periode) {
             if (!in_array($periode->tahun_ajaran, $tahun_ajaran)) {
                 $periodes[] = $periode;
                 $tahun_ajaran[] = $periode->tahun_ajaran;
             }
         }
+        $periode = tahunAjaran();
+        if (request()->periode) {
+            $periode = request()->periode;
+        }
         return view('backend.mahasiswa.index', [
             'periodes' => $periodes,
-            'items' => MahasiswaImport::where('tahun_ajaran', 'like', '%' . request()->periode . '%')->latest()->get()
+            'tahun_ajaran' => $periode,
+            'semester' => semester(),
+            'items' => MahasiswaImport::where('tahun_ajaran', 'like', '%' . $periode . '%')->latest()->get()
         ]);
     }
 

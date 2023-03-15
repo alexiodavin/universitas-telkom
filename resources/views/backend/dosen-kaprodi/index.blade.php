@@ -6,7 +6,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Data Kaprodi @if(request()->periode) Periode {{ request()->periode }} @endif</h1>
+                        <h1 class="m-0 text-dark">Data Kaprodi @if (request()->periode)
+                                Periode {{ request()->periode }}
+                            @endif
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -26,7 +29,7 @@
                                         <select id="periode" class="form-control">
                                             <option value="">Pilih Periode</option>
                                             @foreach ($periodes as $periode)
-                                                <option value="{{ $periode->tahun_ajaran }}" @if($periode->tahun_ajaran == request()->periode) selected @endif>{{ $periode->tahun_ajaran }}</option>
+                                                <option value="{{ $periode->tahun_ajaran }}" @if ($periode->tahun_ajaran == request()->periode) selected @endif>{{ $periode->tahun_ajaran }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -44,7 +47,9 @@
                     <div class="col-12">
                         <div class="card shadow">
                             <div class="card-header">
-                                <h3 class="card-title"><a href="{{ route('backend.admin.dosen-kaprodi.create') }}" class="btn btn-primary shadow bg-primary"> <i class="fa fa-plus"></i> Tambah</a></h3>
+                                <h3 class="card-title"><a href="{{ route('backend.admin.dosen-kaprodi.create') }}"
+                                        class="btn btn-primary shadow bg-primary"> <i class="fa fa-plus"></i> Tambah</a>
+                                </h3>
                             </div>
                             <div class="card-body table-responsive">
                                 <table id="example1" class="table table-hover borderless" style="width: 100%; border: 0;">
@@ -57,6 +62,7 @@
                                             <th style="width: 100px">Awal Masa Jabatan</th>
                                             <th style="width: 100px">Akhir Masa Jabatan</th>
                                             {{-- <th style="width: 150px">Semester</th> --}}
+                                            <th style="width: 150px">Tanggal Import</th>
                                             <th style="width: 150px; text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -64,18 +70,25 @@
                                         @php
                                             $no = 1;
                                         @endphp
-                                        @foreach($items as $item)
+                                        @foreach ($items as $item)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->dosen->kode }}</td>
                                                 <td>{{ $item->dosen->nama_gelar }}</td>
                                                 <td>{{ $item->prodi->nama }}</td>
                                                 <td>{{ $item->awal_menjabat }}</td>
-                                                <td>{{ (!$item->akhir_menjabat) ? "Masih Menjabat" : $item->akhir_menjabat }}</td>
+                                                <td>{{ !$item->akhir_menjabat ? 'Masih Menjabat' : $item->akhir_menjabat }}
+                                                </td>
                                                 {{-- <td>{{ $item->semester }}</td> --}}
+                                                <td>{{ date('j F Y', strtotime($item->created_at)) }}</td>
                                                 <td style="text-align: center">
-                                                    <a href="{{ route('backend.admin.dosen-kaprodi.edit', ['id' => $item->id]) }}" class="btn btn-primary shadow bg-primary"> <i class="fa fa-edit"></i> Edit</a>
-                                                    <a href="{{ route('backend.admin.dosen-kaprodi.delete', ['id' => $item->id]) }}" class="btn btn-primary shadow bg-primary" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini ?')"> <i class="fa fa-trash"></i> Delete</a>
+                                                    <a href="{{ route('backend.admin.dosen-kaprodi.edit', ['id' => $item->id]) }}"
+                                                        class="btn btn-primary shadow bg-primary"> <i
+                                                            class="fa fa-edit"></i> Edit</a>
+                                                    <a href="{{ route('backend.admin.dosen-kaprodi.delete', ['id' => $item->id]) }}"
+                                                        class="btn btn-primary shadow bg-primary"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini ?')">
+                                                        <i class="fa fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -93,7 +106,7 @@
 @section('js')
     <script>
         $('#periode').on('change', function() {
-            window.location.href = "{{ route('backend.admin.dosen-kaprodi') }}"+'?periode='+this.value
+            window.location.href = "{{ route('backend.admin.dosen-kaprodi') }}" + '?periode=' + this.value
         });
     </script>
 @endsection

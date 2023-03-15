@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        {{-- <section class="content ml-4 mr-4">
+        <section class="content ml-4 mr-4">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -29,7 +29,9 @@
                                         <select id="periode" class="form-control">
                                             <option value="">Pilih Periode</option>
                                             @foreach ($periodes as $periode)
-                                                <option value="{{ $periode->tahun_ajaran }}" @if ($periode->tahun_ajaran == request()->periode) selected @endif>{{ $periode->tahun_ajaran }}</option>
+                                                <option value="{{ $periode->tahun_ajaran }}"
+                                                    @if ($periode->tahun_ajaran == $tahun_ajaran) selected @endif>
+                                                    {{ $periode->tahun_ajaran }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -39,7 +41,7 @@
                     </div>
                 </div>
             </div>
-        </section> --}}
+        </section>
 
         <section class="content ml-4 mr-4">
             <div class="container-fluid">

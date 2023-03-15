@@ -52,15 +52,18 @@ class DosenKaprodiController extends Controller
 
     public function store(Request $request)
     {
-        if (!$periode = Periode::whereTahunAjaran("2021-2022")->whereSemester("Genap")->first()) {
+        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->whereNull('bulan')->first()) {
             return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
+        }
+        if (DosenKaprodi::where('periode_id', $periode->id)->where('prodi_id', $request->prodi_id)->first()) {
+            return redirect()->back()->with('warning', 'Posisi Kaprodi untuk periode ini sudah tersedia');
         }
         $data = [
             'dosen_id' => $request->dosen_id,
             'prodi_id' => $request->prodi_id,
             'periode_id' => $periode->id,
-            'tahun_ajaran' => "2021-2022",
-            'semester' => "Genap",
+            'tahun_ajaran' => $request->tahun_ajaran,
+            'semester' => $request->semester,
             'awal_menjabat' => $request->awal_menjabat,
             'akhir_menjabat' => $request->akhir_menjabat,
         ];
@@ -83,6 +86,15 @@ class DosenKaprodiController extends Controller
         // if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->first()) {
         //     return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
         // }
+        if (!$periode = Periode::whereTahunAjaran($request->tahun_ajaran)->whereSemester($request->semester)->whereNull('bulan')->first()) {
+            return redirect()->back()->with('warning', 'Data periode yang anda pilih belum tersedia');
+        }
+        $kaprodi = DosenKaprodi::find($id);
+        if ($kaprodi->tahun_ajaran != $request->tahun_ajaran || $kaprodi->semester != $request->semester || $kaprodi->prodi_id != $request->prodi_id) {
+            if (DosenKaprodi::where('periode_id', $periode->id)->where('prodi_id', $request->prodi_id)->first()) {
+                return redirect()->back()->with('warning', 'Posisi kaprodi untuk periode ini sudah tersedia');
+            }
+        }
         $data = [
             'dosen_id' => $request->dosen_id,
             'prodi_id' => $request->prodi_id,
