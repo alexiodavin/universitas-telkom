@@ -256,10 +256,14 @@ class KomponenNilaiController extends Controller
 
     public function sidang($periode_id = null)
     {
+        if ($periode_id == null) {
+            $periode_id = DosenKoordinatorPA::whereDosenId(auth()->user()->dosen->id)->first()->periode_id;
+        }
         return view('backend.komponen-nilai.sidang', [
             'periode_id' => $periode_id,
             'item' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($periode_id),
             'deadline_sidang' => DeadlineSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
             'komponen_sidangs' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->get(),
             'total_komponen_sidang' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->sum('persentase'),
@@ -285,11 +289,13 @@ class KomponenNilaiController extends Controller
     {
 
         // dd($request->periode_id);
-
-        if (KomponenSidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::where('id', $request->periode_id)->select('tahun')->get())->whereSemester(Periode::where('id', $request->periode_id)->select('semester')->get())->sum('persentase') + $request->persentase > 100) {
+        if (KomponenSidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
         $data = $request->all();
+        if (!DeadlineSidang::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first()) {
+            return redirect()->back()->with('warning', 'Anda belum mengatur deadline input Nilai');
+        }
         $data['prodi_id'] = auth()->user()->prodi_id;
         $data['tahun_ajaran'] = Periode::where('id', $request->periode_id)->select('tahun')->first()->tahun;
         $data['semester'] = Periode::where('id', $request->periode_id)->select('semester')->first()->semester;
@@ -298,15 +304,16 @@ class KomponenNilaiController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data');
     }
 
-    public function editSidang($periode_id = null)
+    public function editSidang(Request $request)
     {
         return view('backend.komponen-nilai.sidang-edit', [
-            'periode_id' => $periode_id,
-            'item' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
-            'periodes' => Periode::all(),
-            'komponen_sidangs' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->get(),
-            'total_komponen_sidang' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->sum('persentase'),
-            'komponen_sidang_latest' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->orderBy('id', 'DESC')->first()
+            'periode_id' => $request->periode_id,
+            'item' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->first(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($request->periode_id),
+            'komponen_sidangs' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->get(),
+            'total_komponen_sidang' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->sum('persentase'),
+            'komponen_sidang_latest' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->orderBy('id', 'DESC')->first()
         ]);
     }
 
