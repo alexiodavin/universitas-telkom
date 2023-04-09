@@ -13,7 +13,7 @@ use App\Models\DeadlineSidang;
 use App\Models\DosenKoordinatorPA;
 use Maatwebsite\Excel\Facades\Excel;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\Periode;
 use App\Models\Proposal;
 use App\Models\Sidang;
@@ -82,15 +82,16 @@ class KomponenNilaiController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data');
     }
 
-    public function editProposal($periode_id = null)
+    public function editProposal(Request $request)
     {
         return view('backend.komponen-nilai.proposal-edit', [
-            'periode_id' => $periode_id,
-            'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
-            'periodes' => Periode::all(),
-            'komponen_proposals' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->get(),
-            'total_komponen_proposal' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->sum('persentase'),
-            'komponen_proposal_latest' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->orderBy('id', 'DESC')->first()
+            'periode_id' => $request->periode_id,
+            'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->first(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($request->periode_id),
+            'komponen_proposals' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->get(),
+            'total_komponen_proposal' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->sum('persentase'),
+            'komponen_proposal_latest' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->orderBy('id', 'DESC')->first()
         ]);
     }
 
@@ -145,10 +146,14 @@ class KomponenNilaiController extends Controller
 
     public function prasidang($periode_id = null)
     {
+        if ($periode_id == null) {
+            $periode_id = DosenKoordinatorPA::whereDosenId(auth()->user()->dosen->id)->first()->periode_id;
+        }
         return view('backend.komponen-nilai.prasidang', [
             'periode_id' => $periode_id,
             'item' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($periode_id),
             'deadline_prasidang' => DeadlinePrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
             'komponen_prasidangs' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->get(),
             'total_komponen_prasidang' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->sum('persentase'),
@@ -176,6 +181,9 @@ class KomponenNilaiController extends Controller
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
         $data = $request->all();
+        if (!DeadlinePrasidang::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first()) {
+            return redirect()->back()->with('warning', 'Anda belum mengatur deadline input Nilai');
+        }
         $data['prodi_id'] = auth()->user()->prodi_id;
         $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
         $data['semester'] = Periode::find($request->periode_id)->semester;
@@ -185,15 +193,16 @@ class KomponenNilaiController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data');
     }
 
-    public function editPrasidang($periode_id = null)
+    public function editPrasidang(Request $request)
     {
         return view('backend.komponen-nilai.prasidang-edit', [
-            'periode_id' => $periode_id,
-            'item' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),
-            'periodes' => Periode::all(),
-            'komponen_prasidangs' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->get(),
-            'total_komponen_prasidang' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->sum('persentase'),
-            'komponen_prasidang_latest' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->orderBy('id', 'DESC')->first()
+            'periode_id' => $request->periode_id,
+            'item' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->first(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($request->periode_id),
+            'komponen_prasidangs' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->get(),
+            'total_komponen_prasidang' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->sum('persentase'),
+            'komponen_prasidang_latest' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($request->periode_id)->orderBy('id', 'DESC')->first()
         ]);
     }
 

@@ -10,6 +10,9 @@
 
         <section class="content ml-4 mr-4 mb-4">
             <div class="container-fluid">
+                {{-- <div class="alert alert-danger" role="alert">
+                    Anda tidak sedang di dalam masa jabatan Koordinator Proyek Akhir
+                </div> --}}
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow">

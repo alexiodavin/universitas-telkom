@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2023 at 06:43 PM
+-- Generation Time: Apr 09, 2023 at 07:42 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -86,7 +86,8 @@ CREATE TABLE `deadline_prasidang` (
 --
 
 INSERT INTO `deadline_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, '2022-11-26', NULL, '2022-11-10 07:04:25');
+(1, 1, 3, '2022-11-26', NULL, '2022-11-10 07:04:25'),
+(2, 1, 10, '2022-04-10', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,7 +539,9 @@ INSERT INTO `komponen_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline_pras
 (9, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
 (10, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
 (11, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
-(12, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL);
+(12, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
+(13, 1, 10, 2, 'BAB 1', 50, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:32', '2023-04-09 17:39:32', NULL),
+(14, 1, 10, 2, 'BAB 2', 10, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:52', '2023-04-09 17:39:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -1847,7 +1850,7 @@ ALTER TABLE `current_semester`
 -- AUTO_INCREMENT for table `deadline_prasidang`
 --
 ALTER TABLE `deadline_prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deadline_proposal`
@@ -1943,7 +1946,7 @@ ALTER TABLE `komponen`
 -- AUTO_INCREMENT for table `komponen_prasidang`
 --
 ALTER TABLE `komponen_prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `komponen_proposal`
