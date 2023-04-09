@@ -15,33 +15,35 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Kode Koordinator </label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Kode Koordinator </label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ auth()->user()->dosen->kode }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Nama Koordinator PA</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Nama Koordinator PA</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ auth()->user()->dosen->nama }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Program Studi</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Program Studi</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ auth()->user()->prodi->nama }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Semester</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Semester</label>
                                     <div class="col-sm-10">
-                                        <span class="form-control-plaintext">: {{ auth()->user()->prodi->periode->semester }}</span>
+                                        <span class="form-control-plaintext">:
+                                            {{ auth()->user()->prodi->periode->semester }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Tahun Ajaran</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Tahun Ajaran</label>
                                     <div class="col-sm-10">
-                                        <span class="form-control-plaintext">: {{ auth()->user()->prodi->periode->tahun_ajaran }}</span>
+                                        <span class="form-control-plaintext">:
+                                            {{ auth()->user()->prodi->periode->tahun_ajaran }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -57,22 +59,29 @@
                     <div class="col-12">
                         <div class="card shadow">
                             <div class="card-body">
-                                <form action="{{ route('backend.koordinator-pa.komponen-nilai.sidang.update-deadline') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
+                                <form action="{{ route('backend.koordinator-pa.komponen-nilai.sidang.update-deadline') }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Periode <span style="color: red">*</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Periode <span
+                                                style="color: red">*</span></label>
                                         <div class="col-sm-10">
-                                            <select  name="periode_id" class="form-control" required id="periode_id">
+                                            <select name="periode_id" class="form-control" required id="periode_id"
+                                                readonly>
                                                 @foreach ($periodes as $periode)
-                                                    <option value="{{ $periode->id }}" @if($periode_id == $periode->id) selected @endif>{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
+                                                    <option value="{{ $periode->id }}"
+                                                        @if ($periode_id == $periode->id) selected @endif>
+                                                        {{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Tanggal Deadline Input Nilai <span style="color: red">*</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Tanggal Deadline Input Nilai
+                                            <span style="color: red">*</span></label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="tanggal_deadline_input_nilai" class="form-control" value="{{ $deadline_sidang->deadline ?? '' }}" required>
+                                            <input type="date" name="tanggal_deadline_input_nilai" class="form-control"
+                                                value="{{ $deadline_sidang->deadline ?? '' }}" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary float-right">Simpan</button>
@@ -95,7 +104,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control col-sm-2" id="periode_id" >
                                             @foreach ($periodes as $periode)
-                                                <option value="{{ $periode->id }}" @if($periode_id == $periode->id) selected @endif>{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
+                                                <option value="{{ $periode->id }}" @if ($periode_id == $periode->id) selected @endif>{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -104,9 +113,12 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center; width: 100px;">No KN</th>
-                                            <th style="text-align: center; border-left: 2px solid #dee2e6; width: 500px;">Nama</th>
-                                            <th style="text-align: center; border-left: 2px solid #dee2e6; width: 250px;">Persentase</th>
-                                            <th style="text-align: center; border-left: 2px solid #dee2e6;">Diambil Dari</th>
+                                            <th style="text-align: center; border-left: 2px solid #dee2e6; width: 500px;">
+                                                Nama</th>
+                                            <th style="text-align: center; border-left: 2px solid #dee2e6; width: 250px;">
+                                                Persentase</th>
+                                            <th style="text-align: center; border-left: 2px solid #dee2e6;">Diambil Dari
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody id="komponen_sidang">
@@ -117,8 +129,10 @@
                                             <tr>
                                                 <td style="border-right: 2px solid #dee2e6;">KN {{ $no++ }}</td>
                                                 <td style="border-right: 2px solid #dee2e6;">{{ $kn->nama_komponen }}</td>
-                                                <td style="border-right: 2px solid #dee2e6; text-align: center;">{{ $kn->persentase }}</td>
-                                                <td style="border: 2px solid #dee2e6; text-align: center;">{{ $kn->keterangan }}</td>
+                                                <td style="border-right: 2px solid #dee2e6; text-align: center;">
+                                                    {{ $kn->persentase }}</td>
+                                                <td style="border: 2px solid #dee2e6; text-align: center;">
+                                                    {{ $kn->keterangan }}</td>
                                             </tr>
                                         @endforeach
                                         <tr>
@@ -141,13 +155,16 @@
                     + Tambah Data
                 </button>
 
-                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang.edit', ['periode_id' => $periode_id]) }}" class="btn btn-primary float-right">Edit Nilai</a>
-                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang.upload') }}" class="btn btn-primary float-right mr-2">Upload</a>
+                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang.edit', ['periode_id' => $periode_id]) }}"
+                    class="btn btn-primary float-right">Edit Nilai</a>
+                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang.upload') }}"
+                    class="btn btn-primary float-right mr-2">Upload</a>
             </div>
         </section>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,25 +173,26 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('backend.koordinator-pa.komponen-nilai.sidang.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('backend.koordinator-pa.komponen-nilai.sidang.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="periode_id" value="{{ $periode_id }}">
 
                         <label>Nomor KN</label>
                         <input type="number" class="form-control" value="{{ $no }}" readonly>
-                        
+
                         <label>Nama Komponen Nilai</label>
                         <input type="text" class="form-control" name="nama_komponen" required>
 
                         <label>Diambil Dari</label>
-                        <select name="keterangan" class="form-control" >
+                        <select name="keterangan" class="form-control">
                             <option value="">Pilih Diambil Dari</option>
                             <option value="Nilai Proposal">Nilai Proposal</option>
                             <option value="Nilai Prasidang">Nilai Prasidang</option>
                             <option value="Nilai Baru">Nilai Baru</option>
                         </select>
-    
+
                         <label>Nilai Maksimal</label>
                         <input type="number" class="form-control" name="persentase" required>
 
@@ -194,8 +212,7 @@
 @section('js')
     <script>
         $('#periode_id').on('change', function() {
-            return window.location.href = "{{ url('koordinator-pa/komponen-nilai/sidang/list') }}/"+this.value
+            return window.location.href = "{{ url('koordinator-pa/komponen-nilai/sidang/list') }}/" + this.value
         });
     </script>
-    
 @endsection

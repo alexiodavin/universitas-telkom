@@ -339,21 +339,21 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.proposal', ['periode_id' => \DB::table('periode')->orderBy('id', 'DESC')->first()->id]) }}"
+                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.proposal') }}"
                                     class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Proposal</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.prasidang', ['periode_id' => \DB::table('periode')->orderBy('id', 'DESC')->first()->id]) }}"
+                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.prasidang') }}"
                                     class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Prasidang</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang', ['periode_id' => \DB::table('periode')->orderBy('id', 'DESC')->first()->id]) }}"
+                                <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang') }}"
                                     class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Sidang</p>

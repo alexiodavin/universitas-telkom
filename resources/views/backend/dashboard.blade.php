@@ -24,31 +24,60 @@
                             @csrf
                             @method('put')
                             <div class="form-row align-items-center">
-                                <div class="col-auto">
-                                    <label class="sr-only" for="tahun_ajaran">Tahun Ajaran</label>
-                                    <input type="text" class="form-control mb-2" id="tahun_ajaran" name="tahun_ajaran"
-                                        value="{{ $current_semester->tahun_ajaran }}">
-                                    @error('tahun_ajaran')
-                                        <div id="tahun_ajaran_error" class="text-danger text-sm">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col-auto">
-                                    <label class="sr-only" for="semester">Semester</label>
-                                    <div class="input-group mb-2">
-                                        <select name="semester" id="semester" class="form-control">\
-                                            <option value="" disabled>Pilih Semester</option>
-                                            <option value="Ganjil" @if ($current_semester->semester == 'Ganjil') selected @endif>Ganjil
-                                            </option>
-                                            <option value="Genap" @if ($current_semester->semester == 'Genap') selected @endif>Genap
-                                            </option>
-                                        </select>
+                                @if (auth()->user()->role_id == 'admin')
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="tahun_ajaran">Tahun Ajaran</label>
+                                        <input type="text" class="form-control mb-2" id="tahun_ajaran"
+                                            name="tahun_ajaran" value="{{ $current_semester->tahun_ajaran }}">
+                                        @error('tahun_ajaran')
+                                            <div id="tahun_ajaran_error" class="text-danger text-sm">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                                </div>
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="semester">Semester</label>
+                                        <div class="input-group mb-2">
+                                            <select name="semester" id="semester" class="form-control">
+                                                <option value="" disabled>Pilih Semester</option>
+                                                <option value="Ganjil" @if ($current_semester->semester == 'Ganjil') selected @endif>
+                                                    Ganjil
+                                                </option>
+                                                <option value="Genap" @if ($current_semester->semester == 'Genap') selected @endif>
+                                                    Genap
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                    </div>
+                                @else
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="tahun_ajaran">Tahun Ajaran</label>
+                                        <input type="text" class="form-control mb-2" id="tahun_ajaran"
+                                            name="tahun_ajaran" value="{{ $current_semester->tahun_ajaran }}" disabled>
+                                        @error('tahun_ajaran')
+                                            <div id="tahun_ajaran_error" class="text-danger text-sm">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="semester">Semester</label>
+                                        <div class="input-group mb-2">
+                                            <select name="semester" id="semester" class="form-control" disabled>
+                                                <option value="" disabled>Pilih Semester</option>
+                                                <option value="Ganjil" @if ($current_semester->semester == 'Ganjil') selected @endif>
+                                                    Ganjil
+                                                </option>
+                                                <option value="Genap" @if ($current_semester->semester == 'Genap') selected @endif>
+                                                    Genap
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </form>
                     </div>

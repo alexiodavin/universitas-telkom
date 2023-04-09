@@ -219,9 +219,11 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::prefix('komponen-nilai')->group(function () {
                 Route::prefix('proposal')->group(function () {
                     Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'proposal'])->name('backend.koordinator-pa.komponen-nilai.proposal');
+                    Route::get('list', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'proposal'])->name('backend.koordinator-pa.komponen-nilai.proposal');
                     Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlineProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.update-deadline');
                     Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.store');
                     Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.edit');
+                    Route::get('edit', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.edit');
                     Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.update');
                     Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload');
                     Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload.store');
@@ -230,9 +232,11 @@ Route::group(['middleware' => ['auth:web']], function () {
 
                 Route::prefix('prasidang')->group(function () {
                     Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'prasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang');
+                    Route::get('list/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'prasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang');
                     Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlinePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.update-deadline');
                     Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.store');
                     Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.edit');
+                    Route::get('edit/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.edit');
                     Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updatePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.update');
                     Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.upload');
                     Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.upload.store');
@@ -241,9 +245,11 @@ Route::group(['middleware' => ['auth:web']], function () {
 
                 Route::prefix('sidang')->group(function () {
                     Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'sidang'])->name('backend.koordinator-pa.komponen-nilai.sidang');
+                    Route::get('list/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'sidang'])->name('backend.koordinator-pa.komponen-nilai.sidang');
                     Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlineSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.update-deadline');
                     Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.store');
                     Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.edit');
+                    Route::get('edit/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.edit');
                     Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.update');
                     Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload');
                     Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload.store');
