@@ -103,7 +103,8 @@ class UploadDaftarMahasiswaController extends Controller
         // dd($dosen_prodi);
 
         return view('backend.upload-daftar-mahasiswa.proposal-create', [
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
+            'periode_koor' => Periode::find($request->periode_id),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
@@ -118,7 +119,11 @@ class UploadDaftarMahasiswaController extends Controller
         }
         $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
         $data['semester'] = Periode::find($request->periode_id)->semester;
-        Proposal::create($data);
+        if (!Proposal::where('mahasiswa_id', $data['mahasiswa_id'])->where('periode_id', $data['periode_id'])) {
+            Proposal::create($data);
+        } else {
+            return back()->with('warning', 'Proposal Mahasiswa ini sudah terdaftar di periode ini sebelumnya, hapus data proposal mahasiswa terlebih dahulu agar tidak terjadi redudansi data');
+        }
         return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.proposal')->with('success', 'Berhasil menambahkan data');
     }
 
@@ -139,7 +144,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.proposal-edit', [
             'item' => Proposal::find($id),
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
@@ -242,7 +247,7 @@ class UploadDaftarMahasiswaController extends Controller
             ->get();
 
         return view('backend.upload-daftar-mahasiswa.prasidang-create', [
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
@@ -302,7 +307,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.prasidang-edit', [
             'item' => Prasidang::find($id),
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
@@ -322,7 +327,7 @@ class UploadDaftarMahasiswaController extends Controller
             'item' => Prasidang::find($id),
             'jadwal_prasidang' => JadwalPrasidang::wherePrasidangId($id)->first(),
             'ruangans' => Ruangan::where('is_active', 1)->get(),
-            'periodes' => Periode::all()
+            'periodes' => Periode::whereNull('bulan')->get(),
         ]);
     }
 
@@ -448,7 +453,7 @@ class UploadDaftarMahasiswaController extends Controller
             ->get();
 
         return view('backend.upload-daftar-mahasiswa.sidang-create', [
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
@@ -484,7 +489,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.sidang-edit', [
             'item' => Sidang::find($id),
-            'periodes' => Periode::all(),
+            'periodes' => Periode::whereNull('bulan')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
@@ -503,7 +508,7 @@ class UploadDaftarMahasiswaController extends Controller
             'item' => Sidang::find($id),
             'jadwal_sidang' => JadwalSidang::whereSidangId($id)->first(),
             'ruangans' => Ruangan::where('is_active', 1)->get(),
-            'periodes' => Periode::all()
+            'periodes' => Periode::whereNull('bulan')->get(),
         ]);
     }
 
