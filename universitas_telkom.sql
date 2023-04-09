@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 01:49 PM
+-- Generation Time: Apr 09, 2023 at 06:43 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -108,7 +108,8 @@ CREATE TABLE `deadline_proposal` (
 --
 
 INSERT INTO `deadline_proposal` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
-(1, 1, 6, '2022-11-26', NULL, NULL);
+(1, 1, 6, '2022-11-26', NULL, NULL),
+(2, 1, 10, '2022-02-09', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -334,10 +335,8 @@ CREATE TABLE `dosen_kaprodi` (
 --
 
 INSERT INTO `dosen_kaprodi` (`id`, `periode_id`, `dosen_id`, `prodi_id`, `tahun_ajaran`, `semester`, `awal_menjabat`, `akhir_menjabat`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 13, 1, '2021-2022', 'Genap', '2022-08-01', NULL, '2022-08-16 09:35:06', '2022-08-16 09:35:06', NULL),
-(2, 1, 3, 2, '2021-2022', 'Genap', '2022-08-01', NULL, '2022-08-16 09:46:54', '2022-08-16 09:46:54', NULL),
-(3, 1, 7, 1, '2021-2022', 'Genap', '2022-11-10', NULL, '2022-11-10 06:53:12', '2022-11-10 06:53:12', NULL),
-(4, 1, 7, 1, '2021-2022', 'Genap', '2022-11-10', NULL, '2022-11-16 04:22:11', '2022-11-16 04:22:11', NULL);
+(1, 9, 13, 1, '2021-2022', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:35:06', '2022-08-16 09:35:06', NULL),
+(2, 11, 3, 2, '2022-2023', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:46:54', '2022-08-16 09:46:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -362,10 +361,10 @@ CREATE TABLE `dosen_koordinator_pa` (
 --
 
 INSERT INTO `dosen_koordinator_pa` (`id`, `periode_id`, `dosen_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 1, '2021-2022', 'Genap', '2022-08-16 14:18:58', '2022-08-16 14:18:58', NULL),
-(2, 4, 2, 1, '2022-2023', 'Genap', '2022-11-10 05:00:41', '2022-11-10 05:00:41', NULL),
-(3, 5, 8, 1, '2023-2024', 'Ganjil', '2022-11-10 06:51:18', '2022-11-10 06:51:18', NULL),
-(4, 3, 8, 1, '2022-2023', 'Ganjil', '2022-11-16 04:13:18', '2022-11-16 04:13:18', NULL);
+(1, 10, 1, 1, '2021-2022', 'Genap', '2022-08-16 14:18:58', '2022-08-16 14:18:58', NULL),
+(2, 11, 2, 1, '2022-2023', 'Ganjil', '2022-11-10 05:00:41', '2022-11-10 05:00:41', NULL),
+(3, 12, 8, 1, '2022-2023', 'Genap', '2022-11-10 06:51:18', '2022-11-10 06:51:18', NULL),
+(4, 13, 8, 1, '2023-2024', 'Ganjil', '2022-11-16 04:13:18', '2022-11-16 04:13:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -588,7 +587,10 @@ INSERT INTO `komponen_proposal` (`id`, `prodi_id`, `periode_id`, `deadline_propo
 (18, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
 (19, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
 (20, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
-(21, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL);
+(21, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
+(22, 1, 10, 2, 'BAB 1', 20, NULL, NULL, '2022', 'Genap', '2023-04-09 08:49:12', '2023-04-09 08:49:12', NULL),
+(24, 1, 10, NULL, 'testing 1', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL),
+(25, 1, 10, NULL, 'testing 2', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -711,9 +713,9 @@ CREATE TABLE `mahasiswa_import` (
 --
 
 INSERT INTO `mahasiswa_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, '2021-2022', 'Genap', '2022-08-16 10:34:25', '2022-08-16 10:34:25', NULL),
-(2, 1, 1, '2021-2022', 'Ganjil', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(3, 1, 1, '2022-2023', 'Genap', '2022-11-10 06:54:02', '2022-11-16 04:32:13', '2022-11-16 04:32:13');
+(1, 10, 1, '2021-2022', 'Genap', '2022-08-16 10:34:25', '2022-08-16 10:34:25', NULL),
+(2, 10, 1, '2021-2022', 'Ganjil', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
+(3, 10, 1, '2022-2023', 'Genap', '2022-11-10 06:54:02', '2022-11-16 04:32:13', '2022-11-16 04:32:13');
 
 -- --------------------------------------------------------
 
@@ -801,21 +803,21 @@ CREATE TABLE `nilai_mutu` (
 --
 
 INSERT INTO `nilai_mutu` (`id`, `periode_id`, `index`, `nilai_min`, `nilai_maks`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'A', 85, 100, '2021-2022', 'Genap', NULL, '2022-11-10 06:52:39', NULL),
-(2, 1, 'AB', 70, 80, '2021-2022', 'Genap', NULL, NULL, NULL),
-(3, 1, 'B', 65, 70, '2021-2022', 'Genap', NULL, NULL, NULL),
-(4, 1, 'BC', 60, 65, '2021-2022', 'Genap', NULL, NULL, NULL),
-(5, 1, 'C', 50, 60, '2021-2022', 'Genap', NULL, NULL, NULL),
-(6, 1, 'D', 40, 50, '2021-2022', 'Genap', NULL, NULL, NULL),
-(7, 1, 'E', 0, 40, '2021-2022', 'Genap', NULL, NULL, NULL),
-(8, 2, 'A', 80, 100, '2021-2022', 'Genap', NULL, NULL, NULL),
-(9, 2, 'AB', 70, 80, '2021-2022', 'Genap', NULL, NULL, NULL),
-(10, 2, 'B', 65, 70, '2021-2022', 'Genap', NULL, NULL, NULL),
-(11, 2, 'BC', 60, 65, '2021-2022', 'Genap', NULL, NULL, NULL),
-(12, 2, 'C', 50, 60, '2021-2022', 'Genap', NULL, NULL, NULL),
-(13, 2, 'D', 40, 50, '2021-2022', 'Genap', NULL, NULL, NULL),
-(14, 2, 'E', 0, 40, '2021-2022', 'Genap', NULL, NULL, NULL),
-(15, 3, 'A', 80, 99, '2022-2023', 'Ganjil', '2022-11-16 04:18:54', '2022-11-16 04:18:54', NULL);
+(1, 9, 'A', 85, 100, '2021-2022', 'Ganjil', NULL, '2022-11-10 06:52:39', NULL),
+(2, 9, 'AB', 70, 80, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(3, 9, 'B', 65, 70, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(4, 9, 'BC', 60, 65, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(5, 9, 'C', 50, 60, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(6, 9, 'D', 40, 50, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(7, 9, 'E', 0, 40, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(8, 10, 'A', 80, 100, '2021-2022', 'Genap', NULL, NULL, NULL),
+(9, 10, 'AB', 70, 80, '2021-2022', 'Genap', NULL, NULL, NULL),
+(10, 10, 'B', 65, 70, '2021-2022', 'Genap', NULL, NULL, NULL),
+(11, 10, 'BC', 60, 65, '2021-2022', 'Genap', NULL, NULL, NULL),
+(12, 10, 'C', 50, 60, '2021-2022', 'Genap', NULL, NULL, NULL),
+(13, 10, 'D', 40, 50, '2021-2022', 'Genap', NULL, NULL, NULL),
+(14, 10, 'E', 0, 40, '2021-2022', 'Genap', NULL, NULL, NULL),
+(15, 11, 'A', 80, 99, '2022-2023', 'Ganjil', '2022-11-16 04:18:54', '2022-11-16 04:18:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1026,7 +1028,8 @@ INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, 
 (13, NULL, '2023-2024', 'Ganjil', NULL, 2023, '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
 (14, NULL, '2023-2024', 'Genap', NULL, 2024, '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
 (15, NULL, '2024-2025', 'Ganjil', NULL, 2024, '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
-(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL);
+(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL),
+(17, NULL, '2022-2024', 'Genap', NULL, 2024, '2023-03-13 17:14:07', '2023-03-13 17:14:19', '2023-03-13 17:14:19');
 
 -- --------------------------------------------------------
 
@@ -1850,7 +1853,7 @@ ALTER TABLE `deadline_prasidang`
 -- AUTO_INCREMENT for table `deadline_proposal`
 --
 ALTER TABLE `deadline_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deadline_sidang`
@@ -1892,7 +1895,7 @@ ALTER TABLE `dosen_import`
 -- AUTO_INCREMENT for table `dosen_kaprodi`
 --
 ALTER TABLE `dosen_kaprodi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `dosen_koordinator_pa`
@@ -1946,7 +1949,7 @@ ALTER TABLE `komponen_prasidang`
 -- AUTO_INCREMENT for table `komponen_proposal`
 --
 ALTER TABLE `komponen_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `komponen_sidang`
@@ -2024,7 +2027,7 @@ ALTER TABLE `pendaftaran_sidang`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `periode_semester`
