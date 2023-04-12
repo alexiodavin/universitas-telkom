@@ -16,6 +16,7 @@ class Dosen extends Model
         'id',
         'user_id',
         'periode_id',
+        'prodi_id',
         'dosen_import_id',
         'nama',
         'nama_gelar',
@@ -40,11 +41,18 @@ class Dosen extends Model
         // 'dosen_import',
     ];
 
-    public function periode(){
-        return $this->belongsTo('App\Models\Periode','periode_id')->withTrashed();
+    public function periode()
+    {
+        return $this->belongsTo('App\Models\Periode', 'periode_id')->withTrashed();
     }
-    
-    public function dosen_import(){
-        return $this->belongsTo('App\Models\DosenImport','dosen_import_id')->withTrashed();
+
+    public function prodi()
+    {
+        return $this->belongsTo('App\Models\Prodi', 'prodi_id')->withTrashed();
+    }
+
+    public function dosen_import()
+    {
+        return $this->belongsTo('App\Models\DosenImport', 'dosen_import_id')->withTrashed();
     }
 }

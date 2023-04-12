@@ -38,12 +38,19 @@ class Prodi extends Model
         // 'kaprodi',
     ];
 
-    public function periode(){
-        return $this->belongsTo('App\Models\Periode','periode_id')->withTrashed();
+    public function periode()
+    {
+        return $this->belongsTo('App\Models\Periode', 'periode_id')->withTrashed();
     }
 
-    public function koor(){
-        return $this->belongsTo('App\Models\Dosen','koor_id')->withTrashed();
+    public function dosen()
+    {
+        return $this->hasMany(Dosen::class);
+    }
+
+    public function koor()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'koor_id')->withTrashed();
     }
 
     // public function kaprodi(){
@@ -54,7 +61,8 @@ class Prodi extends Model
         'kaprodi'
     ];
 
-    public function getKaprodiAttribute(){
+    public function getKaprodiAttribute()
+    {
         return Dosen::find($this->attributes['kaprodi_id']);
     }
 }
