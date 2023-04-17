@@ -17,15 +17,18 @@
                     <div class="col-12">
                         <div class="card shadow">
                             <div class="card-body">
-                                <form action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
+                                <form action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.store') }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Periode<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Periode<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <select name="periode_id" class="form-control" required>
                                                 <option value="">Pilih Periode</option>
                                                 @foreach ($periodes as $periode)
-                                                    <option value="{{ $periode->id }}">{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
+                                                    <option value="{{ $periode->id }}">{{ $periode->tahun_ajaran }} -
+                                                        {{ $periode->semester }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('periode_id'))
@@ -34,9 +37,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Nama Mahasiswa<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Nama Mahasiswa<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
-                                            <select id="mahasiswa_id" name="mahasiswa_id" class="form-control select2bs4" required>
+                                            <select id="mahasiswa_id" name="mahasiswa_id" class="form-control select2bs4"
+                                                required>
                                                 <option value="">Pilih Nama Mahasiswa</option>
                                                 @foreach ($mahasiswas as $mahasiswa)
                                                     <option value="{{ $mahasiswa->id }}">{{ $mahasiswa->nama }}</option>
@@ -48,44 +53,55 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Judul PA<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Judul PA<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="judul_indo" name="judul_indo" value="{{ old('judul_indo') }}" required>
+                                            <input type="text" class="form-control" id="judul_indo" name="judul_indo"
+                                                value="{{ old('judul_indo') }}" required>
                                             @if ($errors->has('judul_indo'))
                                                 <span style="color:red;">{{ $errors->first('judul_indo') }}</span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Title<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Title<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="judul_inggris" name="judul_inggris" value="{{ old('judul_inggris') }}" required>
+                                            <input type="text" class="form-control" id="judul_inggris"
+                                                name="judul_inggris" value="{{ old('judul_inggris') }}" required>
                                             @if ($errors->has('judul_inggris'))
                                                 <span style="color:red;">{{ $errors->first('judul_inggris') }}</span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group row ">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Pembimbing 1<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Pembimbing 1<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-2">
-                                            <select name="pembimbing1_id" id="pembimbing1_id" class="form-control select2bs4" required onchange="showPembimbing1(this.value)">
-                                                <option value="" >Pilih Nama Pembimbing 1</option>
+                                            <select name="pembimbing1_id" id="pembimbing1_id"
+                                                class="form-control select2bs4" required
+                                                onchange="showPembimbing1(this.value)">
+                                                <option value="">Pilih Nama Pembimbing 1</option>
                                                 @foreach ($pembimbing_1 as $dosen)
                                                     <option value="{{ $dosen->id }}">{{ $dosen->kode }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('pembimbing1_id'))
                                                 <span style="color:red;">{{ $errors->first('pembimbing1_id') }}</span>
-                                                @endif
-                                            </div>
-                                            <div class="col-sm-2 ms-2 pt-1">
-                                                <div id="nama_pembimbing_1" class="m-auto" style="font-weight: 700; font-size: inherit;"></div>
-                                            </div>
+                                            @endif
                                         </div>
+                                        <div class="col-sm-2 ms-2 pt-1">
+                                            <div id="nama_pembimbing_1" class="m-auto"
+                                                style="font-weight: 700; font-size: inherit;"></div>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Pembimbing 2<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Pembimbing 2<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-2">
-                                            <select name="pembimbing2_id" id="pembimbing2_id" class="form-control select2bs4" required onchange="showPembimbing2(this.value)">
+                                            <select name="pembimbing2_id" id="pembimbing2_id"
+                                                class="form-control select2bs4" required
+                                                onchange="showPembimbing2(this.value)">
                                                 <option value="">Pilih Nama Pembimbing 2</option>
                                             </select>
                                             @if ($errors->has('pembimbing2_id'))
@@ -93,13 +109,16 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2 ms-2 pt-1">
-                                            <div id="nama_pembimbing_2" class="m-auto" style="font-weight: 700; font-size: inherit;"></div>
+                                            <div id="nama_pembimbing_2" class="m-auto"
+                                                style="font-weight: 700; font-size: inherit;"></div>
                                         </div>
                                     </div>
-                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Penguji 1<span style="color:red;"> *</span></label>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Penguji 1<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-2">
-                                            <select name="penguji1_id" class="form-control select2bs4" required onchange="showPenguji1(this.value)">
+                                            <select name="penguji1_id" class="form-control select2bs4" required
+                                                onchange="showPenguji1(this.value)">
                                                 <option value="">Pilih Nama Penguji 1</option>
                                                 @foreach ($dosens as $dosen)
                                                     <option value="{{ $dosen->id }}">{{ $dosen->kode }}</option>
@@ -110,25 +129,30 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2 ms-2 pt-1">
-                                            <div id="nama_penguji_1" class="m-auto" style="font-weight: 700; font-size: inherit;"></div>
+                                            <div id="nama_penguji_1" class="m-auto"
+                                                style="font-weight: 700; font-size: inherit;"></div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label font-weight-bold">Penguji 2<span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Penguji 2<span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-2">
-                                            <select name="penguji2_id" id="opsi_penguji2" class="form-control select2bs4" required onchange="showPenguji2(this.value)">
+                                            <select name="penguji2_id" id="opsi_penguji2" class="form-control select2bs4"
+                                                required onchange="showPenguji2(this.value)">
                                                 <option value="">Pilih Nama Penguji 2</option>
-                                                
+
                                             </select>
                                             @if ($errors->has('penguji2_id'))
                                                 <span style="color:red;">{{ $errors->first('penguji2_id') }}</span>
                                             @endif
                                         </div>
                                         <div class="col-sm-2 ms-2 pt-1">
-                                            <div id="nama_penguji_2" class="m-auto" style="font-weight: 700; font-size: inherit;"></div>
+                                            <div id="nama_penguji_2" class="m-auto"
+                                                style="font-weight: 700; font-size: inherit;"></div>
                                         </div>
                                     </div>
-                                <button type="submit" class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
+                                    <button type="submit"
+                                        class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
                                 </form>
                             </div>
                         </div>
@@ -149,19 +173,27 @@
                     <div class="col-12">
                         <div class="card shadow">
                             <div class="card-body">
-                                <form action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.upload') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Download File</label>
+                                <form
+                                    action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.upload') }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Download File</label>
                                         <div class="col-sm-10">
-                                            <a  class="btn btn-primary" href="{{ asset('file/template_daftar_mahasiswa_prasidang.xlsx') }}" download>Template Excel</a>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#periodeModal">List Periode</button>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mahasiswaModal">List Mahasiswa</button>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dosenModal">List Dosen</button>
+                                            <a class="btn btn-primary"
+                                                href="{{ asset('file/template_daftar_mahasiswa_prasidang.xlsx') }}"
+                                                download>Template Excel</a>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#periodeModal">List Periode</button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#mahasiswaModal">List Mahasiswa</button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#dosenModal">List Dosen</button>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Upload File <span style="color:red;"> *</span></label>
+                                        <label class="col-sm-2 col-form-label font-weight-bold">Upload File <span
+                                                style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control-file" name="file" required>
                                             @if ($errors->has('file'))
@@ -169,7 +201,8 @@
                                             @endif
                                         </div>
                                     </div>
-                                <button type="submit" class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
+                                    <button type="submit"
+                                        class="btn btn-primary btn-save shadow bg-primary">Simpan</button>
                                 </form>
                             </div>
                         </div>
@@ -179,7 +212,8 @@
         </section>
     </div>
 
-    <div class="modal fade" id="periodeModal" tabindex="-1" role="dialog" aria-labelledby="periodeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="periodeModal" tabindex="-1" role="dialog" aria-labelledby="periodeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,7 +232,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($periodes as $periode)
+                            @foreach ($periodes as $periode)
                                 <tr>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $periode->id }}</td>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $periode->tahun_ajaran }}</td>
@@ -215,7 +249,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="mahasiswaModal" tabindex="-1" role="dialog" aria-labelledby="mahasiswaModalLabel" aria-hidden="true">
+    <div class="modal fade" id="mahasiswaModal" tabindex="-1" role="dialog" aria-labelledby="mahasiswaModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -234,7 +269,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($mahasiswas as $mahasiswa)
+                            @foreach ($mahasiswas as $mahasiswa)
                                 <tr>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $mahasiswa->id }}</td>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $mahasiswa->nim }}</td>
@@ -251,7 +286,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="dosenModal" tabindex="-1" role="dialog" aria-labelledby="dosenModalLabel" aria-hidden="true">
+    <div class="modal fade" id="dosenModal" tabindex="-1" role="dialog" aria-labelledby="dosenModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -270,7 +306,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dosens as $dosen)
+                            @foreach ($dosens as $dosen)
                                 <tr>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $dosen->id }}</td>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $dosen->kode }}</td>
@@ -291,11 +327,11 @@
 @section('js')
     <script>
         $('#mahasiswa_id').on('change', function() {
-            $.get("{{ route('api.proposal.find-by-mahasiswa-id') }}"+'?id='+this.value, function(response){
-                if(response.data){
+            $.get("{{ route('api.proposal.find-by-mahasiswa-id') }}" + '?id=' + this.value, function(response) {
+                if (response.data) {
                     $('#judul_indo').val(response.data.judul_indo)
                     $('#judul_inggris').val(response.data.judul_inggris)
-                }else{
+                } else {
                     $('#judul_indo').val('-')
                     $('#judul_inggris').val('-')
                 }
@@ -304,108 +340,110 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        const showPembimbing1 = (e) =>{
+        const showPembimbing1 = (e) => {
             $.ajax({
-             url:'/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
-             type:'POST',
-             data: {
-                '_token' : '{{ csrf_token() }}',
-                'dosen_id_pbb1' : e
-             },
-             dataType:'json',
-             success:function(response){
-                // console.log(response.nama_dosen);
-                const namaP1 = document.querySelector('#nama_pembimbing_1');
-                namaP1.innerHTML = response.nama_dosen;
+                url: '/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'dosen_id_pbb1': e
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response.nama_dosen);
+                    const namaP1 = document.querySelector('#nama_pembimbing_1');
+                    namaP1.innerHTML = response.nama_dosen;
 
-                const opsiP2 = document.getElementById('pembimbing2_id');
-                
-                response.dosen_pbb2_id.forEach(element => {
-                    opsiP2.innerHTML += `
+                    const opsiP2 = document.getElementById('pembimbing2_id');
+
+                    response.dosen_pbb2_id.forEach(element => {
+                        opsiP2.innerHTML += `
                     <option value="${element.id}">${element.kode}</option>
                     `;
-                });
-                console.log(opsiP2);
+                    });
+                    console.log(opsiP2);
 
-                
-                
 
-                // console.log(namaP1);
-             },error:function(err){
 
-             }
-          })
+
+                    // console.log(namaP1);
+                },
+                error: function(err) {
+
+                }
+            })
         }
 
-        const showPembimbing2 = (e) =>{
+        const showPembimbing2 = (e) => {
             const namaP1 = document.querySelector('#pembimbing1_id');
             // console.log(namaP1);
-            
+
 
             $.ajax({
-             url:'/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
-             type:'POST',
-             data: {
-                '_token' : '{{ csrf_token() }}',
-                'dosen_id_pbb2' : e,
-             },
-             dataType:'json',
-             success:function(response){
-                const namaP1 = document.querySelector('#nama_pembimbing_2');
-                namaP1.innerHTML = response.nama_dosen;
+                url: '/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'dosen_id_pbb2': e,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    const namaP1 = document.querySelector('#nama_pembimbing_2');
+                    namaP1.innerHTML = response.nama_dosen;
 
-                // console.log(namaP1);
-             },error:function(err){
+                    // console.log(namaP1);
+                },
+                error: function(err) {
 
-             }
-          })
+                }
+            })
         }
-        
-        const showPenguji1 = (e) =>{
+
+        const showPenguji1 = (e) => {
             $.ajax({
-             url:'/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
-             type:'POST',
-             data: {
-                '_token' : '{{ csrf_token() }}',
-                'dosen_id_penguji1' : e
-             },
-             dataType:'json',
-             success:function(response){
-                const namaP1 = document.querySelector('#nama_penguji_1');
-                namaP1.innerHTML = response.nama_dosen;
-                const opsiP2 = document.querySelector('#opsi_penguji2');
-                // console.log(opsiP2);
+                url: '/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'dosen_id_penguji1': e
+                },
+                dataType: 'json',
+                success: function(response) {
+                    const namaP1 = document.querySelector('#nama_penguji_1');
+                    namaP1.innerHTML = response.nama_dosen;
+                    const opsiP2 = document.querySelector('#opsi_penguji2');
+                    // console.log(opsiP2);
 
-                response.dosen_id_penguji2.forEach(element => {
-                    opsiP2.innerHTML += `<option value="${element.id}">${element.kode}</option>`
-                });
+                    response.dosen_id_penguji2.forEach(element => {
+                        opsiP2.innerHTML += `<option value="${element.id}">${element.kode}</option>`
+                    });
 
-             },error:function(err){
+                },
+                error: function(err) {
 
-             }
-          })
+                }
+            })
         }
 
-        const showPenguji2 = (e) =>{
+        const showPenguji2 = (e) => {
             $.ajax({
-             url:'/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
-             type:'POST',
-             data: {
-                '_token' : '{{ csrf_token() }}',
-                'dosen_id_penguji2' : e
-             },
-             dataType:'json',
-             success:function(response){
-                const namaP1 = document.querySelector('#nama_penguji_2');
-                namaP1.innerHTML = response.nama_dosen;
+                url: '/koordinator-pa/upload-daftar-mahasiswa/proposal/create',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'dosen_id_penguji2': e
+                },
+                dataType: 'json',
+                success: function(response) {
+                    const namaP1 = document.querySelector('#nama_penguji_2');
+                    namaP1.innerHTML = response.nama_dosen;
 
-                // console.log(namaP1);
-             },error:function(err){
+                    // console.log(namaP1);
+                },
+                error: function(err) {
 
-             }
-          })
+                }
+            })
         }
-
-        
     </script>
 @endsection

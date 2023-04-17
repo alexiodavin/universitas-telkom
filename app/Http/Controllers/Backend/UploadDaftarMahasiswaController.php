@@ -263,20 +263,23 @@ class UploadDaftarMahasiswaController extends Controller
                 $proposal_data = Proposal::where('id', $proposal)->first();
                 // array_push($array_proposal, $proposal_data);
                 // dd($proposal_data);
-                $inserted_data = [
-                    'mahasiswa_id' => $proposal_data->mahasiswa_id,
-                    'pembimbing1_id' => $proposal_data->pembimbing1_id,
-                    'pembimbing2_id' => $proposal_data->pembimbing2_id,
-                    'penguji1_id' => $proposal_data->penguji1_id,
-                    'penguji2_id' => $proposal_data->penguji2_id,
-                    'periode_id' => $proposal_data->periode_id,
-                    'judul_indo' => $proposal_data->judul_indo,
-                    'judul_inggris' => $proposal_data->judul_inggris,
-                    'tahun_ajaran' => $proposal_data->tahun_ajaran,
-                    'semester' => $proposal_data->semester
-                ];
-                // dd($inserted_data);
-                Prasidang::create($inserted_data);
+                $check = Proposal::whereMahasiswaId($proposal_data->mahasiswa_id)->first();
+                if (!$check) {
+                    $inserted_data = [
+                        'mahasiswa_id' => $proposal_data->mahasiswa_id,
+                        'pembimbing1_id' => $proposal_data->pembimbing1_id,
+                        'pembimbing2_id' => $proposal_data->pembimbing2_id,
+                        'penguji1_id' => $proposal_data->penguji1_id,
+                        'penguji2_id' => $proposal_data->penguji2_id,
+                        'periode_id' => $proposal_data->periode_id,
+                        'judul_indo' => $proposal_data->judul_indo,
+                        'judul_inggris' => $proposal_data->judul_inggris,
+                        'tahun_ajaran' => $proposal_data->tahun_ajaran,
+                        'semester' => $proposal_data->semester
+                    ];
+                    // dd($inserted_data);
+                    Prasidang::create($inserted_data);
+                }
             }
             return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang')->with('success', 'Berhasil menambahkan data');
             // dd($array_proposal);

@@ -13,11 +13,11 @@ class ImportMahasiswaProposal implements ToCollection
 {
     public function collection(Collection $rows)
     {
-        foreach ($rows as $key => $row){
-            if($key != 0){
-                if($row[0] != null || $row[0] != ""){
-                    $check = Proposal::whereMahasiswaId($row[0])->wherePeriodeId($row[5])->first();
-                    if($check){
+        foreach ($rows as $key => $row) {
+            if ($key != 0) {
+                if ($row[0] != null || $row[0] != "") {
+                    $check = Proposal::whereMahasiswaId($row[0])->first();
+                    if ($check) {
                         $check->delete();
                     }
                     Proposal::create([
