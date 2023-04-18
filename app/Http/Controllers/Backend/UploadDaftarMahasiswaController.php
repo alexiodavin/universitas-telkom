@@ -340,8 +340,18 @@ class UploadDaftarMahasiswaController extends Controller
         $data['prasidang_id'] = $id;
         $data['ruangan'] = $request->ruangan_id ? Ruangan::find($request->ruangan_id)->nama : $request->ruangan;
         if (session('auth_login') == 'koordinator_pa') {
+            $this->validate($request, [
+                'bulan' => 'required',
+                'tanggal_prasidang' => 'required',
+                'jam_mulai_prasidang' => 'required',
+                'jam_selesai_prasidang' => 'required',
+            ]);
             JadwalPrasidang::create($data);
         } else {
+            $this->validate($request, [
+                'ruangan_id' => 'required',
+                'ruangan' => 'required',
+            ]);
             JadwalPrasidang::where('id', $request->jadwal_id)->update([
                 'ruangan_id' => $request->ruangan_id,
                 'ruangan' => $data['ruangan']

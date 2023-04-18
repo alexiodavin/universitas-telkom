@@ -226,7 +226,7 @@
     @if (session('success'))
         <script>
             swal.fire({
-                title: 'Success!',
+                title: 'Sukses!',
                 text: "{{ session('success') }}",
                 icon: 'success',
                 confirmButtonColor: '#b6252a',
@@ -237,8 +237,18 @@
     @if (session('failed'))
         <script>
             swal.fire({
-                title: 'Failed!',
+                title: 'Gagal!',
                 text: "{{ session('failed') }}",
+                icon: 'error',
+                confirmButtonColor: '#b6252a',
+            })
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            swal.fire({
+                title: 'Terjadi kesalahan!',
+                text: "@foreach ($errors->all() as $error) {{ $error . ', ' }} @endforeach ",
                 icon: 'error',
                 confirmButtonColor: '#b6252a',
             })
@@ -248,7 +258,7 @@
     @if (session('warning'))
         <script>
             swal.fire({
-                title: 'Warning!',
+                title: 'Peringatan!',
                 text: "{{ session('warning') }}",
                 icon: 'warning',
                 confirmButtonColor: '#b6252a',
@@ -263,7 +273,7 @@
                 'default': '',
                 'replace': '',
                 'remove': 'Remove',
-                'error': 'Ooops, something wrong happended.'
+                'error': 'Aduhh, terjadi kesalahan.'
             }
         });
     </script>

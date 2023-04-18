@@ -100,19 +100,34 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label  font-weight-bold">Bulan</label>
+                                        <label
+                                            class="col-sm-2 col-form-label @error('bulan') is-invalid @enderror font-weight-bold">Bulan</label>
                                         <div class="col-sm-10">
                                             <select name="bulan" class="form-control col-4" style=""
                                                 id="bulan_opsi">
-
                                             </select>
+                                            @error('bulan')
+                                                <span style="color:red;">{{ $errors->first('bulan') }}</span>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label font-weight-bold">Tanggal</label>
                                         <div class="col-sm-10">
-                                            <input type="date" class="form-control" name="tanggal_prasidang"
-                                                value="{{ $jadwal_prasidang->tanggal_prasidang ?? null }}" required>
+                                            <input type="date"
+                                                class="form-control @error('tanggal_prasidang') is-invalid @enderror"
+                                                name="tanggal_prasidang"
+                                                value="{{ old('judul', $jadwal_prasidang->tanggal_prasidang) ?? null }}"
+                                                required>
+                                            @error('tanggal_prasidang')
+                                                <span style="color:red;">{{ $errors->first('tanggal_prasidang') }}</span>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             @if ($errors->has('tanggal_prasidang'))
                                                 <span style="color:red;">{{ $errors->first('tanggal_prasidang') }}</span>
                                             @endif
@@ -122,13 +137,29 @@
                                         <label class="col-sm-2 col-form-label font-weight-bold">Jam</label>
                                         <div class="col-sm-10">
                                             <div class="row p-0 m-0">
-                                                <input style="width: 200px;" type="time" class="form-control mr-3"
+                                                <input style="width: 200px;" type="time"
+                                                    class="form-control @error('jam_mulai_prasidang') is-invalid @enderror mr-3"
                                                     name="jam_mulai_prasidang"
-                                                    value="{{ $jadwal_prasidang->jam_mulai_prasidang ?? null }}" required>
-                                                <input style="width: 200px;" type="time" class="form-control"
-                                                    name="jam_selesai_prasidang"
-                                                    value="{{ $jadwal_prasidang->jam_selesai_prasidang ?? null }}"
+                                                    value="{{ old('judul', $jadwal_prasidang->jam_mulai_prasidang) ?? null }}"
                                                     required>
+                                                @error('jam_mulai_prasidang')
+                                                    <span style="color:red;">{{ $errors->first('jam_mulai_prasidang') }}</span>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                                <input style="width: 200px;" type="time"
+                                                    class="form-control @error('jam_selesai_prasidang') is-invalid @enderror"
+                                                    name="jam_selesai_prasidang"
+                                                    value="{{ old('judul', $jadwal_prasidang->jam_selesai_prasidang) ?? null }}"
+                                                    required>
+                                                @error('jam_selesai_prasidang')
+                                                    <span
+                                                        style="color:red;">{{ $errors->first('jam_selesai_prasidang') }}</span>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                                 <i class="mt-2 ml-3">Format hh:mm:ss</i>
                                             </div>
                                         </div>
@@ -138,7 +169,8 @@
                                         <label class="col-sm-2 col-form-label font-weight-bold">Ruangan<span
                                                 style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
-                                            <select name="ruangan_id" class="form-control" required>
+                                            <select name="ruangan_id"
+                                                class="form-control @error('ruangan_id') is-invalid @enderror" required>
                                                 <option value="">Pilih Ruangan</option>
                                                 <option value="" @if (str_contains($jadwal_prasidang->ruangan ?? '', 'http')) selected @endif>
                                                     Online</option>
@@ -148,6 +180,12 @@
                                                         {{ $ruangan->nama }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('ruangan_id')
+                                                <span style="color:red;">{{ $errors->first('ruangan_id') }}</span>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             @if ($errors->has('ruangan_id'))
                                                 <span style="color:red;">{{ $errors->first('ruangan_id') }}</span>
                                             @endif
@@ -158,11 +196,20 @@
                                             Meet</label>
                                         <div class="col-sm-10">
                                             @if ($jadwal_prasidang)
-                                                <input type="text" class="form-control" name="ruangan"
-                                                    value="{{ $jadwal_prasidang->ruangan_id == null ? $jadwal_prasidang->ruangan : '' }}">
+                                                <input type="text"
+                                                    class="form-control @error('ruangan') is-invalid @enderror name="ruangan"
+                                                    value="{{ old('judul', $jadwal_prasidang->ruangan_id) == null ? $jadwal_prasidang->ruangan : '' }}">
                                             @else
-                                                <input type="text" class="form-control" name="ruangan">
+                                                <input type="text"
+                                                    class="form-control @error('ruangan') is-invalid @enderror"
+                                                    name="ruangan">
                                             @endif
+                                            @error('ruangan')
+                                                <span style="color:red;">{{ $errors->first('ruangan') }}</span>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             <i>Diisi ketika ruangan Online</i>
                                             @if ($errors->has('ruangan'))
                                                 <span style="color:red;">{{ $errors->first('ruangan') }}</span>
