@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2023 at 07:42 PM
+-- Generation Time: Apr 18, 2023 at 04:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -86,7 +86,7 @@ CREATE TABLE `deadline_prasidang` (
 --
 
 INSERT INTO `deadline_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, '2022-11-26', NULL, '2022-11-10 07:04:25'),
+(1, 1, 9, '2022-11-26', NULL, '2022-11-10 07:04:25'),
 (2, 1, 10, '2022-04-10', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -109,7 +109,7 @@ CREATE TABLE `deadline_proposal` (
 --
 
 INSERT INTO `deadline_proposal` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
-(1, 1, 6, '2022-11-26', NULL, NULL),
+(1, 1, 13, '2022-11-26', NULL, NULL),
 (2, 1, 10, '2022-02-09', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -132,7 +132,8 @@ CREATE TABLE `deadline_sidang` (
 --
 
 INSERT INTO `deadline_sidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, '2022-11-26', NULL, NULL);
+(1, 1, 11, '2022-11-26', NULL, NULL),
+(2, 1, 10, '2022-08-10', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,6 +246,7 @@ CREATE TABLE `dosen` (
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `periode_id` bigint(20) UNSIGNED DEFAULT NULL,
   `dosen_import_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `prodi_id` bigint(20) UNSIGNED DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `nama_gelar` varchar(255) DEFAULT NULL,
   `nip` varchar(255) DEFAULT NULL,
@@ -263,27 +265,27 @@ CREATE TABLE `dosen` (
 -- Dumping data for table `dosen`
 --
 
-INSERT INTO `dosen` (`id`, `user_id`, `periode_id`, `dosen_import_id`, `nama`, `nama_gelar`, `nip`, `kode`, `telepon`, `alamat`, `foto`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 1, 2, 'Patrick Adolf Telnoni', 'Patrick Adolf Telnoni, S.T., M.T.', '5171', 'PTI', '+62 822-1928-7517', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(2, 3, 1, 2, 'Dedy Rahman Wijaya', 'Dr. Dedy Rahman Wijaya, S.T., M.T.', '5172', 'DRW', '+62 822-1914-7349', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(3, 4, 1, 2, 'Hanung Nindito Prasetyo', 'Hanung Nindito Prasetyo, S.Si, M.T.', '5173', 'HNP', '+62 812-2059-9883', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(4, 5, 1, 2, 'M. Barja Sanjaya', 'M. Barja Sanjaya, S.T., M.T., OCA.', '5174', 'MBS', '+62 813-1314-1120', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(5, 6, 1, 2, 'Siska Komala Sari', 'Siska Komala Sari, S.T., M.T.', '5175', 'SKS', '+62 813-2019-8038', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(6, 7, 1, 2, 'Wawa Wikusna', 'Wawa Wikusna, S.T., M.Kom.', '5176', 'WIU', '+62 813-2060-4160', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
-(7, 8, 1, 2, 'Elis Hernawati', 'Elis Hernawati, S.T., M.Kom.', '5177', 'ELT', '+62 822-4003-5983', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(8, 9, 1, 2, 'Inne Gartina Husein', 'Dr. Inne Gartina Husein, S.Kom., M.T.', '5178', 'INE', '+62 813-9509-6162', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(9, 10, 1, 2, 'Pramuko Aji', 'Pramuko Aji, S.T., M.T.', '5179', 'PRA', '+62 821-8008-5050', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(10, 11, 1, 2, 'Suryatiningsih', 'Suryatiningsih, S.T., M.T., OCA., C.Ht.', '5180', 'SYN', '+62 813-2077-6520', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(11, 12, 1, 2, 'Tedi Gunawan', 'Tedi Gunawan, S.T., M.Kom.', '5181', 'TGN', '+62 812-2199-440', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(12, 13, 1, 2, 'Pikir Wisnu Wijayanto', 'Dr. Pikir Wisnu Wijayanto, S.E., S.Pd.Ing., M.Hum.', '5182', 'PWW', '+62 851-0387-9393', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(13, 14, 1, 2, 'Ely Rosely', 'Ir. Ely Rosely, M.B.S.', '5183', 'ELR', '+62 815-1324-4609', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(14, 15, 1, 2, 'Mutia Qana\'a', 'Mutia Qana\'a, S.Psi., M.Psi.', '5184', 'MQA', '+62 852-2279-7846', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(15, 16, 1, 2, 'Wahyu Hidayat', 'Wahyu Hidayat, S.T., M.T., OCA.', '5185', 'WHY', '+62 813-2207-2099', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(16, 17, 1, 2, 'Robbi Hendriyanto', 'Robbi Hendriyanto, S.T., M.T.', '5186', 'RHN', '+62 823-1604-9294', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(17, 22, 1, 4, 'Olivia Istianah', 'Olivia Istianah Amd.Kom', '1222', 'opi', '08131213123', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(18, 23, 1, 4, 'Rania Athala', 'Rania Athala Amd.Kom', '1235', 'tat', '08121312321', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(19, 24, 1, 4, 'Rusyda Hanifan', 'Rusyda Hanifan Amd.Kom', '1236', 'han', '8121312326', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(20, 25, 1, 5, 'ejakkk', 'Ejak Amd.Kom', '1229', 'ejk', '8131213120', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 11:37:53', '2022-08-16 11:37:53', NULL);
+INSERT INTO `dosen` (`id`, `user_id`, `periode_id`, `dosen_import_id`, `prodi_id`, `nama`, `nama_gelar`, `nip`, `kode`, `telepon`, `alamat`, `foto`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 9, 2, NULL, 'Patrick Adolf Telnoni', 'Patrick Adolf Telnoni, S.T., M.T.', '5171', 'PTI', '+62 822-1928-7517', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(2, 3, 9, 2, NULL, 'Dedy Rahman Wijaya', 'Dr. Dedy Rahman Wijaya, S.T., M.T.', '5172', 'DRW', '+62 822-1914-7349', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(3, 4, 9, 2, NULL, 'Hanung Nindito Prasetyo', 'Hanung Nindito Prasetyo, S.Si, M.T.', '5173', 'HNP', '+62 812-2059-9883', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(4, 5, 9, 2, NULL, 'M. Barja Sanjaya', 'M. Barja Sanjaya, S.T., M.T., OCA.', '5174', 'MBS', '+62 813-1314-1120', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(5, 6, 9, 2, NULL, 'Siska Komala Sari', 'Siska Komala Sari, S.T., M.T.', '5175', 'SKS', '+62 813-2019-8038', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(6, 7, 9, 2, NULL, 'Wawa Wikusna', 'Wawa Wikusna, S.T., M.Kom.', '5176', 'WIU', '+62 813-2060-4160', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:30', '2022-08-16 09:34:30', NULL),
+(7, 8, 9, 2, NULL, 'Elis Hernawati', 'Elis Hernawati, S.T., M.Kom.', '5177', 'ELT', '+62 822-4003-5983', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(8, 9, 9, 2, NULL, 'Inne Gartina Husein', 'Dr. Inne Gartina Husein, S.Kom., M.T.', '5178', 'INE', '+62 813-9509-6162', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(9, 10, 9, 2, NULL, 'Pramuko Aji', 'Pramuko Aji, S.T., M.T.', '5179', 'PRA', '+62 821-8008-5050', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(10, 11, 9, 2, NULL, 'Suryatiningsih', 'Suryatiningsih, S.T., M.T., OCA., C.Ht.', '5180', 'SYN', '+62 813-2077-6520', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(11, 12, 9, 2, NULL, 'Tedi Gunawan', 'Tedi Gunawan, S.T., M.Kom.', '5181', 'TGN', '+62 812-2199-440', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(12, 13, 9, 2, NULL, 'Pikir Wisnu Wijayanto', 'Dr. Pikir Wisnu Wijayanto, S.E., S.Pd.Ing., M.Hum.', '5182', 'PWW', '+62 851-0387-9393', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(13, 14, 9, 2, NULL, 'Ely Rosely', 'Ir. Ely Rosely, M.B.S.', '5183', 'ELR', '+62 815-1324-4609', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(14, 15, 9, 2, NULL, 'Mutia Qana\'a', 'Mutia Qana\'a, S.Psi., M.Psi.', '5184', 'MQA', '+62 852-2279-7846', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(15, 16, 9, 2, NULL, 'Wahyu Hidayat', 'Wahyu Hidayat, S.T., M.T., OCA.', '5185', 'WHY', '+62 813-2207-2099', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(16, 17, 9, 2, NULL, 'Robbi Hendriyanto', 'Robbi Hendriyanto, S.T., M.T.', '5186', 'RHN', '+62 823-1604-9294', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
+(17, 22, 9, 4, NULL, 'Olivia Istianah', 'Olivia Istianah Amd.Kom', '1222', 'opi', '08131213123', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
+(18, 23, 9, 4, NULL, 'Rania Athala', 'Rania Athala Amd.Kom', '1235', 'tat', '08121312321', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
+(19, 24, 9, 4, NULL, 'Rusyda Hanifan', 'Rusyda Hanifan Amd.Kom', '1236', 'han', '8121312326', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
+(20, 25, 9, 5, NULL, 'ejakkk', 'Ejak Amd.Kom', '1229', 'ejk', '8131213120', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 11:37:53', '2022-08-16 11:37:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -307,9 +309,9 @@ CREATE TABLE `dosen_import` (
 --
 
 INSERT INTO `dosen_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 1, 1, '2021-2022', 'Genap', '2022-08-16 09:34:28', '2022-08-16 09:34:28', NULL),
-(4, 1, 3, '2021-2022', 'Genap', '2022-08-16 10:52:58', '2022-08-16 10:52:58', NULL),
-(5, 1, 1, '2021-2022', 'Genap', '2022-08-16 11:37:51', '2022-08-16 11:37:51', NULL);
+(2, 9, 1, '2021-2022', 'Genap', '2022-08-16 09:34:28', '2022-08-16 09:34:28', NULL),
+(4, 9, 3, '2021-2022', 'Genap', '2022-08-16 10:52:58', '2022-08-16 10:52:58', NULL),
+(5, 9, 1, '2021-2022', 'Genap', '2022-08-16 11:37:51', '2022-08-16 11:37:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -528,20 +530,20 @@ CREATE TABLE `komponen_prasidang` (
 --
 
 INSERT INTO `komponen_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline_prasidang_id`, `nama_komponen`, `persentase`, `keterangan`, `tanggal_deadline_input_nilai`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 2, NULL, 'Penguasaan Materi', 35, 'Keterangan Penguasaan Materi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(2, 1, 2, NULL, 'Penguasaan Aplikasi / Implementasi Produk', 35, 'Keterangan Penguasaan Aplikasi / Implementasi Produk', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(3, 1, 2, NULL, 'Tata Tulis', 20, 'Keterangan Tata Tulis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 2, NULL, 'Teknik Presentasi', 10, 'Keterangan Teknik Presentasi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:36', '2022-11-14 04:35:36'),
-(6, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:42', '2022-11-14 04:35:42'),
-(7, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:28', '2022-11-14 07:34:28'),
-(8, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:33', '2022-11-14 07:34:33'),
-(9, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
-(10, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
-(11, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
-(12, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
-(13, 1, 10, 2, 'BAB 1', 50, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:32', '2023-04-09 17:39:32', NULL),
-(14, 1, 10, 2, 'BAB 2', 10, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:52', '2023-04-09 17:39:52', NULL);
+(1, 1, 9, NULL, 'Penguasaan Materi', 35, 'Keterangan Penguasaan Materi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(2, 1, 9, NULL, 'Penguasaan Aplikasi / Implementasi Produk', 35, 'Keterangan Penguasaan Aplikasi / Implementasi Produk', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(3, 1, 9, NULL, 'Tata Tulis', 20, 'Keterangan Tata Tulis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(4, 1, 9, NULL, 'Teknik Presentasi', 10, 'Keterangan Teknik Presentasi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(5, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:36', '2022-11-14 04:35:36'),
+(6, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:42', '2022-11-14 04:35:42'),
+(7, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:28', '2022-11-14 07:34:28'),
+(8, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:33', '2022-11-14 07:34:33'),
+(9, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
+(10, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
+(11, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
+(12, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
+(13, 1, 9, 2, 'BAB 1', 50, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:32', '2023-04-09 17:39:32', NULL),
+(14, 1, 9, 2, 'BAB 2', 10, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:52', '2023-04-09 17:39:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -570,30 +572,30 @@ CREATE TABLE `komponen_proposal` (
 --
 
 INSERT INTO `komponen_proposal` (`id`, `prodi_id`, `periode_id`, `deadline_proposal_id`, `nama_komponen`, `persentase`, `keterangan`, `tanggal_deadline_input_nilai`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 2, NULL, 'Latar Belakang', 20, 'Keterangan Latar Belakang', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(2, 1, 2, NULL, 'Studi Pustaka', 20, 'Keterangan Studi Pustaka', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(3, 1, 2, NULL, 'Perbandingan Sistem', 10, 'Keterangan Perbandingan Sistem', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 2, NULL, 'Gambaran Proses Bisnis', 25, 'Keterangan Gambaran Proses Bisnis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 2, NULL, 'Lampiran Hasil Kuisioner', 25, 'Keterangan Lampiran Hasil Kuisioner', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(6, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:25:57', '2022-11-14 04:25:57'),
-(7, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:26:03', '2022-11-14 04:26:03'),
-(8, 1, 6, 1, 'Latar Belakang', 20, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:31', '2022-11-14 07:22:49', '2022-11-14 07:22:49'),
-(9, 1, 6, 1, 'Bab 1', 25, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:47', '2022-11-14 07:22:54', '2022-11-14 07:22:54'),
-(10, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:23', '2022-11-14 04:28:23'),
-(11, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:30', '2022-11-14 04:28:30'),
-(12, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:43', '2022-11-14 07:20:43'),
-(13, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:49', '2022-11-14 07:20:49'),
-(14, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:27', '2022-11-14 07:32:27'),
-(15, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:32', '2022-11-14 07:32:32'),
-(16, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
-(17, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
-(18, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
-(19, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
-(20, 1, 2, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
-(21, 1, 2, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
-(22, 1, 10, 2, 'BAB 1', 20, NULL, NULL, '2022', 'Genap', '2023-04-09 08:49:12', '2023-04-09 08:49:12', NULL),
-(24, 1, 10, NULL, 'testing 1', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL),
-(25, 1, 10, NULL, 'testing 2', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL);
+(1, 1, 9, NULL, 'Latar Belakang', 20, 'Keterangan Latar Belakang', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(2, 1, 9, NULL, 'Studi Pustaka', 20, 'Keterangan Studi Pustaka', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(3, 1, 9, NULL, 'Perbandingan Sistem', 10, 'Keterangan Perbandingan Sistem', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(4, 1, 9, NULL, 'Gambaran Proses Bisnis', 25, 'Keterangan Gambaran Proses Bisnis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(5, 1, 9, NULL, 'Lampiran Hasil Kuisioner', 25, 'Keterangan Lampiran Hasil Kuisioner', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(6, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:25:57', '2022-11-14 04:25:57'),
+(7, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:26:03', '2022-11-14 04:26:03'),
+(8, 1, 9, 1, 'Latar Belakang', 20, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:31', '2022-11-14 07:22:49', '2022-11-14 07:22:49'),
+(9, 1, 9, 1, 'Bab 1', 25, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:47', '2022-11-14 07:22:54', '2022-11-14 07:22:54'),
+(10, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:23', '2022-11-14 04:28:23'),
+(11, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:30', '2022-11-14 04:28:30'),
+(12, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:43', '2022-11-14 07:20:43'),
+(13, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:49', '2022-11-14 07:20:49'),
+(14, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:27', '2022-11-14 07:32:27'),
+(15, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:32', '2022-11-14 07:32:32'),
+(16, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
+(17, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
+(18, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
+(19, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
+(20, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
+(21, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
+(22, 1, 9, 2, 'BAB 1', 20, NULL, NULL, '2022', 'Genap', '2023-04-09 08:49:12', '2023-04-09 08:49:12', NULL),
+(24, 1, 9, NULL, 'testing 1', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL),
+(25, 1, 9, NULL, 'testing 2', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -622,15 +624,17 @@ CREATE TABLE `komponen_sidang` (
 --
 
 INSERT INTO `komponen_sidang` (`id`, `prodi_id`, `periode_id`, `deadline_sidang_id`, `nama_komponen`, `persentase`, `keterangan`, `tanggal_deadline_input_nilai`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 2, NULL, 'Nilai Pembimbing 1', 24, 'Keterangan Nilai Pembimbing 1', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(2, 1, 2, NULL, 'Nilai Pembimbing 2', 24, 'Keterangan Nilai Pembimbing 2', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(3, 1, 2, NULL, 'Nilai Penguji 1', 16, 'Keterangan Nilai Penguji 1', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 2, NULL, 'Nilai Penguji 2', 16, 'Keterangan Nilai Penguji 2', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 2, NULL, 'Nilai Proposal', 20, 'Keterangan Nilai Proposal', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(6, 1, 3, 1, 'Latar Belakang', 20, 'Nilai Prasidang', NULL, '2022', 'Ganjil', '2022-11-10 07:06:01', '2022-11-10 07:06:14', NULL),
-(7, 1, 3, 1, 'Nilai Tambahan', 50, 'Nilai Baru', NULL, '2022', 'Ganjil', '2022-11-14 06:35:10', '2022-11-14 06:35:10', NULL),
-(8, 1, 2, NULL, 'testing 1', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL),
-(9, 1, 2, NULL, 'testing 2', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL);
+(1, 1, 11, NULL, 'Nilai Pembimbing 1', 24, 'Keterangan Nilai Pembimbing 1', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(2, 1, 11, NULL, 'Nilai Pembimbing 2', 24, 'Keterangan Nilai Pembimbing 2', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(3, 1, 11, NULL, 'Nilai Penguji 1', 16, 'Keterangan Nilai Penguji 1', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(4, 1, 11, NULL, 'Nilai Penguji 2', 16, 'Keterangan Nilai Penguji 2', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(5, 1, 11, NULL, 'Nilai Proposal', 20, 'Keterangan Nilai Proposal', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
+(6, 1, 11, 1, 'Latar Belakang', 20, 'Nilai Prasidang', NULL, '2022', 'Ganjil', '2022-11-10 07:06:01', '2022-11-10 07:06:14', NULL),
+(7, 1, 11, 1, 'Nilai Tambahan', 50, 'Nilai Baru', NULL, '2022', 'Ganjil', '2022-11-14 06:35:10', '2022-11-14 06:35:10', NULL),
+(8, 1, 11, NULL, 'testing 1', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL),
+(9, 1, 11, NULL, 'testing 2', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL),
+(10, 1, 10, 2, 'BAB 1', 25, 'Nilai Baru', NULL, '2022', 'Genap', '2023-04-09 17:59:19', '2023-04-09 17:59:19', NULL),
+(11, 1, 10, 2, 'BAB 1', 100, 'Nilai Proposal', NULL, '2022', 'Genap', '2023-04-09 17:59:28', '2023-04-09 18:00:59', '2023-04-09 18:00:59');
 
 -- --------------------------------------------------------
 
@@ -661,38 +665,38 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `user_id`, `periode_id`, `mahasiswa_import_id`, `nama`, `nim`, `angkatan`, `telepon`, `alamat`, `foto`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 18, 1, 2, 'Olivia Istianah', '6701194000', NULL, '08213123121', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(2, 19, 1, 2, 'Rania Athala', '6701194001', NULL, '08123123412', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(3, 20, 1, 2, 'Rusyda Hanifan', '6701194002', NULL, '08121314124', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(4, 26, 1, 2, 'Emung Zakaria ', '6701204092', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(5, 27, 1, 2, 'Esya Oktariani', '6701200037', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(6, 28, 1, 2, 'Ahmad Ridho Maulana', '6701200042', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(7, 29, 1, 2, 'Anggun Shinta Prasella Dinata', '6701200045', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(8, 30, 1, 2, 'Derisa', '6701200066', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(9, 31, 1, 2, 'Fildzah Nabilah Putri ', '6701200071', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(10, 32, 1, 2, 'Feby Rahma Chayaningrum', '6701200073', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(11, 33, 1, 2, 'Gabriella Angelina', '6701200081', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(12, 34, 1, 2, 'Farhan Abdullah Rynold', '6701201098', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(13, 35, 1, 2, 'Gusnita Pratiwi', '6701201128', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(14, 36, 1, 2, 'Nyayu Najla Apritia', '6701201129', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(15, 37, 1, 2, 'Rayhana Alya Azzara ', '6701201142', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(16, 38, 1, 2, 'Diego Prayudha', '6701202021', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(17, 39, 1, 2, 'Amelia Ramahani ', '6701202029', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(18, 40, 1, 2, 'Fayza Alana', '6701202055', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(19, 41, 1, 2, 'Destiny sabila fitriamita dewi', '6701202060', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(20, 42, 1, 2, 'Tapa Kumbara Nasution', '6701202121', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(21, 43, 1, 2, 'Kamilia Putri Afifah R', '6701202124', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(22, 44, 1, 2, 'Raden Fachry Azwar', '6701202132', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(23, 45, 1, 2, 'Mahdhor Fauzi Hakiki', '6701202139', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(24, 46, 1, 2, 'Muhammad Fachrur Rasyid', '6701202143', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(25, 47, 1, 2, 'Endar Sulistyaningsih', '6701203107', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(26, 48, 1, 2, 'Husni Falah', '6701204007', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(27, 49, 1, 2, 'Zitha Ailsa Vashti Ali', '6701204008', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(28, 50, 1, 2, 'Viona Mustika Putri Zaelani', '6701204018', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(29, 51, 1, 2, 'Yoland Anggreyani Kendek', '6701204035', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(30, 52, 1, 2, 'Nailatul Fadhilah Syarwan', '6701204053', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(31, 53, 1, 2, 'Refka Maulana Sidik', '6701204054', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(32, 54, 1, 2, 'Rahmad Fitrananda H', '6701204069', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL);
+(1, 18, 9, 2, 'Olivia Istianah', '6701194000', NULL, '08213123121', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(2, 19, 9, 2, 'Rania Athala', '6701194001', NULL, '08123123412', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(3, 20, 9, 2, 'Rusyda Hanifan', '6701194002', NULL, '08121314124', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
+(4, 26, 9, 2, 'Emung Zakaria ', '6701204092', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
+(5, 27, 9, 2, 'Esya Oktariani', '6701200037', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(6, 28, 9, 2, 'Ahmad Ridho Maulana', '6701200042', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(7, 29, 9, 2, 'Anggun Shinta Prasella Dinata', '6701200045', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(8, 30, 9, 2, 'Derisa', '6701200066', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(9, 31, 9, 2, 'Fildzah Nabilah Putri ', '6701200071', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(10, 32, 9, 2, 'Feby Rahma Chayaningrum', '6701200073', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(11, 33, 9, 2, 'Gabriella Angelina', '6701200081', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(12, 34, 9, 2, 'Farhan Abdullah Rynold', '6701201098', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(13, 35, 9, 2, 'Gusnita Pratiwi', '6701201128', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(14, 36, 9, 2, 'Nyayu Najla Apritia', '6701201129', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(15, 37, 9, 2, 'Rayhana Alya Azzara ', '6701201142', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(16, 38, 9, 2, 'Diego Prayudha', '6701202021', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(17, 39, 9, 2, 'Amelia Ramahani ', '6701202029', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(18, 40, 9, 2, 'Fayza Alana', '6701202055', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(19, 41, 9, 2, 'Destiny sabila fitriamita dewi', '6701202060', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(20, 42, 9, 2, 'Tapa Kumbara Nasution', '6701202121', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(21, 43, 9, 2, 'Kamilia Putri Afifah R', '6701202124', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(22, 44, 9, 2, 'Raden Fachry Azwar', '6701202132', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
+(23, 45, 9, 2, 'Mahdhor Fauzi Hakiki', '6701202139', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(24, 46, 9, 2, 'Muhammad Fachrur Rasyid', '6701202143', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(25, 47, 9, 2, 'Endar Sulistyaningsih', '6701203107', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(26, 48, 9, 2, 'Husni Falah', '6701204007', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(27, 49, 9, 2, 'Zitha Ailsa Vashti Ali', '6701204008', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(28, 50, 9, 2, 'Viona Mustika Putri Zaelani', '6701204018', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(29, 51, 9, 2, 'Yoland Anggreyani Kendek', '6701204035', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(30, 52, 9, 2, 'Nailatul Fadhilah Syarwan', '6701204053', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(31, 53, 9, 2, 'Refka Maulana Sidik', '6701204054', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
+(32, 54, 9, 2, 'Rahmad Fitrananda H', '6701204069', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -1031,8 +1035,7 @@ INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, 
 (13, NULL, '2023-2024', 'Ganjil', NULL, 2023, '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
 (14, NULL, '2023-2024', 'Genap', NULL, 2024, '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
 (15, NULL, '2024-2025', 'Ganjil', NULL, 2024, '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
-(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL),
-(17, NULL, '2022-2024', 'Genap', NULL, 2024, '2023-03-13 17:14:07', '2023-03-13 17:14:19', '2023-03-13 17:14:19');
+(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -1079,12 +1082,13 @@ CREATE TABLE `prasidang` (
 --
 
 INSERT INTO `prasidang` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `keterangan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 2, 1, 2, 1, 1, 'Test', 'Test', '2022', 'Genap', NULL, 2, '2022-08-16 14:20:40', '2022-08-16 14:20:40', NULL),
-(2, 4, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 05:26:01', '2022-11-10 05:26:01', NULL),
-(3, 4, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
-(4, 5, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
-(5, 6, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:31:46', '2022-12-15 18:31:46', NULL),
-(6, 7, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:37:50', '2022-12-15 18:37:50', NULL);
+(1, 2, 2, 1, 2, 1, 10, 'Test', 'Test', '2021-2022', 'Genap', NULL, 2, '2022-08-16 14:20:40', '2022-08-16 14:20:40', NULL),
+(2, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 05:26:01', '2022-11-10 05:26:01', NULL),
+(4, 5, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
+(5, 6, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:31:46', '2022-12-15 18:31:46', NULL),
+(6, 7, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:37:50', '2022-12-15 18:37:50', NULL),
+(7, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2023-04-12 08:41:14', '2023-04-13 09:03:56', '2023-04-13 09:03:56'),
+(8, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2023-04-16 16:33:56', '2023-04-16 16:34:27', '2023-04-16 16:34:27');
 
 -- --------------------------------------------------------
 
@@ -1153,93 +1157,35 @@ CREATE TABLE `proposal` (
 --
 
 INSERT INTO `proposal` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 4, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(2, 5, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(3, 6, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(4, 7, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(5, 8, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(6, 9, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(7, 10, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(8, 11, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(9, 12, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(10, 13, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(11, 14, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(12, 15, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(13, 16, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(14, 17, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(15, 18, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(16, 19, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(17, 20, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(18, 21, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(19, 22, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(20, 23, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(21, 24, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(22, 25, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(23, 26, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(24, 27, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(25, 28, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(26, 29, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(27, 30, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(28, 31, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(29, 32, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(30, 4, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(31, 5, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(32, 6, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(33, 7, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(34, 8, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(35, 9, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(36, 10, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(37, 11, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(38, 12, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(39, 13, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(40, 14, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(41, 15, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(42, 16, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(43, 17, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(44, 18, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(45, 19, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(46, 20, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(47, 21, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(48, 22, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(49, 23, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(50, 24, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(51, 25, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(52, 26, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(53, 27, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(54, 28, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(55, 29, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(56, 30, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(57, 31, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(58, 32, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:09:40', '2022-11-16 05:09:40', NULL),
-(59, 4, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(60, 5, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(61, 6, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(62, 7, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(63, 8, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(64, 9, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(65, 10, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(66, 11, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(67, 12, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(68, 13, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(69, 14, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(70, 15, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(71, 16, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(72, 17, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(73, 18, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(74, 19, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(75, 20, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(76, 21, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(77, 22, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(78, 23, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(79, 24, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(80, 25, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(81, 26, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(82, 27, 10, 8, 10, 8, 3, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(83, 28, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:58', '2022-11-16 05:10:58', NULL),
-(84, 29, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:59', '2022-11-16 05:10:59', NULL),
-(85, 30, 10, 8, 10, 8, 3, 'Sistem Informasi', 'Information System', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:59', '2022-11-16 05:10:59', NULL),
-(86, 31, 10, 8, 10, 8, 3, 'Aplikasi Mobile', 'Mobile Application', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:59', '2022-11-16 05:10:59', NULL),
-(87, 32, 10, 8, 10, 8, 3, 'Machine Learning', 'Machine Learning', '2022-2023', 'Ganjil', 2, '2022-11-16 05:10:59', '2022-11-16 05:10:59', NULL);
+(1, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(2, 5, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(3, 6, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(4, 7, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(5, 8, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(6, 9, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(7, 10, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(8, 11, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(9, 12, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(10, 13, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(11, 14, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(12, 15, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(13, 16, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(14, 17, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(15, 18, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(16, 19, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(17, 20, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(18, 21, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(19, 22, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(20, 23, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(21, 24, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(22, 25, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(23, 26, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(24, 27, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(25, 28, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(26, 29, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(27, 30, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(28, 31, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(29, 32, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -1384,7 +1330,7 @@ CREATE TABLE `sidang` (
 --
 
 INSERT INTO `sidang` (`id`, `pendaftaran_sidang_id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, 2, 2, 1, 2, 1, 1, 'Test', 'Test', '2022', 'Genap', 2, '2022-08-16 14:21:10', '2022-08-16 14:21:10', NULL);
+(1, NULL, 2, 2, 1, 2, 1, 9, 'Test', 'Test', '2022', 'Genap', 2, '2022-08-16 14:21:10', '2022-08-16 14:21:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -1862,7 +1808,7 @@ ALTER TABLE `deadline_proposal`
 -- AUTO_INCREMENT for table `deadline_sidang`
 --
 ALTER TABLE `deadline_sidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_prasidang`
@@ -1958,7 +1904,7 @@ ALTER TABLE `komponen_proposal`
 -- AUTO_INCREMENT for table `komponen_sidang`
 --
 ALTER TABLE `komponen_sidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -2030,7 +1976,7 @@ ALTER TABLE `pendaftaran_sidang`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `periode_semester`
@@ -2042,7 +1988,7 @@ ALTER TABLE `periode_semester`
 -- AUTO_INCREMENT for table `prasidang`
 --
 ALTER TABLE `prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `prodi`
