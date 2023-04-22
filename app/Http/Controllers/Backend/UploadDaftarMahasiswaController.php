@@ -36,7 +36,8 @@ class UploadDaftarMahasiswaController extends Controller
     public function proposal()
     {
         return view('backend.upload-daftar-mahasiswa.proposal', [
-            'items' => Proposal::all()
+            'items' => Proposal::all(),
+            'list_tahun_ajaran' => TahunAjaran::where('is_active', 1)->get(),
         ]);
     }
 
@@ -115,7 +116,7 @@ class UploadDaftarMahasiswaController extends Controller
     public function storeProposal(Request $request)
     {
         $data = $request->all();
-        $cek_periode = Periode::where('tahun_ajaran', $request->tahun_ajaran)->where('semester', $request->semester)->where('bulan', $request->bulan)->where('jenis_periode', 'proposal')->first();
+        $cek_periode = Periode::where('tahun_ajaran', $request->tahun_ajaran)->where('semester', $request->semester)->where('bulan', $request->bulan)->where('jenis_periode', 'Proposal')->first();
         if ($cek_periode) {
             $data['periode_id'] = $cek_periode->id;
         } else {
@@ -123,7 +124,7 @@ class UploadDaftarMahasiswaController extends Controller
                 'tahun_ajaran' => $request->tahun_ajaran,
                 'semester' => $request->semester,
                 'bulan' => $request->bulan,
-                'jenis_periode' => 'proposal',
+                'jenis_periode' => 'Proposal',
             ]);
             $data['periode_id'] = $periode->id;
         }
@@ -157,7 +158,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.proposal-edit', [
             'item' => Proposal::find($id),
-            'periodes' => Periode::where('jenis_periode', 'proposal')->get(),
+            'periodes' => Periode::where('jenis_periode', 'Proposal')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
@@ -261,6 +262,7 @@ class UploadDaftarMahasiswaController extends Controller
 
         return view('backend.upload-daftar-mahasiswa.prasidang-create', [
             'periodes' => Periode::whereNull('bulan')->get(),
+            'list_tahun_ajaran' => TahunAjaran::where('is_active', 1)->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
@@ -270,6 +272,18 @@ class UploadDaftarMahasiswaController extends Controller
     public function storePrasidang(Request $request)
     {
         $data = $request->all();
+        $cek_periode = Periode::where('tahun_ajaran', $request->tahun_ajaran)->where('semester', $request->semester)->where('bulan', $request->bulan)->where('jenis_periode', 'Prasidang')->first();
+        if ($cek_periode) {
+            $data['periode_id'] = $cek_periode->id;
+        } else {
+            $periode = Periode::create([
+                'tahun_ajaran' => $request->tahun_ajaran,
+                'semester' => $request->semester,
+                'bulan' => $request->bulan,
+                'jenis_periode' => 'Prasidang',
+            ]);
+            $data['periode_id'] = $periode->id;
+        }
         if ($request->idProposal) {
             $array_proposal = [];
             foreach ($request->idProposal as $key => $proposal) {
@@ -284,11 +298,11 @@ class UploadDaftarMahasiswaController extends Controller
                         'pembimbing2_id' => $proposal_data->pembimbing2_id,
                         'penguji1_id' => $proposal_data->penguji1_id,
                         'penguji2_id' => $proposal_data->penguji2_id,
-                        'periode_id' => $proposal_data->periode_id,
+                        'periode_id' => $data['periode_id'],
                         'judul_indo' => $proposal_data->judul_indo,
                         'judul_inggris' => $proposal_data->judul_inggris,
-                        'tahun_ajaran' => $proposal_data->tahun_ajaran,
-                        'semester' => $proposal_data->semester
+                        'tahun_ajaran' => $request->tahun_ajaran,
+                        'semester' => $request->semester
                     ];
                     // dd($inserted_data);
                     Prasidang::create($inserted_data);
@@ -297,11 +311,11 @@ class UploadDaftarMahasiswaController extends Controller
             return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang')->with('success', 'Berhasil menambahkan data');
             // dd($array_proposal);
         }
-        if (Prasidang::wherePeriodeId($request->periode_id)->whereMahasiswaId($request->mahasiswa_id)->first()) {
+        if (Prasidang::wherePeriodeId($data['periode_id'])->whereMahasiswaId($request->mahasiswa_id)->first()) {
             return redirect()->back()->with('warning', 'Data sudah terdaftar');
         }
-        $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
-        $data['semester'] = Periode::find($request->periode_id)->semester;
+        // $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
+        // $data['semester'] = Periode::find($request->periode_id)->semester;
         Prasidang::create($data);
         return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang')->with('success', 'Berhasil menambahkan data');
     }
@@ -323,7 +337,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.prasidang-edit', [
             'item' => Prasidang::find($id),
-            'periodes' => Periode::whereNull('bulan')->get(),
+            'periodes' => Periode::where('jenis_periode', 'Prasidang')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
