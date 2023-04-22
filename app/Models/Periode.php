@@ -18,6 +18,7 @@ class Periode extends Model
         'semester',
         'bulan',
         'tahun',
+        'jenis_periode',
     ];
 
     protected $casts = [

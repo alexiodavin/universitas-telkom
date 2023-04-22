@@ -19,22 +19,22 @@ class ViewNilaiProposalController extends Controller
     public function index(Request $request)
     {
         //
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $array_nilai_proposal = NilaiProposal::all();
             $items = [];
-            foreach($array_nilai_proposal as $value){
-                if($value->proposal->periode->id == $request->periode_id){
+            foreach ($array_nilai_proposal as $value) {
+                if ($value->proposal->periode->id == $request->periode_id) {
                     array_push($items, $value);
                 }
             }
             // dd($items);
             return response()->json(['items' => $items]);
-         }
+        }
 
         $items = NilaiProposal::all();
         $periodes = Periode::all();
-        
+
         return view('backend.view-nilai.proposal', [
             'items' => $items,
             'periodes' => $periodes,
@@ -106,7 +106,7 @@ class ViewNilaiProposalController extends Controller
     {
         //
     }
-    
+
     public static function download()
     {
         return Excel::download(new ExportNilaiProposal, 'nilaiProposal.xlsx');

@@ -19,6 +19,7 @@ class CreatePeriodeTable extends Migration
             $table->enum('semester', ['Ganjil', 'Genap']);
             $table->string('bulan')->nullable();
             $table->integer('tahun')->nullable();
+            $table->enum('jenis_periode', ['Umum', 'Proposal', 'Prasidang', 'Sidang'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
