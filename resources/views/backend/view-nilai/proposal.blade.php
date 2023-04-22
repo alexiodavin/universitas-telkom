@@ -22,7 +22,7 @@
                                     class="form-control col-2 mx-2" style="float: right">
                                     @foreach ($periodes as $periode)
                                         <option value="{{ $periode->id }}">{{ $periode->tahun_ajaran }} -
-                                            {{ $periode->semester }}</option>
+                                            {{ $periode->semester }} - {{ $periode->bulan }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -37,7 +37,8 @@ class ViewNilaiProposalController extends Controller
 
         return view('backend.view-nilai.proposal', [
             'items' => $items,
-            'periodes' => $periodes,
+            // 'periodes' => $periodes,
+            'periodes' => Periode::where('jenis_periode', 'Proposal')->get(),
         ]);
     }
 

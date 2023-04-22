@@ -19,25 +19,26 @@ class ViewNilaiSidangController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $array_nilai_sidang = NilaiSidang::all();
             $items = [];
-            foreach($array_nilai_sidang as $value){
-                if($value->sidang->periode->id == $request->periode_id){
+            foreach ($array_nilai_sidang as $value) {
+                if ($value->sidang->periode->id == $request->periode_id) {
                     array_push($items, $value);
                 }
             }
             // dd($items);
             return response()->json(['items' => $items]);
-         }
+        }
 
         $items = NilaiSidang::all();
         $periodes = Periode::all();
-        
+
         return view('backend.view-nilai.sidang', [
             'items' => $items,
-            'periodes' => $periodes,
+            // 'periodes' => $periodes,
+            'periodes' => Periode::where('jenis_periode', 'Sidang')->get(),
         ]);
     }
 
@@ -111,5 +112,4 @@ class ViewNilaiSidangController extends Controller
     {
         return Excel::download(new ExportNilaiSidang, 'nilaiSidang.xlsx');
     }
-    
 }

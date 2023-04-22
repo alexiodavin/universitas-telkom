@@ -18,25 +18,26 @@ class ViewNilaiPrasidangController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $array_nilai_prasidang = NilaiPrasidang::all();
             $items = [];
-            foreach($array_nilai_prasidang as $value){
-                if($value->prasidang->periode->id == $request->periode_id){
+            foreach ($array_nilai_prasidang as $value) {
+                if ($value->prasidang->periode->id == $request->periode_id) {
                     array_push($items, $value);
                 }
             }
             // dd($items);
             return response()->json(['items' => $items]);
-         }
+        }
 
         $items = NilaiPrasidang::all();
         $periodes = Periode::all();
-        
-        return view('backend.view-nilai.Prasidang', [
+
+        return view('backend.view-nilai.prasidang', [
             'items' => $items,
-            'periodes' => $periodes,
+            // 'periodes' => $periodes,
+            'periodes' => Periode::where('jenis_periode', 'Prasidang')->get(),
         ]);
     }
 
