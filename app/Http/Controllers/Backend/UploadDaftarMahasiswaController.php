@@ -27,7 +27,7 @@ use App\Models\JadwalPrasidang;
 use App\Models\JadwalSidang;
 use App\Models\HistoriJudulProposal;
 use App\Models\HistoriJudulPrasidang;
-
+use App\Models\TahunAjaran;
 
 class UploadDaftarMahasiswaController extends Controller
 {
@@ -104,6 +104,7 @@ class UploadDaftarMahasiswaController extends Controller
 
         return view('backend.upload-daftar-mahasiswa.proposal-create', [
             'periodes' => Periode::whereNull('bulan')->get(),
+            'list_tahun_ajaran' => TahunAjaran::where('is_active', 1)->get(),
             'periode_koor' => Periode::find($request->periode_id),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,

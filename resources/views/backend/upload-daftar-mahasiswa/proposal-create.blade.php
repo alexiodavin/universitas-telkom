@@ -24,7 +24,7 @@
                                         <label class="col-sm-2 col-form-label font-weight-bold">Periode<span
                                                 style="color:red;"> *</span></label>
                                         <div class="col-sm-10">
-                                            <select name="periode_id" class="form-control" required>
+                                            {{-- <select name="periode_id" class="form-control" required>
                                                 <option value="">Pilih Periode</option>
                                                 @foreach ($periodes as $periode)
                                                     <option value="{{ $periode->id }}">{{ $periode->tahun_ajaran }} -
@@ -33,6 +33,42 @@
                                             </select>
                                             @if ($errors->has('periode_id'))
                                                 <span style="color:red;">{{ $errors->first('periode_id') }}</span>
+                                            @endif --}}
+                                            <select name="periode_id" class="form-control my-2" required>
+                                                <option value="">Pilih Tahun Ajaran</option>
+                                                @foreach ($list_tahun_ajaran as $tahun_ajaran)
+                                                    <option value="{{ $tahun_ajaran->tahun_ajaran }}">
+                                                        {{ $tahun_ajaran->tahun_ajaran }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('tahun_ajaran'))
+                                                <span style="color:red;">{{ $errors->first('tahun_ajaran') }}</span>
+                                            @endif
+                                            <select name="semester" class="form-control my-2" required>
+                                                <option value="">Pilih Semester</option>
+                                                <option value="Ganjil">Ganjil</option>
+                                                <option value="Genap">Genap</option>
+                                            </select>
+                                            @if ($errors->has('semester'))
+                                                <span style="color:red;">{{ $errors->first('semester') }}</span>
+                                            @endif
+                                            <select name="bulan" class="form-control my-2" required>
+                                                <option value="">Pilih Bulan</option>
+                                                <option value="Januari">Januari</option>
+                                                <option value="Februari">Februari</option>
+                                                <option value="Maret">Maret</option>
+                                                <option value="April">April</option>
+                                                <option value="Mei">Mei</option>
+                                                <option value="Juni">Juni</option>
+                                                <option value="Juli">Juli</option>
+                                                <option value="Agustus">Agustus</option>
+                                                <option value="September">September</option>
+                                                <option value="Oktober">Oktober</option>
+                                                <option value="November">November</option>
+                                                <option value="Desembar">Desembar</option>
+                                            </select>
+                                            @if ($errors->has('bulan'))
+                                                <span style="color:red;">{{ $errors->first('bulan') }}</span>
                                             @endif
                                         </div>
                                     </div>

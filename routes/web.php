@@ -20,6 +20,7 @@ Route::post('forgot-password/store', [\App\Http\Controllers\Frontend\DashboardCo
 Route::get('logout', [\App\Http\Controllers\Backend\DashboardController::class, 'logout'])->name('backend.logout');
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('dashboard', [\App\Http\Controllers\Backend\DashboardController::class, 'dashboard'])->name('backend.dashboard');
+    Route::post('/dashboard/update-tahun-ajaran', [\App\Http\Controllers\Backend\DashboardController::class, 'updateTahunAjaran'])->name('backend.dashboard.update-tahun-ajaran');
 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class, 'indexProfile'])->name('backend.profile');

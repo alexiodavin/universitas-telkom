@@ -12,6 +12,7 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\CurrentSemester;
 use App\Helpers\MultipartHelper;
+use App\Models\TahunAjaran;
 
 class DashboardController extends Controller
 {
@@ -19,10 +20,22 @@ class DashboardController extends Controller
     {
         session(['role_dosen' => null]);
         return view('backend.dashboard', [
-            'current_semester' => CurrentSemester::find(1)
+            'current_semester' => CurrentSemester::find(1),
+            'list_tahun_ajaran' => TahunAjaran::all()
         ]);
     }
-
+    public function updateTahunAjaran(Request $request)
+    {
+        $tahun_ajaran = TahunAjaran::find($request->tahun_ajaran);
+        if ($tahun_ajaran->is_active == 1) {
+            $is_active = 0;
+        } else {
+            $is_active = 1;
+        }
+        $tahun_ajaran->update([
+            'is_active' => $is_active
+        ]);
+    }
     public function indexProfile()
     {
         session(['role_dosen' => null]);
