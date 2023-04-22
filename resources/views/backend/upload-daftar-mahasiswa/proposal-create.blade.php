@@ -34,7 +34,7 @@
                                             @if ($errors->has('periode_id'))
                                                 <span style="color:red;">{{ $errors->first('periode_id') }}</span>
                                             @endif --}}
-                                            <select name="periode_id" class="form-control my-2" required>
+                                            <select name="tahun_ajaran" class="form-control my-2" required>
                                                 <option value="">Pilih Tahun Ajaran</option>
                                                 @foreach ($list_tahun_ajaran as $tahun_ajaran)
                                                     <option value="{{ $tahun_ajaran->tahun_ajaran }}">

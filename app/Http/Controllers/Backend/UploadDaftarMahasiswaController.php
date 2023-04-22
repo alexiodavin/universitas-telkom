@@ -115,12 +115,24 @@ class UploadDaftarMahasiswaController extends Controller
     public function storeProposal(Request $request)
     {
         $data = $request->all();
+        $cek_periode = Periode::where('tahun_ajaran', $request->tahun_ajaran)->where('semester', $request->semester)->where('bulan', $request->bulan)->where('jenis_periode', 'proposal')->first();
+        if ($cek_periode) {
+            $data['periode_id'] = $cek_periode->id;
+        } else {
+            $periode = Periode::create([
+                'tahun_ajaran' => $request->tahun_ajaran,
+                'semester' => $request->semester,
+                'bulan' => $request->bulan,
+                'jenis_periode' => 'proposal',
+            ]);
+            $data['periode_id'] = $periode->id;
+        }
         if (Proposal::wherePeriodeId($request->periode_id)->whereMahasiswaId($request->mahasiswa_id)->first()) {
             return redirect()->back()->with('warning', 'Data sudah terdaftar');
         }
-        $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
-        $data['semester'] = Periode::find($request->periode_id)->semester;
-        if (!Proposal::where('mahasiswa_id', $data['mahasiswa_id'])->where('periode_id', $data['periode_id'])) {
+        // $data['tahun_ajaran'] = Periode::find($request->periode_id)->tahun;
+        // $data['semester'] = Periode::find($request->periode_id)->semester;
+        if (!Proposal::where('mahasiswa_id', $data['mahasiswa_id'])->where('periode_id', $data['periode_id'])->first()) {
             Proposal::create($data);
         } else {
             return back()->with('warning', 'Proposal Mahasiswa ini sudah terdaftar di periode ini sebelumnya, hapus data proposal mahasiswa terlebih dahulu agar tidak terjadi redudansi data');
@@ -145,7 +157,7 @@ class UploadDaftarMahasiswaController extends Controller
     {
         return view('backend.upload-daftar-mahasiswa.proposal-edit', [
             'item' => Proposal::find($id),
-            'periodes' => Periode::whereNull('bulan')->get(),
+            'periodes' => Periode::where('jenis_periode', 'proposal')->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'dosens' => Dosen::orderBy('nama', 'ASC')->get(),
         ]);
