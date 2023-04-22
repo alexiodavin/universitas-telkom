@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2023 at 04:21 PM
+-- Generation Time: Apr 22, 2023 at 11:18 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -1010,6 +1010,7 @@ CREATE TABLE `periode` (
   `semester` enum('Ganjil','Genap') NOT NULL,
   `bulan` varchar(255) DEFAULT NULL,
   `tahun` int(11) DEFAULT NULL,
+  `jenis_periode` enum('Umum','Proposal','Prasidang','Sidang') DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1019,23 +1020,29 @@ CREATE TABLE `periode` (
 -- Dumping data for table `periode`
 --
 
-INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, `bulan`, `tahun`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, '2021-2022', 'Genap', 'Juni', 2022, NULL, NULL, NULL),
-(2, NULL, '2021-2022', 'Ganjil', 'Desember', 2022, NULL, NULL, NULL),
-(3, NULL, '2022-2023', 'Ganjil', 'September', 2022, '2022-11-10 04:54:24', '2022-11-10 04:54:24', NULL),
-(4, NULL, '2022-2023', 'Genap', 'Februari', 2023, '2022-11-10 04:54:40', '2022-11-10 04:54:40', NULL),
-(5, NULL, '2023-2024', 'Ganjil', 'September', 2023, '2022-11-10 06:48:52', '2022-11-10 06:48:52', NULL),
-(6, NULL, '2023-2024', 'Genap', 'Februari', 2023, '2022-11-10 06:50:27', '2022-11-10 06:50:42', NULL),
-(7, NULL, '2024-2025', 'Ganjil', 'Februari', 2024, '2022-11-16 04:09:58', '2022-11-16 04:10:39', NULL),
-(8, NULL, '2024-2025', 'Genap', 'Februari', 2024, '2022-11-23 15:38:30', '2022-11-23 15:38:30', NULL),
-(9, NULL, '2021-2022', 'Ganjil', NULL, 2021, '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
-(10, NULL, '2021-2022', 'Genap', NULL, 2022, '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
-(11, NULL, '2022-2023', 'Ganjil', NULL, 2022, '2023-03-11 10:27:53', '2023-03-11 10:29:45', NULL),
-(12, NULL, '2022-2023', 'Genap', NULL, 2023, '2023-03-11 10:28:12', '2023-03-11 10:29:37', NULL),
-(13, NULL, '2023-2024', 'Ganjil', NULL, 2023, '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
-(14, NULL, '2023-2024', 'Genap', NULL, 2024, '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
-(15, NULL, '2024-2025', 'Ganjil', NULL, 2024, '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
-(16, NULL, '2024-2025', 'Genap', NULL, 2025, '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL);
+INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, `bulan`, `tahun`, `jenis_periode`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, '2021-2022', 'Genap', 'Juni', 2022, 'Prasidang', NULL, NULL, NULL),
+(2, NULL, '2021-2022', 'Ganjil', 'Desember', 2022, 'Proposal', NULL, NULL, NULL),
+(3, NULL, '2022-2023', 'Ganjil', 'September', 2022, 'Prasidang', '2022-11-10 04:54:24', '2022-11-10 04:54:24', NULL),
+(4, NULL, '2022-2023', 'Genap', 'Februari', 2023, 'Prasidang', '2022-11-10 04:54:40', '2022-11-10 04:54:40', NULL),
+(5, NULL, '2023-2024', 'Ganjil', 'September', 2023, 'Sidang', '2022-11-10 06:48:52', '2022-11-10 06:48:52', NULL),
+(6, NULL, '2023-2024', 'Genap', 'Februari', 2023, 'Proposal', '2022-11-10 06:50:27', '2022-11-10 06:50:42', NULL),
+(7, NULL, '2024-2025', 'Ganjil', 'Februari', 2024, 'Prasidang', '2022-11-16 04:09:58', '2022-11-16 04:10:39', NULL),
+(8, NULL, '2024-2025', 'Genap', 'Februari', 2024, 'Sidang', '2022-11-23 15:38:30', '2022-11-23 15:38:30', NULL),
+(9, NULL, '2021-2022', 'Ganjil', NULL, 2021, 'Umum', '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
+(10, NULL, '2021-2022', 'Genap', NULL, 2022, 'Umum', '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
+(11, NULL, '2022-2023', 'Ganjil', NULL, 2022, 'Umum', '2023-03-11 10:27:53', '2023-03-11 10:29:45', NULL),
+(12, NULL, '2022-2023', 'Genap', NULL, 2023, 'Umum', '2023-03-11 10:28:12', '2023-03-11 10:29:37', NULL),
+(13, NULL, '2023-2024', 'Ganjil', NULL, 2023, 'Umum', '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
+(14, NULL, '2023-2024', 'Genap', NULL, 2024, 'Umum', '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
+(15, NULL, '2024-2025', 'Ganjil', NULL, 2024, 'Umum', '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
+(16, NULL, '2024-2025', 'Genap', NULL, 2025, 'Umum', '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL),
+(17, NULL, '2024-2025', 'Ganjil', 'Maret', NULL, 'Proposal', '2023-04-22 19:56:54', '2023-04-22 19:56:54', NULL),
+(18, NULL, '2024-2025', 'Genap', 'Februari', NULL, 'Proposal', '2023-04-22 19:59:36', '2023-04-22 19:59:36', NULL),
+(19, NULL, '2022-2023', 'Ganjil', 'Agustus', NULL, 'Proposal', '2023-04-22 20:02:37', '2023-04-22 20:02:37', NULL),
+(20, NULL, '2022-2023', 'Ganjil', 'Januari', NULL, 'Proposal', '2023-04-22 20:03:46', '2023-04-22 20:03:46', NULL),
+(21, NULL, '2022-2023', 'Ganjil', 'Maret', NULL, 'Prasidang', '2023-04-22 20:58:50', '2023-04-22 20:58:50', NULL),
+(22, NULL, '2021-2022', 'Ganjil', 'November', 2021, 'Prasidang', '2023-04-22 17:00:00', '2023-04-22 21:10:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -1070,6 +1077,7 @@ CREATE TABLE `prasidang` (
   `judul_inggris` varchar(255) DEFAULT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
+  `bulan` varchar(25) DEFAULT NULL,
   `keterangan` varchar(255) DEFAULT NULL,
   `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1081,14 +1089,15 @@ CREATE TABLE `prasidang` (
 -- Dumping data for table `prasidang`
 --
 
-INSERT INTO `prasidang` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `keterangan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 2, 1, 2, 1, 10, 'Test', 'Test', '2021-2022', 'Genap', NULL, 2, '2022-08-16 14:20:40', '2022-08-16 14:20:40', NULL),
-(2, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 05:26:01', '2022-11-10 05:26:01', NULL),
-(4, 5, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
-(5, 6, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:31:46', '2022-12-15 18:31:46', NULL),
-(6, 7, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-12-15 18:37:50', '2022-12-15 18:37:50', NULL),
-(7, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2023-04-12 08:41:14', '2023-04-13 09:03:56', '2023-04-13 09:03:56'),
-(8, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2023-04-16 16:33:56', '2023-04-16 16:34:27', '2023-04-16 16:34:27');
+INSERT INTO `prasidang` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `keterangan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 2, 1, 2, 1, 1, 'Test', 'Test', '2021-2022', 'Genap', NULL, NULL, 2, '2022-08-16 14:20:40', '2022-08-16 14:20:40', NULL),
+(2, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-11-10 05:26:01', '2022-11-10 05:26:01', NULL),
+(4, 5, 10, 8, 10, 8, 22, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
+(5, 6, 10, 8, 10, 8, 22, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-12-15 18:31:46', '2022-12-15 18:31:46', NULL),
+(6, 7, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-12-15 18:37:50', '2022-12-15 18:37:50', NULL),
+(7, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2023-04-12 08:41:14', '2023-04-13 09:03:56', '2023-04-13 09:03:56'),
+(8, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2023-04-16 16:33:56', '2023-04-16 16:34:27', '2023-04-16 16:34:27'),
+(9, 6, 2, 6, 3, 6, 21, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 'Maret', NULL, 2, '2023-04-22 20:58:50', '2023-04-22 20:58:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -1146,6 +1155,7 @@ CREATE TABLE `proposal` (
   `judul_inggris` varchar(255) DEFAULT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
+  `bulan` varchar(25) DEFAULT NULL,
   `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1156,36 +1166,37 @@ CREATE TABLE `proposal` (
 -- Dumping data for table `proposal`
 --
 
-INSERT INTO `proposal` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 4, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(2, 5, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(3, 6, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(4, 7, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(5, 8, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(6, 9, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(7, 10, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(8, 11, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(9, 12, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(10, 13, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(11, 14, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(12, 15, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(13, 16, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(14, 17, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(15, 18, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(16, 19, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(17, 20, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(18, 21, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(19, 22, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(20, 23, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(21, 24, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(22, 25, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(23, 26, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(24, 27, 10, 8, 10, 8, 9, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(25, 28, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(26, 29, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(27, 30, 10, 8, 10, 8, 9, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(28, 31, 10, 8, 10, 8, 9, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(29, 32, 10, 8, 10, 8, 9, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL);
+INSERT INTO `proposal` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 4, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(2, 5, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(3, 6, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(4, 7, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(5, 8, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(6, 9, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(7, 10, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(8, 11, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(9, 12, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(10, 13, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(11, 14, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(12, 15, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(13, 16, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(14, 17, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(15, 18, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(16, 19, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(17, 20, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(18, 21, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(19, 22, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(20, 23, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(21, 24, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(22, 25, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(23, 26, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(24, 27, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(25, 28, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(26, 29, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(27, 30, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(28, 31, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(29, 32, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
+(88, 6, 2, 6, 13, 5, 20, 'oke', 'oke', '2022-2023', 'Ganjil', 'Januari', 2, '2023-04-22 20:06:39', '2023-04-22 20:06:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -1319,6 +1330,7 @@ CREATE TABLE `sidang` (
   `judul_inggris` varchar(255) DEFAULT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
+  `bulan` varchar(25) DEFAULT NULL,
   `jumlah_penguji` int(11) NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1329,8 +1341,34 @@ CREATE TABLE `sidang` (
 -- Dumping data for table `sidang`
 --
 
-INSERT INTO `sidang` (`id`, `pendaftaran_sidang_id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, 2, 2, 1, 2, 1, 9, 'Test', 'Test', '2022', 'Genap', 2, '2022-08-16 14:21:10', '2022-08-16 14:21:10', NULL);
+INSERT INTO `sidang` (`id`, `pendaftaran_sidang_id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, 2, 2, 1, 2, 1, 5, 'Test', 'Test', '2023-2024', 'Genap', NULL, 2, '2022-08-16 14:21:10', '2022-08-16 14:21:10', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahun_ajaran`
+--
+
+CREATE TABLE `tahun_ajaran` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tahun_ajaran` varchar(255) NOT NULL,
+  `is_active` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tahun_ajaran`
+--
+
+INSERT INTO `tahun_ajaran` (`id`, `tahun_ajaran`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2020-2021', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
+(2, '2021-2022', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
+(3, '2022-2023', 1, '2023-04-22 15:51:56', '2023-04-22 17:53:07', NULL),
+(4, '2023-2024', 1, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
+(5, '2024-2025', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -1767,6 +1805,12 @@ ALTER TABLE `sidang`
   ADD KEY `sidang_periode_id_foreign` (`periode_id`);
 
 --
+-- Indexes for table `tahun_ajaran`
+--
+ALTER TABLE `tahun_ajaran`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1976,7 +2020,7 @@ ALTER TABLE `pendaftaran_sidang`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `periode_semester`
@@ -1988,7 +2032,7 @@ ALTER TABLE `periode_semester`
 -- AUTO_INCREMENT for table `prasidang`
 --
 ALTER TABLE `prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `prodi`
@@ -2000,7 +2044,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `revisi`
@@ -2037,6 +2081,12 @@ ALTER TABLE `ruangan_terpakai`
 --
 ALTER TABLE `sidang`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tahun_ajaran`
+--
+ALTER TABLE `tahun_ajaran`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
