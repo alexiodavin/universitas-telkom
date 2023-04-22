@@ -25,6 +25,7 @@ class CreateProposalTable extends Migration
             $table->string('judul_inggris')->nullable();
             $table->string('tahun_ajaran')->nullable();
             $table->string('semester')->nullable();
+            $table->string('bulan')->nullable();
             $table->integer('jumlah_penguji')->default(2);
             $table->timestamps();
             $table->softDeletes();

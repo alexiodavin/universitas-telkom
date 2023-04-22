@@ -25,6 +25,7 @@ class Sidang extends Model
         'judul_inggris',
         'tahun_ajaran',
         'semester',
+        'bulan',
         'jumlah_penguji',
     ];
 
@@ -52,40 +53,49 @@ class Sidang extends Model
         'nilai_final'
     ];
 
-    public function pendaftaran_sidang(){
-        return $this->belongsTo('App\Models\PendaftaranSidang','pendaftaran_sidang_id')->withTrashed();
+    public function pendaftaran_sidang()
+    {
+        return $this->belongsTo('App\Models\PendaftaranSidang', 'pendaftaran_sidang_id')->withTrashed();
     }
 
-    public function mahasiswa(){
-        return $this->belongsTo('App\Models\Mahasiswa','mahasiswa_id')->withTrashed();
+    public function mahasiswa()
+    {
+        return $this->belongsTo('App\Models\Mahasiswa', 'mahasiswa_id')->withTrashed();
     }
 
-    public function pembimbing1(){
-        return $this->belongsTo('App\Models\Dosen','pembimbing1_id')->withTrashed();
+    public function pembimbing1()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'pembimbing1_id')->withTrashed();
     }
 
-    public function pembimbing2(){
-        return $this->belongsTo('App\Models\Dosen','pembimbing2_id')->withTrashed();
+    public function pembimbing2()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'pembimbing2_id')->withTrashed();
     }
 
-    public function penguji1(){
-        return $this->belongsTo('App\Models\Dosen','penguji1_id')->withTrashed();
+    public function penguji1()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'penguji1_id')->withTrashed();
     }
 
-    public function penguji2(){
-        return $this->belongsTo('App\Models\Dosen','penguji2_id')->withTrashed();
+    public function penguji2()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'penguji2_id')->withTrashed();
     }
 
-    public function periode(){
-        return $this->belongsTo('App\Models\Periode','periode_id')->withTrashed();
+    public function periode()
+    {
+        return $this->belongsTo('App\Models\Periode', 'periode_id')->withTrashed();
     }
 
-    public function jadwal_sidang(){
-    	return $this->hasOne('App\Models\JadwalSidang','sidang_id');
+    public function jadwal_sidang()
+    {
+        return $this->hasOne('App\Models\JadwalSidang', 'sidang_id');
     }
 
-    public function nilai_final(){
-    	return $this->hasOne('App\Models\NilaiSidangFinal','sidang_id')->withTrashed();
+    public function nilai_final()
+    {
+        return $this->hasOne('App\Models\NilaiSidangFinal', 'sidang_id')->withTrashed();
     }
 
     protected $appends = [
@@ -93,11 +103,13 @@ class Sidang extends Model
         'nilai_penguji2'
     ];
 
-    public function getNilaiPenguji1Attribute(){
+    public function getNilaiPenguji1Attribute()
+    {
         return NilaiSidang::whereSidangId($this->attributes['id'])->wherePenguji(1)->first();
     }
 
-    public function getNilaiPenguji2Attribute(){
+    public function getNilaiPenguji2Attribute()
+    {
         return NilaiSidang::whereSidangId($this->attributes['id'])->wherePenguji(2)->first();
     }
 }

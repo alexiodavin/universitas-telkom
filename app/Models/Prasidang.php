@@ -23,6 +23,7 @@ class Prasidang extends Model
         'judul_indo',
         'judul_inggris',
         'tahun_ajaran',
+        'bulan',
         'keterangan',
         'semester',
         'keterangan',

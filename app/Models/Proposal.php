@@ -23,6 +23,7 @@ class Proposal extends Model
         'judul_indo',
         'judul_inggris',
         'tahun_ajaran',
+        'bulan',
         'semester',
         'jumlah_penguji',
     ];
