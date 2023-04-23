@@ -28,7 +28,6 @@ class ViewNilaiProposalController extends Controller
                     array_push($items, $value);
                 }
             }
-            // dd($items);
             return response()->json(['items' => $items]);
         }
 

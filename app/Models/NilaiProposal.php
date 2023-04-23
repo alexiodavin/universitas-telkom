@@ -34,18 +34,21 @@ class NilaiProposal extends Model
     protected $with = [
         'ruangan',
         'detail_nilai',
-        'proposal'
+        // 'proposal'
     ];
-    
-    public function ruangan(){
-        return $this->belongsTo('App\Models\Ruangan','ruangan_id')->withTrashed();
+
+    public function ruangan()
+    {
+        return $this->belongsTo('App\Models\Ruangan', 'ruangan_id')->withTrashed();
     }
 
-    public function detail_nilai(){
+    public function detail_nilai()
+    {
         return $this->hasMany('App\Models\DetailNilaiProposal')->withTrashed();
     }
 
-    public function proposal(){
+    public function proposal()
+    {
         return $this->belongsTo('App\Models\Proposal')->withTrashed();
     }
 }

@@ -46,6 +46,8 @@ class Proposal extends Model
         'penguji1',
         'penguji2',
         'periode',
+        // 'jadwal_proposal',
+        'nilai_final',
     ];
 
     public function mahasiswa()

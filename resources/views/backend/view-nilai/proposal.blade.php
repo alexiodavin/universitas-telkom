@@ -96,7 +96,7 @@
                     const tbody = document.querySelector('tbody');
                     tbody.innerHTML = ``;
                     let i = 1;
-                    // console.log(response);   
+                    console.log(response);
                     response.items.forEach(element => {
 
                         tbody.innerHTML += `
