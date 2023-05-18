@@ -200,8 +200,13 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::prefix('nilai-mahasiswa')->group(function () {
                 Route::prefix('proposal')->group(function () {
                     Route::get('/', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'proposal'])->name('backend.dosen.nilai-mahasiswa.proposal');
+                    Route::get('/{id}/editDetail', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit-detail');
                     Route::get('/{id}/edit', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit');
+
+                    Route::post('/{id}/update-detail-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-detail-nilai');
+
                     Route::post('/{id}/update-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-nilai');
+
                     Route::post('/{id}/update', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update');
                     Route::get('/{id}/set-nilai-akhir', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'setNilaiAkhirProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.set-nilai-akhir');
                 });

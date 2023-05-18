@@ -63,6 +63,54 @@ class NilaiMahasiswaController extends Controller
         ]);
     }
 
+    public function editDetailNilaiProposal($id)
+    {
+        // return Proposal::find($id);        
+        $nilai_total_penguji1 = NilaiProposal::where('proposal_id', $id)->where('penguji', 1)->first();
+        $nilai_total_penguji2 = NilaiProposal::where('proposal_id', $id)->where('penguji', 2)->first();
+        $nilai_total = 0;
+
+        // dd($nilai_total_penguji2->proposal->id);
+
+        if ($nilai_total_penguji1) {
+            if ($nilai_total_penguji1->proposal->penguji1_id == auth()->user()->dosen->id) {
+                $nilai_total_penguji1 ? $nilai_total = $nilai_total_penguji1->nilai_akhir : $nilai_total = 0;
+            }
+        } elseif ($nilai_total_penguji2) {
+            if ($nilai_total_penguji2->proposal->penguji2_id == auth()->user()->dosen->id)
+                $nilai_total_penguji2 ? $nilai_total = $nilai_total_penguji2->nilai_akhir : $nilai_total = 0;
+        }
+
+        // dd($nilai_total);
+
+        return view('backend.nilai-mahasiswa.proposal-edit-detail-nilai', [
+            'item' => Proposal::find($id),
+            'items' => KomponenProposal::all(),
+            'nilai_total' => $nilai_total,
+            'nilai_final' => NilaiProposalFinal::whereProposalId($id)->first()
+        ]);
+    }
+
+    public function updateDetailNilaiProposal(Request $request, $id)
+    {
+
+        // dd($request->nilai);
+        $id_terakhir = 0;
+        foreach ($request->nilai as $key => $value) {
+            DetailNilaiProposal::where('id', $key)->update([
+                'nilai' => $value
+            ]);
+            $id_terakhir = $value;
+        }
+        $detail_nilai_proposal = DetailNilaiProposal::find($id_terakhir);
+
+        NilaiProposal::where('id', $detail_nilai_proposal->nilai_proposal_id)->update([
+            'nilai_akhir' => array_sum($request->nilai),
+        ]);
+
+        return redirect()->route('backend.dosen.nilai-mahasiswa.proposal.edit', ['id' => $id])->with(['success' => 'Berhasil mengubah data', 'nilai_akhir' => array_sum($request->nilai)]);
+    }
+
     public function updateNilaiProposal(Request $request, $id)
     {
 
