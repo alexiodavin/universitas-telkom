@@ -114,7 +114,8 @@ class KomponenNilaiController extends Controller
                 'persentase' => $data['persentase'][$key],
             ]);
         }
-        return back()->with('success', 'Berhasil Mengubah Data');
+        return redirect('/koordinator-pa/komponen-nilai/proposal/list')->with('success', 'Berhasil Mengubah Data');
+        // return back()->with('success', 'Berhasil Mengubah Data');
         // return view('backend.komponen-nilai.proposal', [
         //     'periode_id' => $data['periode_id'],
         //     'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
@@ -228,14 +229,16 @@ class KomponenNilaiController extends Controller
                 'persentase' => $data['persentase'][$key],
             ]);
         }
-        return view('backend.komponen-nilai.prasidang', [
-            'periode_id' => $data['periode_id'],
-            'item' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
-            'periodes' => Periode::all(),
-            'komponen_prasidangs' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
-            'total_komponen_prasidang' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
-            'komponen_prasidang_latest' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
-        ])->with('success', 'Berhasil mengubah data');
+
+        return redirect('/koordinator-pa/komponen-nilai/prasidang/list')->with('success', 'Berhasil Mengubah Data');
+        // return view('backend.komponen-nilai.prasidang', [
+        //     'periode_id' => $data['periode_id'],
+        //     'item' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
+        //     'periodes' => Periode::all(),
+        //     'komponen_prasidangs' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
+        //     'total_komponen_prasidang' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
+        //     'komponen_prasidang_latest' => KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
+        // ])->with('success', 'Berhasil mengubah data');
     }
 
     public function uploadPrasidang()
@@ -343,14 +346,16 @@ class KomponenNilaiController extends Controller
                 'persentase' => $data['persentase'][$key],
             ]);
         }
-        return view('backend.komponen-nilai.sidang', [
-            'periode_id' => $data['periode_id'],
-            'item' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
-            'periodes' => Periode::all(),
-            'komponen_sidangs' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
-            'total_komponen_sidang' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
-            'komponen_sidang_latest' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
-        ])->with('success', 'Berhasil mengubah data');
+        return redirect('/koordinator-pa/komponen-nilai/sidang/list')->with('success', 'Berhasil Mengubah Data');
+
+        // return view('backend.komponen-nilai.sidang', [
+        //     'periode_id' => $data['periode_id'],
+        //     'item' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
+        //     'periodes' => Periode::all(),
+        //     'komponen_sidangs' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
+        //     'total_komponen_sidang' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
+        //     'komponen_sidang_latest' => KomponenSidang::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
+        // ])->with('success', 'Berhasil mengubah data');
     }
 
     public function uploadSidang()
