@@ -66,9 +66,12 @@ class KomponenNilaiController extends Controller
 
     public function storeProposal(Request $request)
     {
-        if (KomponenProposal::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        if (KomponenProposal::whereProdiId(auth()->user()->prodi_id)->where('periode_id', $request->periode_id)->sum('persentase') + $request->persentase > 100) {
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
+        // if (KomponenProposal::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        //     return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
+        // }
         $data = $request->all();
         // dd(DeadlineProposal::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first());
         if (!DeadlineProposal::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first()) {
@@ -99,6 +102,9 @@ class KomponenNilaiController extends Controller
     {
         $data = $request->all();
         // dd($data);
+        if (!isset($data['persentase'])) {
+            return redirect()->back()->with('warning', 'Belum ada komponen yang diinputkan');
+        }
         if (array_sum($data['persentase']) > 100) {
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
@@ -108,14 +114,15 @@ class KomponenNilaiController extends Controller
                 'persentase' => $data['persentase'][$key],
             ]);
         }
-        return view('backend.komponen-nilai.proposal', [
-            'periode_id' => $data['periode_id'],
-            'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
-            'periodes' => Periode::all(),
-            'komponen_proposals' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
-            'total_komponen_proposal' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
-            'komponen_proposal_latest' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
-        ])->with('success', 'Berhasil mengubah data');
+        return back()->with('success', 'Berhasil Mengubah Data');
+        // return view('backend.komponen-nilai.proposal', [
+        //     'periode_id' => $data['periode_id'],
+        //     'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->first(),
+        //     'periodes' => Periode::all(),
+        //     'komponen_proposals' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->get(),
+        //     'total_komponen_proposal' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->sum('persentase'),
+        //     'komponen_proposal_latest' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($data['periode_id'])->orderBy('id', 'DESC')->first()
+        // ])->with('success', 'Berhasil mengubah data');
     }
 
     public function uploadProposal()
@@ -177,9 +184,12 @@ class KomponenNilaiController extends Controller
 
     public function storePrasidang(Request $request)
     {
-        if (KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        if (KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->where('periode_id', $request->periode_id)->sum('persentase') + $request->persentase > 100) {
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
+        // if (KomponenPrasidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        //     return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
+        // }
         $data = $request->all();
         if (!DeadlinePrasidang::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first()) {
             return redirect()->back()->with('warning', 'Anda belum mengatur deadline input Nilai');
@@ -289,9 +299,12 @@ class KomponenNilaiController extends Controller
     {
 
         // dd($request->periode_id);
-        if (KomponenSidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        if (KomponenSidang::whereProdiId(auth()->user()->prodi_id)->where('periode_id', $request->periode_id)->sum('persentase') + $request->persentase > 100) {
             return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
         }
+        // if (KomponenSidang::whereProdiId(auth()->user()->prodi_id)->whereTahunAjaran(Periode::find($request->periode_id)->tahun)->whereSemester(Periode::find($request->periode_id)->semester)->sum('persentase') + $request->persentase > 100) {
+        //     return redirect()->back()->with('warning', 'Total nilai komponen tidak boleh lebih dari 100');
+        // }
         $data = $request->all();
         if (!DeadlineSidang::wherePeriodeId($request->periode_id)->whereProdiId(auth()->user()->prodi_id)->select('id')->first()) {
             return redirect()->back()->with('warning', 'Anda belum mengatur deadline input Nilai');
