@@ -31,32 +31,68 @@ class DaftarMahasiswaController extends Controller
 
 
         $items = [];
+        $item_proposal = [];
+        $item_prasidang = [];
+        $item_sidang = [];
         $nilai_proposal_final = NilaiProposalFinal::all();
         $nilai_prasidang_final = NilaiPrasidangFinal::all();
         $nilai_sidang_final = NilaiSidangFinal::all();
+
+        $proposal_final = Proposal::all();
+        $prasidang_final = Prasidang::all();
+        $sidang_final = Sidang::all();
         // dd($nilai_proposal_final);
 
 
 
-        foreach ($nilai_proposal_final as $nilai_proposal) {
-            if ($nilai_proposal->proposal->pembimbing1_id == auth()->user()->dosen->id || $nilai_proposal->proposal->pembimbing2_id == auth()->user()->dosen->id || $nilai_proposal->proposal->penguji1_id == auth()->user()->dosen->id || $nilai_proposal->proposal->penguji1_id == auth()->user()->dosen->id) {
-                $nilai_proposal['tipe'] = 'Proposal';
-                array_push($items, $nilai_proposal);
+        foreach ($proposal_final as $proposal) {
+            if ($proposal->pembimbing1_id == auth()->user()->dosen->id || $proposal->pembimbing2_id == auth()->user()->dosen->id || $proposal->penguji1_id == auth()->user()->dosen->id || $proposal->penguji1_id == auth()->user()->dosen->id) {
+                $proposal['tipe'] = 'Proposal';
+                array_push($item_proposal, $proposal);
             }
         }
 
-        foreach ($nilai_prasidang_final as $nilai_prasidang) {
-            if ($nilai_prasidang->prasidang->pembimbing1_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->pembimbing2_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->penguji1_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->penguji1_id == auth()->user()->dosen->id) {
-                $nilai_prasidang['tipe'] = 'Prasidang';
-                array_push($items, $nilai_prasidang);
+        foreach ($prasidang_final as $prasidang) {
+            if ($prasidang->pembimbing1_id == auth()->user()->dosen->id || $prasidang->pembimbing2_id == auth()->user()->dosen->id || $prasidang->penguji1_id == auth()->user()->dosen->id || $prasidang->penguji1_id == auth()->user()->dosen->id) {
+                $prasidang['tipe'] = 'Prasidang';
+                array_push($item_prasidang, $prasidang);
             }
         }
-        foreach ($nilai_sidang_final as $nilai_sidang) {
-            if ($nilai_sidang->sidang->pembimbing1_id == auth()->user()->dosen->id || $nilai_sidang->sidang->pembimbing2_id == auth()->user()->dosen->id || $nilai_sidang->sidang->penguji1_id == auth()->user()->dosen->id || $nilai_sidang->sidang->penguji1_id == auth()->user()->dosen->id) {
-                $nilai_sidang['tipe'] = 'Prasidang';
-                array_push($items, $nilai_sidang);
+        foreach ($sidang_final as $sidang) {
+            if ($sidang->pembimbing1_id == auth()->user()->dosen->id || $sidang->pembimbing2_id == auth()->user()->dosen->id || $sidang->penguji1_id == auth()->user()->dosen->id || $sidang->penguji1_id == auth()->user()->dosen->id) {
+                $sidang['tipe'] = 'Prasidang';
+                array_push($item_sidang, $sidang);
             }
         }
+
+        return view('backend.daftar-mahasiswa.bimbingan', [
+            'items' => $items,
+            'item_proposal' => $item_proposal,
+            'item_prasidang' => $item_prasidang,
+            'item_sidang' => $item_sidang,
+        ]);
+
+
+        // KENAPA INI HARUS ADA PENILAIANNYA DULU
+        // foreach ($nilai_proposal_final as $nilai_proposal) {
+        //     if ($nilai_proposal->proposal->pembimbing1_id == auth()->user()->dosen->id || $nilai_proposal->proposal->pembimbing2_id == auth()->user()->dosen->id || $nilai_proposal->proposal->penguji1_id == auth()->user()->dosen->id || $nilai_proposal->proposal->penguji1_id == auth()->user()->dosen->id) {
+        //         $nilai_proposal['tipe'] = 'Proposal';
+        //         array_push($items, $nilai_proposal);
+        //     }
+        // }
+
+        // foreach ($nilai_prasidang_final as $nilai_prasidang) {
+        //     if ($nilai_prasidang->prasidang->pembimbing1_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->pembimbing2_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->penguji1_id == auth()->user()->dosen->id || $nilai_prasidang->prasidang->penguji1_id == auth()->user()->dosen->id) {
+        //         $nilai_prasidang['tipe'] = 'Prasidang';
+        //         array_push($items, $nilai_prasidang);
+        //     }
+        // }
+        // foreach ($nilai_sidang_final as $nilai_sidang) {
+        //     if ($nilai_sidang->sidang->pembimbing1_id == auth()->user()->dosen->id || $nilai_sidang->sidang->pembimbing2_id == auth()->user()->dosen->id || $nilai_sidang->sidang->penguji1_id == auth()->user()->dosen->id || $nilai_sidang->sidang->penguji1_id == auth()->user()->dosen->id) {
+        //         $nilai_sidang['tipe'] = 'Prasidang';
+        //         array_push($items, $nilai_sidang);
+        //     }
+        // }
 
         // dd($items);
 

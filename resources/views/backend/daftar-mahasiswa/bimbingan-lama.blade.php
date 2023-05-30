@@ -38,64 +38,60 @@
                                         @php
                                             $no = 1;
                                         @endphp
-                                        @if ($item_proposal)
-                                            @foreach ($item_proposal as $item)
+                                        @foreach ($items as $item)
+                                            @if ($item->proposal)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $item->mahasiswa->nim }}</td>
-                                                    <td>{{ $item->mahasiswa->nama }}</td>
-                                                    <td>{{ $item->judul_indo }}</td>
-                                                    <td>{{ $item->judul_inggris }}</td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing1_id])->first()->kode }}
+                                                    <td>{{ $item->proposal->mahasiswa->nim }}</td>
+                                                    <td>{{ $item->proposal->mahasiswa->nama }}</td>
+                                                    <td>{{ $item->proposal->judul_indo }}</td>
+                                                    <td>{{ $item->proposal->judul_inggris }}</td>
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->proposal->pembimbing1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->proposal->pembimbing2_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji1_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->proposal->penguji1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->proposal->penguji2_id])->first()->kode }}
                                                     </td>
                                                     <td>{{ $item->tipe }}</td>
                                                 </tr>
-                                            @endforeach
-                                        @elseif($item_prasidang)
-                                            @foreach ($item_prasidang as $item)
+                                            @elseif($item->prasidang)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $item->mahasiswa->nim }}</td>
-                                                    <td>{{ $item->mahasiswa->nama }}</td>
-                                                    <td>{{ $item->judul_indo }}</td>
-                                                    <td>{{ $item->judul_inggris }}</td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing1_id])->first()->kode }}
+                                                    <td>{{ $item->prasidang->mahasiswa->nim }}</td>
+                                                    <td>{{ $item->prasidang->mahasiswa->nama }}</td>
+                                                    <td>{{ $item->prasidang->judul_indo }}</td>
+                                                    <td>{{ $item->prasidang->judul_inggris }}</td>
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->prasidang->pembimbing1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->prasidang->pembimbing2_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji1_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->prasidang->penguji1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->prasidang->penguji2_id])->first()->kode }}
                                                     </td>
                                                     <td>{{ $item->tipe }}</td>
                                                 </tr>
-                                            @endforeach
-                                        @else
-                                            @foreach ($item_sidang as $item)
+                                            @else
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $item->mahasiswa->nim }}</td>
-                                                    <td>{{ $item->mahasiswa->nama }}</td>
-                                                    <td>{{ $item->judul_indo }}</td>
-                                                    <td>{{ $item->judul_inggris }}</td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing1_id])->first()->kode }}
+                                                    <td>{{ $item->sidang->mahasiswa->nim }}</td>
+                                                    <td>{{ $item->sidang->mahasiswa->nama }}</td>
+                                                    <td>{{ $item->sidang->judul_indo }}</td>
+                                                    <td>{{ $item->sidang->judul_inggris }}</td>
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->sidang->pembimbing1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->pembimbing2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->sidang->pembimbing2_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji1_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->sidang->penguji1_id])->first()->kode }}
                                                     </td>
-                                                    <td>{{ App\Models\Dosen::where(['id' => $item->penguji2_id])->first()->kode }}
+                                                    <td>{{ App\Models\Dosen::where(['id' => $item->sidang->penguji2_id])->first()->kode }}
                                                     </td>
                                                     <td>{{ $item->tipe }}</td>
                                                 </tr>
-                                            @endforeach
-                                        @endif
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -20,6 +20,7 @@ use App\Models\NilaiPrasidang;
 use App\Models\KomponenPrasidang;
 use App\Models\NilaiPrasidangFinal;
 use App\Models\DetailNilaiPrasidang;
+use App\Models\Periode;
 
 class NilaiMahasiswaController extends Controller
 {
@@ -55,9 +56,13 @@ class NilaiMahasiswaController extends Controller
 
         // dd($nilai_total);
 
+        $proposal = Proposal::find($id);
+
+        $periode_upload = Periode::where('id', $proposal->periode_id)->first();
+        $periode = Periode::where('tahun_ajaran', $periode_upload->tahun_ajaran)->where('semester', $periode_upload->semester)->whereNull('bulan')->first();
         return view('backend.nilai-mahasiswa.proposal-edit', [
-            'item' => Proposal::find($id),
-            'items' => KomponenProposal::all(),
+            'item' => $proposal,
+            'items' => KomponenProposal::where('periode_id', $periode->id)->get(),
             'nilai_total' => $nilai_total,
             'nilai_final' => NilaiProposalFinal::whereProposalId($id)->first()
         ]);
