@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 11:18 PM
+-- Generation Time: Jun 12, 2023 at 06:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -87,7 +87,7 @@ CREATE TABLE `deadline_prasidang` (
 
 INSERT INTO `deadline_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
 (1, 1, 9, '2022-11-26', NULL, '2022-11-10 07:04:25'),
-(2, 1, 10, '2022-04-10', NULL, NULL);
+(2, 1, 10, '2022-04-10', NULL, '2023-05-30 16:26:06');
 
 -- --------------------------------------------------------
 
@@ -182,42 +182,26 @@ CREATE TABLE `detail_nilai_proposal` (
 --
 
 INSERT INTO `detail_nilai_proposal` (`id`, `nilai_proposal_id`, `komponen_proposal_id`, `nilai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 15, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
-(2, 1, 2, 15, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
-(3, 1, 3, 7, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
-(4, 1, 4, 19, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
-(5, 1, 5, 19, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
 (6, 2, 1, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
 (7, 2, 2, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
 (8, 2, 3, 5, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
 (9, 2, 4, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(10, 2, 5, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(11, 2, 6, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(12, 2, 7, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(13, 2, 8, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(14, 2, 9, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(15, 3, 1, 18, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
+(10, 2, 5, 15, '2022-11-10 07:20:08', '2023-05-18 07:18:40', NULL),
+(15, 3, 1, 65, '2022-11-16 05:35:11', '2023-05-18 07:01:31', NULL),
 (16, 3, 2, 18, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
 (17, 3, 3, 7, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
 (18, 3, 4, 23, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
 (19, 3, 5, 21, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(20, 3, 16, 21, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(21, 3, 17, 20, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(22, 3, 18, 20, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(23, 3, 19, 20, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(24, 3, 20, 20, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(25, 3, 21, 20, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
 (26, 4, 1, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
 (27, 4, 2, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
 (28, 4, 3, 7, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
 (29, 4, 4, 15, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
 (30, 4, 5, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(31, 4, 16, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(32, 4, 17, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(33, 4, 18, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(34, 4, 19, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(35, 4, 20, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(36, 4, 21, 20, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL);
+(65, 7, 1, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
+(66, 7, 2, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
+(67, 7, 3, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
+(68, 7, 4, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
+(69, 7, 5, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -364,7 +348,7 @@ CREATE TABLE `dosen_koordinator_pa` (
 --
 
 INSERT INTO `dosen_koordinator_pa` (`id`, `periode_id`, `dosen_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 10, 1, 1, '2021-2022', 'Genap', '2022-08-16 14:18:58', '2022-08-16 14:18:58', NULL),
+(1, 9, 1, 1, '2021-2022', 'Ganjil', '2022-08-16 14:18:58', '2022-08-16 14:18:58', NULL),
 (2, 11, 2, 1, '2022-2023', 'Ganjil', '2022-11-10 05:00:41', '2022-11-10 05:00:41', NULL),
 (3, 12, 8, 1, '2022-2023', 'Genap', '2022-11-10 06:51:18', '2022-11-10 06:51:18', NULL),
 (4, 13, 8, 1, '2023-2024', 'Ganjil', '2022-11-16 04:13:18', '2022-11-16 04:13:18', NULL);
@@ -446,7 +430,7 @@ CREATE TABLE `jadwal_prasidang` (
 --
 
 INSERT INTO `jadwal_prasidang` (`id`, `prasidang_id`, `ruangan_id`, `tanggal_prasidang`, `bulan`, `jam_mulai_prasidang`, `jam_selesai_prasidang`, `ruangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, '2022-09-15', 9, '21:30:00', '22:30:00', 'http://zoom.us.com', '2022-08-16 14:23:04', '2022-11-16 04:43:12', NULL),
+(1, 1, 2, '2022-09-15', 9, '21:30:00', '22:30:00', 'Ruangan 2', '2022-08-16 14:23:04', '2023-06-12 15:49:51', NULL),
 (4, 2, 4, '2023-06-12', NULL, '13:30:00', '15:30:00', 'Ruang FIT', '2022-11-10 06:29:12', '2022-11-10 06:58:27', NULL),
 (5, 1, NULL, '2022-11-26', 11, '21:30:00', '22:30:00', NULL, '2022-11-10 07:08:48', '2022-11-10 07:08:48', NULL),
 (6, 4, NULL, '2022-11-28', 1, '15:30:00', '18:00:00', NULL, '2022-11-16 05:15:24', '2022-12-15 19:02:26', NULL),
@@ -533,17 +517,7 @@ INSERT INTO `komponen_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline_pras
 (1, 1, 9, NULL, 'Penguasaan Materi', 35, 'Keterangan Penguasaan Materi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (2, 1, 9, NULL, 'Penguasaan Aplikasi / Implementasi Produk', 35, 'Keterangan Penguasaan Aplikasi / Implementasi Produk', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (3, 1, 9, NULL, 'Tata Tulis', 20, 'Keterangan Tata Tulis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 9, NULL, 'Teknik Presentasi', 10, 'Keterangan Teknik Presentasi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:36', '2022-11-14 04:35:36'),
-(6, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:34:33', '2022-11-14 04:35:42', '2022-11-14 04:35:42'),
-(7, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:28', '2022-11-14 07:34:28'),
-(8, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:36:14', '2022-11-14 07:34:33', '2022-11-14 07:34:33'),
-(9, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
-(10, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:10:52', '2022-11-15 14:10:52', NULL),
-(11, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
-(12, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:59:33', '2022-11-16 04:59:33', NULL),
-(13, 1, 9, 2, 'BAB 1', 50, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:32', '2023-04-09 17:39:32', NULL),
-(14, 1, 9, 2, 'BAB 2', 10, NULL, NULL, '2022', 'Genap', '2023-04-09 17:39:52', '2023-04-09 17:39:52', NULL);
+(4, 1, 9, NULL, 'Teknik Presentasi', 10, 'Keterangan Teknik Presentasi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -576,26 +550,7 @@ INSERT INTO `komponen_proposal` (`id`, `prodi_id`, `periode_id`, `deadline_propo
 (2, 1, 9, NULL, 'Studi Pustaka', 20, 'Keterangan Studi Pustaka', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (3, 1, 9, NULL, 'Perbandingan Sistem', 10, 'Keterangan Perbandingan Sistem', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (4, 1, 9, NULL, 'Gambaran Proses Bisnis', 25, 'Keterangan Gambaran Proses Bisnis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 9, NULL, 'Lampiran Hasil Kuisioner', 25, 'Keterangan Lampiran Hasil Kuisioner', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(6, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:25:57', '2022-11-14 04:25:57'),
-(7, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-10 07:01:41', '2022-11-14 04:26:03', '2022-11-14 04:26:03'),
-(8, 1, 9, 1, 'Latar Belakang', 20, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:31', '2022-11-14 07:22:49', '2022-11-14 07:22:49'),
-(9, 1, 9, 1, 'Bab 1', 25, NULL, NULL, '2023', 'Genap', '2022-11-10 07:02:47', '2022-11-14 07:22:54', '2022-11-14 07:22:54'),
-(10, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:23', '2022-11-14 04:28:23'),
-(11, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:28:07', '2022-11-14 04:28:30', '2022-11-14 04:28:30'),
-(12, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:43', '2022-11-14 07:20:43'),
-(13, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 04:29:45', '2022-11-14 07:20:49', '2022-11-14 07:20:49'),
-(14, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:27', '2022-11-14 07:32:27'),
-(15, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:30:33', '2022-11-14 07:32:32', '2022-11-14 07:32:32'),
-(16, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
-(17, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-14 07:34:56', '2022-11-14 07:34:56', NULL),
-(18, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
-(19, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-15 14:11:39', '2022-11-15 14:11:39', NULL),
-(20, 1, 9, NULL, 'testing 1', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
-(21, 1, 9, NULL, 'testing 2', 25, NULL, '2022-08-16', '2022', 'Ganjil', '2022-11-16 04:58:19', '2022-11-16 04:58:19', NULL),
-(22, 1, 9, 2, 'BAB 1', 20, NULL, NULL, '2022', 'Genap', '2023-04-09 08:49:12', '2023-04-09 08:49:12', NULL),
-(24, 1, 9, NULL, 'testing 1', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL),
-(25, 1, 9, NULL, 'testing 2', 25, NULL, NULL, '2022', 'Genap', '2023-04-09 10:20:37', '2023-04-09 10:20:37', NULL);
+(5, 1, 9, NULL, 'Lampiran Hasil Kuisioner', 25, 'Keterangan Lampiran Hasil Kuisioner', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -898,10 +853,10 @@ CREATE TABLE `nilai_proposal` (
 --
 
 INSERT INTO `nilai_proposal` (`id`, `proposal_id`, `ruangan_id`, `penguji`, `tanggal_penilaian`, `ruangan`, `nilai_akhir`, `catatan`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, '1', NULL, NULL, 75, NULL, NULL, '2022-11-10 05:31:39', '2022-11-10 05:31:39', NULL),
-(2, 21, NULL, '1', '2022-11-10 14:22:18', NULL, 125, 'sudah bagus', '20221110142218-1668064938-d8d562iGO9ms6MIpl2ELMRSNt5DGKpPLAdOSSZMokDEpPRDF6Y.pdf', '2022-11-10 07:20:08', '2022-11-10 07:22:18', NULL),
-(3, 2, NULL, '1', '2022-11-16 12:36:34', NULL, 208, 'sudah bagus', '20221116123634-1668576994-KIynRKHWXIAKTSU6yxbzbICcgxZjKAdMpUnLmyiW1BCl6FyB9D.pdf', '2022-11-16 05:35:11', '2022-11-16 05:36:34', NULL),
-(4, 2, NULL, '2', '2022-11-16 12:38:36', NULL, 190, 'cukup bagus', '20221116123836-1668577116-BclyBTWC9PMYuQfL9WyyjH4J1gfgLBB6JR6EAZjYUenKBfPZlA.pdf', '2022-11-16 05:38:17', '2022-11-16 05:38:36', NULL);
+(2, 21, NULL, '1', '2022-11-10 14:22:18', NULL, 140, 'sudah bagus', '20221110142218-1668064938-d8d562iGO9ms6MIpl2ELMRSNt5DGKpPLAdOSSZMokDEpPRDF6Y.pdf', '2022-11-10 07:20:08', '2023-05-18 07:22:00', NULL),
+(3, 2, NULL, '1', '2022-11-16 12:36:34', NULL, 150, 'sudah bagus', '20221116123634-1668576994-KIynRKHWXIAKTSU6yxbzbICcgxZjKAdMpUnLmyiW1BCl6FyB9D.pdf', '2022-11-16 05:35:11', '2023-05-18 07:22:47', NULL),
+(4, 2, NULL, '2', '2022-11-16 12:38:36', NULL, 190, 'cukup bagus', '20221116123836-1668577116-BclyBTWC9PMYuQfL9WyyjH4J1gfgLBB6JR6EAZjYUenKBfPZlA.pdf', '2022-11-16 05:38:17', '2022-11-16 05:38:36', NULL),
+(7, 1, NULL, '1', NULL, NULL, 140, NULL, NULL, '2023-05-18 06:43:39', '2023-05-18 07:21:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -1864,7 +1819,7 @@ ALTER TABLE `detail_nilai_prasidang`
 -- AUTO_INCREMENT for table `detail_nilai_proposal`
 --
 ALTER TABLE `detail_nilai_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_sidang`
@@ -1936,13 +1891,13 @@ ALTER TABLE `komponen`
 -- AUTO_INCREMENT for table `komponen_prasidang`
 --
 ALTER TABLE `komponen_prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `komponen_proposal`
 --
 ALTER TABLE `komponen_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `komponen_sidang`
@@ -1990,7 +1945,7 @@ ALTER TABLE `nilai_prasidang_final`
 -- AUTO_INCREMENT for table `nilai_proposal`
 --
 ALTER TABLE `nilai_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `nilai_proposal_final`

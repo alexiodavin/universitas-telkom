@@ -30,6 +30,7 @@ class KomponenNilaiController extends Controller
         if ($periode_id == null) {
             $periode_id = DosenKoordinatorPA::whereDosenId(auth()->user()->dosen->id)->first()->periode_id;
         }
+        // dd(DosenKoordinatorPA::whereDosenId(auth()->user()->dosen->id)->first());
         return view('backend.komponen-nilai.proposal', [
             'periode_id' => $periode_id,
             'item' => KomponenProposal::whereProdiId(auth()->user()->prodi_id)->wherePeriodeId($periode_id)->first(),

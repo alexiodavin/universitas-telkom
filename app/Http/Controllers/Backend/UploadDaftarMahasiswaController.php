@@ -375,10 +375,11 @@ class UploadDaftarMahasiswaController extends Controller
             ]);
             JadwalPrasidang::create($data);
         } else {
-            $this->validate($request, [
-                'ruangan_id' => 'required',
-                'ruangan' => 'required',
-            ]);
+            $check = [];
+            if (!$request->ruangan_id) {
+                $check['ruangan'] = 'required'; 
+            }
+            $this->validate($request, $check);
             JadwalPrasidang::where('id', $request->jadwal_id)->update([
                 'ruangan_id' => $request->ruangan_id,
                 'ruangan' => $data['ruangan']

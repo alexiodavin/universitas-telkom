@@ -197,7 +197,7 @@
                                         <div class="col-sm-10">
                                             @if ($jadwal_prasidang)
                                                 <input type="text"
-                                                    class="form-control @error('ruangan') is-invalid @enderror name="ruangan"
+                                                    class="form-control" @error('ruangan') is-invalid @enderror name="ruangan"
                                                     value="{{ old('judul', $jadwal_prasidang->ruangan_id) == null ? $jadwal_prasidang->ruangan : '' }}">
                                             @else
                                                 <input type="text"

@@ -39,14 +39,14 @@
                                     <label class="col-sm-2 col-form-label font-weight-bold">Semester</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">:
-                                            {{ auth()->user()->prodi->periode->semester }}</span>
+                                            {{ $periode_koor->semester }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label font-weight-bold">Tahun Ajaran</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">:
-                                            {{ auth()->user()->prodi->periode->tahun_ajaran }}</span>
+                                            {{ $periode_koor->tahun_ajaran }}</span>
                                     </div>
                                 </div>
                             </div>
