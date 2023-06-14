@@ -119,7 +119,7 @@ class DosenController extends Controller
             // 'item' => DosenImport::find($id),
             'item' => DosenImport::where('prodi_id', $id)->first(),
             // 'items' => Dosen::whereDosenImportId($id)->get()
-            'items' => Dosen::join('dosen_import', 'dosen.dosen_import_id', '=', 'dosen_import.id')->where('prodi_id', $id)->get()
+            'items' => Dosen::join('dosen_import', 'dosen.dosen_import_id', '=', 'dosen_import.id')->where('dosen_import.prodi_id', $id)->get()
         ]);
     }
 }
