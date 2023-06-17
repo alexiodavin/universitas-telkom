@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2023 at 06:02 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jun 17, 2023 at 08:19 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,7 +64,7 @@ CREATE TABLE `current_semester` (
 --
 
 INSERT INTO `current_semester` (`id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`) VALUES
-(1, '2022-2023', 'Genap', '2023-03-10 15:56:09', '2023-03-10 17:27:37');
+(1, '2022-2023', 'Genap', '2023-03-10 15:56:09', '2023-06-13 04:28:14');
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,8 @@ CREATE TABLE `deadline_prasidang` (
 
 INSERT INTO `deadline_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
 (1, 1, 9, '2022-11-26', NULL, '2022-11-10 07:04:25'),
-(2, 1, 10, '2022-04-10', NULL, '2023-05-30 16:26:06');
+(2, 1, 10, '2022-04-10', NULL, '2023-05-30 16:26:06'),
+(3, 1, 12, '2023-08-11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,7 +111,8 @@ CREATE TABLE `deadline_proposal` (
 
 INSERT INTO `deadline_proposal` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
 (1, 1, 13, '2022-11-26', NULL, NULL),
-(2, 1, 10, '2022-02-09', NULL, NULL);
+(2, 1, 10, '2022-02-09', NULL, NULL),
+(3, 1, 12, '2023-08-11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,8 @@ CREATE TABLE `deadline_sidang` (
 
 INSERT INTO `deadline_sidang` (`id`, `prodi_id`, `periode_id`, `deadline`, `created_at`, `updated_at`) VALUES
 (1, 1, 11, '2022-11-26', NULL, NULL),
-(2, 1, 10, '2022-08-10', NULL, NULL);
+(2, 1, 10, '2022-08-10', NULL, NULL),
+(3, 1, 12, '2023-08-11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,16 +153,6 @@ CREATE TABLE `detail_nilai_prasidang` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `detail_nilai_prasidang`
---
-
-INSERT INTO `detail_nilai_prasidang` (`id`, `nilai_prasidang_id`, `komponen_prasidang_id`, `nilai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 30, '2022-11-10 07:22:53', '2022-11-10 07:22:53', NULL),
-(2, 1, 2, 29, '2022-11-10 07:22:53', '2022-11-10 07:22:53', NULL),
-(3, 1, 3, 17, '2022-11-10 07:22:53', '2022-11-10 07:22:53', NULL),
-(4, 1, 4, 9, '2022-11-10 07:22:53', '2022-11-10 07:22:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -182,26 +175,16 @@ CREATE TABLE `detail_nilai_proposal` (
 --
 
 INSERT INTO `detail_nilai_proposal` (`id`, `nilai_proposal_id`, `komponen_proposal_id`, `nilai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(6, 2, 1, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(7, 2, 2, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(8, 2, 3, 5, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(9, 2, 4, 15, '2022-11-10 07:20:08', '2022-11-10 07:20:08', NULL),
-(10, 2, 5, 15, '2022-11-10 07:20:08', '2023-05-18 07:18:40', NULL),
-(15, 3, 1, 65, '2022-11-16 05:35:11', '2023-05-18 07:01:31', NULL),
-(16, 3, 2, 18, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(17, 3, 3, 7, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(18, 3, 4, 23, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(19, 3, 5, 21, '2022-11-16 05:35:11', '2022-11-16 05:35:11', NULL),
-(26, 4, 1, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(27, 4, 2, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(28, 4, 3, 7, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(29, 4, 4, 15, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(30, 4, 5, 16, '2022-11-16 05:38:17', '2022-11-16 05:38:17', NULL),
-(65, 7, 1, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
-(66, 7, 2, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
-(67, 7, 3, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
-(68, 7, 4, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL),
-(69, 7, 5, 10, '2023-05-18 06:43:39', '2023-05-18 07:22:47', NULL);
+(89, 10, 27, 15, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(90, 10, 28, 15, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(91, 10, 29, 7, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(92, 10, 30, 15, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(93, 10, 31, 15, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(94, 11, 27, 10, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL),
+(95, 11, 28, 10, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL),
+(96, 11, 29, 10, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL),
+(97, 11, 30, 15, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL),
+(98, 11, 31, 25, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,11 +248,7 @@ INSERT INTO `dosen` (`id`, `user_id`, `periode_id`, `dosen_import_id`, `prodi_id
 (13, 14, 9, 2, NULL, 'Ely Rosely', 'Ir. Ely Rosely, M.B.S.', '5183', 'ELR', '+62 815-1324-4609', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
 (14, 15, 9, 2, NULL, 'Mutia Qana\'a', 'Mutia Qana\'a, S.Psi., M.Psi.', '5184', 'MQA', '+62 852-2279-7846', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
 (15, 16, 9, 2, NULL, 'Wahyu Hidayat', 'Wahyu Hidayat, S.T., M.T., OCA.', '5185', 'WHY', '+62 813-2207-2099', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(16, 17, 9, 2, NULL, 'Robbi Hendriyanto', 'Robbi Hendriyanto, S.T., M.T.', '5186', 'RHN', '+62 823-1604-9294', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(17, 22, 9, 4, NULL, 'Olivia Istianah', 'Olivia Istianah Amd.Kom', '1222', 'opi', '08131213123', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(18, 23, 9, 4, NULL, 'Rania Athala', 'Rania Athala Amd.Kom', '1235', 'tat', '08121312321', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(19, 24, 9, 4, NULL, 'Rusyda Hanifan', 'Rusyda Hanifan Amd.Kom', '1236', 'han', '8121312326', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(20, 25, 9, 5, NULL, 'ejakkk', 'Ejak Amd.Kom', '1229', 'ejk', '8131213120', 'Bandung', 'user.png', '2021-2022', 'Genap', '2022-08-16 11:37:53', '2022-08-16 11:37:53', NULL);
+(16, 17, 9, 2, NULL, 'Robbi Hendriyanto', 'Robbi Hendriyanto, S.T., M.T.', '5186', 'RHN', '+62 823-1604-9294', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -322,8 +301,9 @@ CREATE TABLE `dosen_kaprodi` (
 --
 
 INSERT INTO `dosen_kaprodi` (`id`, `periode_id`, `dosen_id`, `prodi_id`, `tahun_ajaran`, `semester`, `awal_menjabat`, `akhir_menjabat`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 9, 13, 1, '2021-2022', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:35:06', '2022-08-16 09:35:06', NULL),
-(2, 11, 3, 2, '2022-2023', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:46:54', '2022-08-16 09:46:54', NULL);
+(1, 9, 13, 1, '2021-2022', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:35:06', '2023-06-13 01:59:15', '2023-06-13 01:59:15'),
+(2, 11, 3, 2, '2022-2023', 'Ganjil', '2022-08-01', '2023-03-15', '2022-08-16 09:46:54', '2022-08-16 09:46:54', NULL),
+(3, 12, 7, 1, '2022-2023', 'Genap', '2023-06-13', NULL, '2023-06-13 01:59:40', '2023-06-13 01:59:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -351,7 +331,8 @@ INSERT INTO `dosen_koordinator_pa` (`id`, `periode_id`, `dosen_id`, `prodi_id`, 
 (1, 9, 1, 1, '2021-2022', 'Ganjil', '2022-08-16 14:18:58', '2022-08-16 14:18:58', NULL),
 (2, 11, 2, 1, '2022-2023', 'Ganjil', '2022-11-10 05:00:41', '2022-11-10 05:00:41', NULL),
 (3, 12, 8, 1, '2022-2023', 'Genap', '2022-11-10 06:51:18', '2022-11-10 06:51:18', NULL),
-(4, 13, 8, 1, '2023-2024', 'Ganjil', '2022-11-16 04:13:18', '2022-11-16 04:13:18', NULL);
+(4, 13, 8, 1, '2023-2024', 'Ganjil', '2022-11-16 04:13:18', '2023-06-13 01:56:18', '2023-06-13 01:56:18'),
+(5, 10, 7, 1, '2021-2022', 'Genap', '2023-06-13 03:43:00', '2023-06-13 03:43:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -425,21 +406,6 @@ CREATE TABLE `jadwal_prasidang` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jadwal_prasidang`
---
-
-INSERT INTO `jadwal_prasidang` (`id`, `prasidang_id`, `ruangan_id`, `tanggal_prasidang`, `bulan`, `jam_mulai_prasidang`, `jam_selesai_prasidang`, `ruangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 2, '2022-09-15', 9, '21:30:00', '22:30:00', 'Ruangan 2', '2022-08-16 14:23:04', '2023-06-12 15:49:51', NULL),
-(4, 2, 4, '2023-06-12', NULL, '13:30:00', '15:30:00', 'Ruang FIT', '2022-11-10 06:29:12', '2022-11-10 06:58:27', NULL),
-(5, 1, NULL, '2022-11-26', 11, '21:30:00', '22:30:00', NULL, '2022-11-10 07:08:48', '2022-11-10 07:08:48', NULL),
-(6, 4, NULL, '2022-11-28', 1, '15:30:00', '18:00:00', NULL, '2022-11-16 05:15:24', '2022-12-15 19:02:26', NULL),
-(7, 4, NULL, '2022-11-28', 1, '23:30:00', '23:59:00', NULL, '2022-11-23 16:03:47', '2022-12-15 19:11:47', NULL),
-(8, 4, NULL, '2022-11-28', NULL, '12:30:00', '15:00:00', NULL, '2022-11-23 16:05:18', '2022-11-23 16:05:18', NULL),
-(9, 5, NULL, '2022-12-24', 1, '18:30:00', '21:00:00', NULL, '2022-12-15 18:34:49', '2022-12-15 19:12:09', NULL),
-(10, 5, NULL, '2022-12-24', NULL, '16:30:00', '18:00:00', NULL, '2022-12-15 18:37:37', '2022-12-15 18:37:37', NULL),
-(11, 6, NULL, '2022-12-26', NULL, '15:40:00', '17:40:00', NULL, '2022-12-15 18:38:48', '2022-12-15 18:38:48', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -459,17 +425,6 @@ CREATE TABLE `jadwal_sidang` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `jadwal_sidang`
---
-
-INSERT INTO `jadwal_sidang` (`id`, `sidang_id`, `ruangan_id`, `tanggal_sidang`, `bulan`, `jam_mulai_sidang`, `jam_selesai_sidang`, `ruangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, '2022-06-24', 7, '09:30:00', '10:30:00', 'http://zoom.us.com', '2022-08-16 16:34:48', '2022-11-10 06:58:53', NULL),
-(2, 1, NULL, '2022-07-25', 7, '14:30:00', '15:00:00', NULL, '2022-11-10 07:11:07', '2022-11-16 05:23:26', NULL),
-(3, 1, NULL, '2023-01-09', 1, '09:30:00', '10:30:00', NULL, '2022-11-16 05:18:43', '2022-11-16 05:18:43', NULL),
-(4, 1, NULL, '2022-06-24', 1, '09:30:00', '10:30:00', NULL, '2022-12-15 18:37:03', '2022-12-15 18:37:03', NULL),
-(5, 1, NULL, '2022-06-24', NULL, '09:30:00', '10:30:00', NULL, '2022-12-15 18:37:17', '2022-12-15 18:37:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -514,10 +469,10 @@ CREATE TABLE `komponen_prasidang` (
 --
 
 INSERT INTO `komponen_prasidang` (`id`, `prodi_id`, `periode_id`, `deadline_prasidang_id`, `nama_komponen`, `persentase`, `keterangan`, `tanggal_deadline_input_nilai`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 9, NULL, 'Penguasaan Materi', 35, 'Keterangan Penguasaan Materi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(2, 1, 9, NULL, 'Penguasaan Aplikasi / Implementasi Produk', 35, 'Keterangan Penguasaan Aplikasi / Implementasi Produk', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(3, 1, 9, NULL, 'Tata Tulis', 20, 'Keterangan Tata Tulis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 9, NULL, 'Teknik Presentasi', 10, 'Keterangan Teknik Presentasi', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL);
+(16, 1, 12, 3, 'Penguasaan Materi', 35, NULL, NULL, '2023', 'Genap', '2023-06-13 02:32:29', '2023-06-13 02:32:29', NULL),
+(17, 1, 12, 3, 'Penguasaan Aplikasi / Implementasi Produk', 35, NULL, NULL, '2023', 'Genap', '2023-06-13 02:32:49', '2023-06-13 02:32:49', NULL),
+(18, 1, 12, 3, 'Tata Tulis', 20, NULL, NULL, '2023', 'Genap', '2023-06-13 02:33:13', '2023-06-13 02:33:13', NULL),
+(19, 1, 12, 3, 'Teknik Presentasi', 10, NULL, NULL, '2023', 'Genap', '2023-06-13 02:33:30', '2023-06-13 02:33:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -546,11 +501,11 @@ CREATE TABLE `komponen_proposal` (
 --
 
 INSERT INTO `komponen_proposal` (`id`, `prodi_id`, `periode_id`, `deadline_proposal_id`, `nama_komponen`, `persentase`, `keterangan`, `tanggal_deadline_input_nilai`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 9, NULL, 'Latar Belakang', 20, 'Keterangan Latar Belakang', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(2, 1, 9, NULL, 'Studi Pustaka', 20, 'Keterangan Studi Pustaka', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(3, 1, 9, NULL, 'Perbandingan Sistem', 10, 'Keterangan Perbandingan Sistem', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(4, 1, 9, NULL, 'Gambaran Proses Bisnis', 25, 'Keterangan Gambaran Proses Bisnis', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(5, 1, 9, NULL, 'Lampiran Hasil Kuisioner', 25, 'Keterangan Lampiran Hasil Kuisioner', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL);
+(27, 1, 12, 3, 'Latar Belakang', 20, NULL, NULL, '2023', 'Genap', '2023-06-13 02:28:47', '2023-06-13 02:28:47', NULL),
+(28, 1, 12, 3, 'Studi Pustaka', 20, NULL, NULL, '2023', 'Genap', '2023-06-13 02:29:08', '2023-06-13 02:29:08', NULL),
+(29, 1, 12, 3, 'Perbandingan Sistem', 10, NULL, NULL, '2023', 'Genap', '2023-06-13 02:29:29', '2023-06-13 02:29:29', NULL),
+(30, 1, 12, 3, 'Gambaran Proses Bisnis', 25, NULL, NULL, '2023', 'Genap', '2023-06-13 02:29:49', '2023-06-13 02:29:49', NULL),
+(31, 1, 12, 3, 'Lampiran Hasil Kuisioner', 25, NULL, NULL, '2023', 'Genap', '2023-06-13 02:30:02', '2023-06-13 02:30:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -584,12 +539,11 @@ INSERT INTO `komponen_sidang` (`id`, `prodi_id`, `periode_id`, `deadline_sidang_
 (3, 1, 11, NULL, 'Nilai Penguji 1', 16, 'Keterangan Nilai Penguji 1', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (4, 1, 11, NULL, 'Nilai Penguji 2', 16, 'Keterangan Nilai Penguji 2', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
 (5, 1, 11, NULL, 'Nilai Proposal', 20, 'Keterangan Nilai Proposal', '2022-08-16', '2022', 'Ganjil', NULL, NULL, NULL),
-(6, 1, 11, 1, 'Latar Belakang', 20, 'Nilai Prasidang', NULL, '2022', 'Ganjil', '2022-11-10 07:06:01', '2022-11-10 07:06:14', NULL),
-(7, 1, 11, 1, 'Nilai Tambahan', 50, 'Nilai Baru', NULL, '2022', 'Ganjil', '2022-11-14 06:35:10', '2022-11-14 06:35:10', NULL),
-(8, 1, 11, NULL, 'testing 1', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL),
-(9, 1, 11, NULL, 'testing 2', 25, 'keterangan', '2022-08-16', '2022', 'Ganjil', '2022-11-14 06:42:24', '2022-11-14 06:42:24', NULL),
-(10, 1, 10, 2, 'BAB 1', 25, 'Nilai Baru', NULL, '2022', 'Genap', '2023-04-09 17:59:19', '2023-04-09 17:59:19', NULL),
-(11, 1, 10, 2, 'BAB 1', 100, 'Nilai Proposal', NULL, '2022', 'Genap', '2023-04-09 17:59:28', '2023-04-09 18:00:59', '2023-04-09 18:00:59');
+(12, 1, 12, 3, 'Nilai Pembimbing 1', 24, NULL, NULL, '2023', 'Genap', '2023-06-13 02:34:55', '2023-06-13 02:34:55', NULL),
+(13, 1, 12, 3, 'Nilai Pembimbing 2', 24, NULL, NULL, '2023', 'Genap', '2023-06-13 02:35:29', '2023-06-13 02:35:29', NULL),
+(14, 1, 12, 3, 'Nilai Penguji 1', 16, NULL, NULL, '2023', 'Genap', '2023-06-13 02:35:41', '2023-06-13 02:35:41', NULL),
+(15, 1, 12, 3, 'Nilai Penguji 2', 16, NULL, NULL, '2023', 'Genap', '2023-06-13 02:35:54', '2023-06-13 02:35:54', NULL),
+(16, 1, 12, 3, 'Nilai Proposal', 10, NULL, NULL, '2023', 'Genap', '2023-06-13 02:36:10', '2023-06-13 02:36:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -620,38 +574,36 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `user_id`, `periode_id`, `mahasiswa_import_id`, `nama`, `nim`, `angkatan`, `telepon`, `alamat`, `foto`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 18, 9, 2, 'Olivia Istianah', '6701194000', NULL, '08213123121', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(2, 19, 9, 2, 'Rania Athala', '6701194001', NULL, '08123123412', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(3, 20, 9, 2, 'Rusyda Hanifan', '6701194002', NULL, '08121314124', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(4, 26, 9, 2, 'Emung Zakaria ', '6701204092', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(5, 27, 9, 2, 'Esya Oktariani', '6701200037', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(6, 28, 9, 2, 'Ahmad Ridho Maulana', '6701200042', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(7, 29, 9, 2, 'Anggun Shinta Prasella Dinata', '6701200045', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(8, 30, 9, 2, 'Derisa', '6701200066', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(9, 31, 9, 2, 'Fildzah Nabilah Putri ', '6701200071', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(10, 32, 9, 2, 'Feby Rahma Chayaningrum', '6701200073', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(11, 33, 9, 2, 'Gabriella Angelina', '6701200081', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(12, 34, 9, 2, 'Farhan Abdullah Rynold', '6701201098', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(13, 35, 9, 2, 'Gusnita Pratiwi', '6701201128', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(14, 36, 9, 2, 'Nyayu Najla Apritia', '6701201129', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(15, 37, 9, 2, 'Rayhana Alya Azzara ', '6701201142', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(16, 38, 9, 2, 'Diego Prayudha', '6701202021', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(17, 39, 9, 2, 'Amelia Ramahani ', '6701202029', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(18, 40, 9, 2, 'Fayza Alana', '6701202055', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(19, 41, 9, 2, 'Destiny sabila fitriamita dewi', '6701202060', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(20, 42, 9, 2, 'Tapa Kumbara Nasution', '6701202121', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(21, 43, 9, 2, 'Kamilia Putri Afifah R', '6701202124', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(22, 44, 9, 2, 'Raden Fachry Azwar', '6701202132', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(23, 45, 9, 2, 'Mahdhor Fauzi Hakiki', '6701202139', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(24, 46, 9, 2, 'Muhammad Fachrur Rasyid', '6701202143', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(25, 47, 9, 2, 'Endar Sulistyaningsih', '6701203107', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(26, 48, 9, 2, 'Husni Falah', '6701204007', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(27, 49, 9, 2, 'Zitha Ailsa Vashti Ali', '6701204008', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(28, 50, 9, 2, 'Viona Mustika Putri Zaelani', '6701204018', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(29, 51, 9, 2, 'Yoland Anggreyani Kendek', '6701204035', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(30, 52, 9, 2, 'Nailatul Fadhilah Syarwan', '6701204053', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(31, 53, 9, 2, 'Refka Maulana Sidik', '6701204054', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(32, 54, 9, 2, 'Rahmad Fitrananda H', '6701204069', NULL, '085737125437', 'Denpasar', 'user.png', '2021-2022', 'Genap', '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL);
+(39, 84, 10, 28, 'Agustine', '150030676', NULL, '085737125123', 'Bandung', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:24:35', '2023-06-14 15:24:35', NULL),
+(40, 86, 10, 30, 'Emung Zakaria ', '6701204092', NULL, '085737125121', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:22', '2023-06-14 15:34:22', NULL),
+(41, 87, 10, 30, 'Esya Oktariani', '6701200037', NULL, '085737125122', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:22', '2023-06-14 15:34:22', NULL),
+(42, 88, 10, 30, 'Ahmad Ridho Maulana', '6701200042', NULL, '085737125124', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(43, 89, 10, 30, 'Anggun Shinta Prasella Dinata', '6701200045', NULL, '085737125125', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(44, 90, 10, 30, 'Derisa', '6701200066', NULL, '085737125126', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(45, 91, 10, 30, 'Fildzah Nabilah Putri ', '6701200071', NULL, '085737125127', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(46, 92, 10, 30, 'Feby Rahma Chayaningrum', '6701200073', NULL, '085737125128', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(47, 93, 10, 30, 'Gabriella Angelina', '6701200081', NULL, '085737125129', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(48, 94, 10, 30, 'Farhan Abdullah Rynold', '6701201098', NULL, '085737125130', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(49, 95, 10, 30, 'Gusnita Pratiwi', '6701201128', NULL, '085737125131', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(50, 96, 10, 30, 'Nyayu Najla Apritia', '6701201129', NULL, '085737125132', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(51, 97, 10, 30, 'Rayhana Alya Azzara ', '6701201142', NULL, '085737125133', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(52, 98, 10, 30, 'Diego Prayudha', '6701202021', NULL, '085737125134', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(53, 99, 10, 30, 'Amelia Ramahani ', '6701202029', NULL, '085737125135', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(54, 100, 10, 30, 'Fayza Alana', '6701202055', NULL, '085737125136', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(55, 101, 10, 30, 'Destiny sabila fitriamita dewi', '6701202060', NULL, '085737125137', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(56, 102, 10, 30, 'Tapa Kumbara Nasution', '6701202121', NULL, '085737125138', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(57, 103, 10, 30, 'Kamilia Putri Afifah R', '6701202124', NULL, '085737125139', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(58, 104, 10, 30, 'Raden Fachry Azwar', '6701202132', NULL, '085737125140', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(59, 105, 10, 30, 'Mahdhor Fauzi Hakiki', '6701202139', NULL, '085737125141', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(60, 106, 10, 30, 'Muhammad Fachrur Rasyid', '6701202143', NULL, '085737125142', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(61, 107, 10, 30, 'Endar Sulistyaningsih', '6701203107', NULL, '085737125143', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(62, 108, 10, 30, 'Husni Falah', '6701204007', NULL, '085737125144', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(63, 109, 10, 30, 'Zitha Ailsa Vashti Ali', '6701204008', NULL, '085737125145', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(64, 110, 10, 30, 'Viona Mustika Putri Zaelani', '6701204018', NULL, '085737125146', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(65, 111, 10, 30, 'Yoland Anggreyani Kendek', '6701204035', NULL, '085737125147', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(66, 112, 10, 30, 'Nailatul Fadhilah Syarwan', '6701204053', NULL, '085737125148', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(67, 113, 10, 30, 'Refka Maulana Sidik', '6701204054', NULL, '085737125149', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(68, 114, 10, 30, 'Rahmad Fitrananda H', '6701204069', NULL, '085737125150', 'Denpasar', 'user.png', '2022-2023', 'Genap', '2023-06-14 15:34:28', '2023-06-14 15:34:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -675,9 +627,8 @@ CREATE TABLE `mahasiswa_import` (
 --
 
 INSERT INTO `mahasiswa_import` (`id`, `periode_id`, `prodi_id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 10, 1, '2021-2022', 'Genap', '2022-08-16 10:34:25', '2022-08-16 10:34:25', NULL),
-(2, 10, 1, '2021-2022', 'Ganjil', '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(3, 10, 1, '2022-2023', 'Genap', '2022-11-10 06:54:02', '2022-11-16 04:32:13', '2022-11-16 04:32:13');
+(28, 10, 1, '2022-2023', 'Genap', '2023-06-14 15:24:35', '2023-06-14 15:24:35', NULL),
+(30, 10, 1, '2022-2023', 'Genap', '2023-06-14 15:34:22', '2023-06-14 15:34:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -765,12 +716,12 @@ CREATE TABLE `nilai_mutu` (
 --
 
 INSERT INTO `nilai_mutu` (`id`, `periode_id`, `index`, `nilai_min`, `nilai_maks`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 9, 'A', 85, 100, '2021-2022', 'Ganjil', NULL, '2022-11-10 06:52:39', NULL),
-(2, 9, 'AB', 70, 80, '2021-2022', 'Ganjil', NULL, NULL, NULL),
-(3, 9, 'B', 65, 70, '2021-2022', 'Ganjil', NULL, NULL, NULL),
-(4, 9, 'BC', 60, 65, '2021-2022', 'Ganjil', NULL, NULL, NULL),
-(5, 9, 'C', 50, 60, '2021-2022', 'Ganjil', NULL, NULL, NULL),
-(6, 9, 'D', 40, 50, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(1, 9, 'A', 81, 100, '2021-2022', 'Ganjil', NULL, '2022-11-10 06:52:39', NULL),
+(2, 9, 'AB', 71, 80, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(3, 9, 'B', 66, 70, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(4, 9, 'BC', 61, 65, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(5, 9, 'C', 51, 60, '2021-2022', 'Ganjil', NULL, NULL, NULL),
+(6, 9, 'D', 41, 50, '2021-2022', 'Ganjil', NULL, NULL, NULL),
 (7, 9, 'E', 0, 40, '2021-2022', 'Ganjil', NULL, NULL, NULL),
 (8, 10, 'A', 80, 100, '2021-2022', 'Genap', NULL, NULL, NULL),
 (9, 10, 'AB', 70, 80, '2021-2022', 'Genap', NULL, NULL, NULL),
@@ -779,7 +730,13 @@ INSERT INTO `nilai_mutu` (`id`, `periode_id`, `index`, `nilai_min`, `nilai_maks`
 (12, 10, 'C', 50, 60, '2021-2022', 'Genap', NULL, NULL, NULL),
 (13, 10, 'D', 40, 50, '2021-2022', 'Genap', NULL, NULL, NULL),
 (14, 10, 'E', 0, 40, '2021-2022', 'Genap', NULL, NULL, NULL),
-(15, 11, 'A', 80, 99, '2022-2023', 'Ganjil', '2022-11-16 04:18:54', '2022-11-16 04:18:54', NULL);
+(16, 12, 'A', 81, 100, '2022-2023', 'Genap', '2023-06-13 04:33:35', '2023-06-13 04:33:35', NULL),
+(17, 12, 'AB', 71, 84, '2022-2023', 'Genap', '2023-06-13 04:36:22', '2023-06-13 04:36:22', NULL),
+(18, 12, 'B', 66, 70, '2022-2023', 'Genap', '2023-06-13 04:36:46', '2023-06-13 04:36:46', NULL),
+(19, 12, 'BC', 61, 65, '2022-2023', 'Genap', '2023-06-13 04:37:13', '2023-06-13 04:37:13', NULL),
+(20, 12, 'C', 51, 60, '2022-2023', 'Genap', '2023-06-13 04:37:54', '2023-06-13 04:37:54', NULL),
+(21, 12, 'D', 41, 50, '2022-2023', 'Genap', '2023-06-13 04:38:17', '2023-06-13 04:38:17', NULL),
+(22, 12, 'E', 0, 40, '2022-2023', 'Genap', '2023-06-13 04:38:41', '2023-06-13 04:38:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -801,13 +758,6 @@ CREATE TABLE `nilai_prasidang` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `nilai_prasidang`
---
-
-INSERT INTO `nilai_prasidang` (`id`, `prasidang_id`, `ruangan_id`, `penguji`, `tanggal_penilaian`, `ruangan`, `nilai_akhir`, `catatan`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, NULL, '1', '2022-11-10 14:23:08', NULL, 85, 'sudah bagus', '20221110142308-1668064988-Hs8RiaBf6ATpc3HAjX5VTqW8oofwMTjkkZfKfXrn0uqiF7divr.pdf', '2022-11-10 07:22:53', '2022-11-10 07:23:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -853,10 +803,8 @@ CREATE TABLE `nilai_proposal` (
 --
 
 INSERT INTO `nilai_proposal` (`id`, `proposal_id`, `ruangan_id`, `penguji`, `tanggal_penilaian`, `ruangan`, `nilai_akhir`, `catatan`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 21, NULL, '1', '2022-11-10 14:22:18', NULL, 140, 'sudah bagus', '20221110142218-1668064938-d8d562iGO9ms6MIpl2ELMRSNt5DGKpPLAdOSSZMokDEpPRDF6Y.pdf', '2022-11-10 07:20:08', '2023-05-18 07:22:00', NULL),
-(3, 2, NULL, '1', '2022-11-16 12:36:34', NULL, 150, 'sudah bagus', '20221116123634-1668576994-KIynRKHWXIAKTSU6yxbzbICcgxZjKAdMpUnLmyiW1BCl6FyB9D.pdf', '2022-11-16 05:35:11', '2023-05-18 07:22:47', NULL),
-(4, 2, NULL, '2', '2022-11-16 12:38:36', NULL, 190, 'cukup bagus', '20221116123836-1668577116-BclyBTWC9PMYuQfL9WyyjH4J1gfgLBB6JR6EAZjYUenKBfPZlA.pdf', '2022-11-16 05:38:17', '2022-11-16 05:38:36', NULL),
-(7, 1, NULL, '1', NULL, NULL, 140, NULL, NULL, '2023-05-18 06:43:39', '2023-05-18 07:21:21', NULL);
+(10, 91, NULL, '1', NULL, NULL, 67, NULL, NULL, '2023-06-17 15:41:52', '2023-06-17 15:41:52', NULL),
+(11, 90, NULL, '1', NULL, NULL, 70, NULL, NULL, '2023-06-17 17:53:01', '2023-06-17 18:06:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -976,28 +924,31 @@ CREATE TABLE `periode` (
 --
 
 INSERT INTO `periode` (`id`, `periode_semester_id`, `tahun_ajaran`, `semester`, `bulan`, `tahun`, `jenis_periode`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, '2021-2022', 'Genap', 'Juni', 2022, 'Prasidang', NULL, NULL, NULL),
-(2, NULL, '2021-2022', 'Ganjil', 'Desember', 2022, 'Proposal', NULL, NULL, NULL),
-(3, NULL, '2022-2023', 'Ganjil', 'September', 2022, 'Prasidang', '2022-11-10 04:54:24', '2022-11-10 04:54:24', NULL),
-(4, NULL, '2022-2023', 'Genap', 'Februari', 2023, 'Prasidang', '2022-11-10 04:54:40', '2022-11-10 04:54:40', NULL),
-(5, NULL, '2023-2024', 'Ganjil', 'September', 2023, 'Sidang', '2022-11-10 06:48:52', '2022-11-10 06:48:52', NULL),
-(6, NULL, '2023-2024', 'Genap', 'Februari', 2023, 'Proposal', '2022-11-10 06:50:27', '2022-11-10 06:50:42', NULL),
-(7, NULL, '2024-2025', 'Ganjil', 'Februari', 2024, 'Prasidang', '2022-11-16 04:09:58', '2022-11-16 04:10:39', NULL),
-(8, NULL, '2024-2025', 'Genap', 'Februari', 2024, 'Sidang', '2022-11-23 15:38:30', '2022-11-23 15:38:30', NULL),
+(1, NULL, '2021-2022', 'Genap', 'Juni', 2022, 'Prasidang', NULL, '2023-06-13 01:55:38', '2023-06-13 01:55:38'),
+(2, NULL, '2021-2022', 'Ganjil', 'Desember', 2022, 'Proposal', NULL, '2023-06-13 01:55:31', '2023-06-13 01:55:31'),
+(3, NULL, '2022-2023', 'Ganjil', 'September', 2022, 'Prasidang', '2022-11-10 04:54:24', '2023-06-13 01:55:24', '2023-06-13 01:55:24'),
+(4, NULL, '2022-2023', 'Genap', 'Februari', 2023, 'Prasidang', '2022-11-10 04:54:40', '2023-06-13 01:55:17', '2023-06-13 01:55:17'),
+(5, NULL, '2023-2024', 'Ganjil', 'September', 2023, 'Sidang', '2022-11-10 06:48:52', '2023-06-13 01:55:02', '2023-06-13 01:55:02'),
+(6, NULL, '2023-2024', 'Genap', 'Februari', 2023, 'Proposal', '2022-11-10 06:50:27', '2023-06-13 01:54:55', '2023-06-13 01:54:55'),
+(7, NULL, '2024-2025', 'Ganjil', 'Februari', 2024, 'Prasidang', '2022-11-16 04:09:58', '2023-06-13 01:54:46', '2023-06-13 01:54:46'),
+(8, NULL, '2024-2025', 'Genap', 'Februari', 2024, 'Sidang', '2022-11-23 15:38:30', '2023-06-13 01:54:17', '2023-06-13 01:54:17'),
 (9, NULL, '2021-2022', 'Ganjil', NULL, 2021, 'Umum', '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
 (10, NULL, '2021-2022', 'Genap', NULL, 2022, 'Umum', '2023-03-11 10:24:20', '2023-03-11 10:24:20', NULL),
 (11, NULL, '2022-2023', 'Ganjil', NULL, 2022, 'Umum', '2023-03-11 10:27:53', '2023-03-11 10:29:45', NULL),
 (12, NULL, '2022-2023', 'Genap', NULL, 2023, 'Umum', '2023-03-11 10:28:12', '2023-03-11 10:29:37', NULL),
 (13, NULL, '2023-2024', 'Ganjil', NULL, 2023, 'Umum', '2023-03-11 10:29:19', '2023-03-11 10:30:02', NULL),
 (14, NULL, '2023-2024', 'Genap', NULL, 2024, 'Umum', '2023-03-11 10:28:45', '2023-03-11 10:30:08', NULL),
-(15, NULL, '2024-2025', 'Ganjil', NULL, 2024, 'Umum', '2023-03-11 10:29:31', '2023-03-11 10:30:12', NULL),
-(16, NULL, '2024-2025', 'Genap', NULL, 2025, 'Umum', '2023-03-11 10:28:55', '2023-03-11 10:30:18', NULL),
-(17, NULL, '2024-2025', 'Ganjil', 'Maret', NULL, 'Proposal', '2023-04-22 19:56:54', '2023-04-22 19:56:54', NULL),
-(18, NULL, '2024-2025', 'Genap', 'Februari', NULL, 'Proposal', '2023-04-22 19:59:36', '2023-04-22 19:59:36', NULL),
-(19, NULL, '2022-2023', 'Ganjil', 'Agustus', NULL, 'Proposal', '2023-04-22 20:02:37', '2023-04-22 20:02:37', NULL),
-(20, NULL, '2022-2023', 'Ganjil', 'Januari', NULL, 'Proposal', '2023-04-22 20:03:46', '2023-04-22 20:03:46', NULL),
-(21, NULL, '2022-2023', 'Ganjil', 'Maret', NULL, 'Prasidang', '2023-04-22 20:58:50', '2023-04-22 20:58:50', NULL),
-(22, NULL, '2021-2022', 'Ganjil', 'November', 2021, 'Prasidang', '2023-04-22 17:00:00', '2023-04-22 21:10:52', NULL);
+(15, NULL, '2024-2025', 'Ganjil', NULL, 2024, 'Umum', '2023-03-11 10:29:31', '2023-06-13 01:55:54', '2023-06-13 01:55:54'),
+(16, NULL, '2024-2025', 'Genap', NULL, 2025, 'Umum', '2023-03-11 10:28:55', '2023-06-13 01:55:49', '2023-06-13 01:55:49'),
+(17, NULL, '2024-2025', 'Ganjil', 'Maret', NULL, 'Proposal', '2023-04-22 19:56:54', '2023-06-13 01:54:09', '2023-06-13 01:54:09'),
+(18, NULL, '2022-2023', 'Genap', 'Agustus', 2023, 'Proposal', '2023-04-22 19:59:36', '2023-06-13 01:54:37', NULL),
+(19, NULL, '2022-2023', 'Ganjil', 'Juli', 2023, 'Proposal', '2023-04-22 20:02:37', '2023-06-13 01:54:02', NULL),
+(20, NULL, '2022-2023', 'Genap', 'Juni', 2023, 'Proposal', '2023-04-22 20:03:46', '2023-06-13 01:53:35', NULL),
+(21, NULL, '2022-2023', 'Genap', 'Mei', 2023, 'Prasidang', '2023-04-22 20:58:50', '2023-06-13 01:53:10', NULL),
+(22, NULL, '2021-2022', 'Ganjil', 'November', 2021, 'Prasidang', '2023-04-22 17:00:00', '2023-04-22 21:10:52', NULL),
+(23, NULL, '2022-2023', 'Genap', 'Juli', NULL, 'Proposal', '2023-06-13 02:40:50', '2023-06-13 04:19:10', '2023-06-13 04:19:10'),
+(24, NULL, '2022-2023', 'Ganjil', 'Januari', NULL, 'Proposal', '2023-06-14 15:37:51', '2023-06-14 15:37:51', NULL),
+(25, NULL, '2022-2023', 'Genap', 'Juli', NULL, 'Proposal', '2023-06-17 15:41:11', '2023-06-17 15:41:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -1039,20 +990,6 @@ CREATE TABLE `prasidang` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `prasidang`
---
-
-INSERT INTO `prasidang` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `keterangan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 2, 1, 2, 1, 1, 'Test', 'Test', '2021-2022', 'Genap', NULL, NULL, 2, '2022-08-16 14:20:40', '2022-08-16 14:20:40', NULL),
-(2, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-11-10 05:26:01', '2022-11-10 05:26:01', NULL),
-(4, 5, 10, 8, 10, 8, 22, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-11-16 05:01:45', '2022-11-16 05:01:45', NULL),
-(5, 6, 10, 8, 10, 8, 22, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-12-15 18:31:46', '2022-12-15 18:31:46', NULL),
-(6, 7, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2022-12-15 18:37:50', '2022-12-15 18:37:50', NULL),
-(7, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2023-04-12 08:41:14', '2023-04-13 09:03:56', '2023-04-13 09:03:56'),
-(8, 4, 10, 8, 10, 8, 22, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, NULL, 2, '2023-04-16 16:33:56', '2023-04-16 16:34:27', '2023-04-16 16:34:27'),
-(9, 6, 2, 6, 3, 6, 21, 'Aplikasi Website', 'Website Application', '2022-2023', 'Ganjil', 'Maret', NULL, 2, '2023-04-22 20:58:50', '2023-04-22 20:58:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -1122,36 +1059,8 @@ CREATE TABLE `proposal` (
 --
 
 INSERT INTO `proposal` (`id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 4, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(2, 5, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(3, 6, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(4, 7, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(5, 8, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(6, 9, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(7, 10, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(8, 11, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(9, 12, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(10, 13, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(11, 14, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(12, 15, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(13, 16, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(14, 17, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(15, 18, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(16, 19, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(17, 20, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(18, 21, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(19, 22, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(20, 23, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(21, 24, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(22, 25, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(23, 26, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(24, 27, 10, 8, 10, 8, 2, 'Aplikasi Website', 'Website Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(25, 28, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(26, 29, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(27, 30, 10, 8, 10, 8, 2, 'Sistem Informasi', 'Information System', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(28, 31, 10, 8, 10, 8, 2, 'Aplikasi Mobile', 'Mobile Application', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(29, 32, 10, 8, 10, 8, 2, 'Machine Learning', 'Machine Learning', '2021-2022', 'Ganjil', NULL, 2, '2022-11-10 04:56:38', '2022-11-10 04:56:38', NULL),
-(88, 6, 2, 6, 13, 5, 20, 'oke', 'oke', '2022-2023', 'Ganjil', 'Januari', 2, '2023-04-22 20:06:39', '2023-04-22 20:06:39', NULL);
+(90, 42, 7, 9, 2, 14, 20, 'Pengujian Aplikasi', 'Testing Application', '2022-2023', 'Ganjil', 'Januari', 2, '2023-06-14 15:37:51', '2023-06-14 15:42:30', NULL),
+(91, 53, 3, 4, 2, 7, 25, 'Pengujian Aplikasi', 'Testing Application', '2022-2023', 'Genap', 'Juli', 2, '2023-06-17 15:41:11', '2023-06-17 15:41:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -1240,7 +1149,8 @@ INSERT INTO `ruangan` (`id`, `kode`, `nama`, `keterangan`, `is_active`, `created
 (1, 'R1', 'Ruangan 1', 'Keterangan Ruangan 1', 1, NULL, NULL, NULL),
 (2, 'R2', 'Ruangan 2', 'Keterangan Ruangan 2', 1, NULL, NULL, NULL),
 (3, 'R3', 'Ruangan 3', 'Keterangan Ruangan 3', 0, NULL, '2022-08-16 14:12:47', NULL),
-(4, 'R4', 'Ruang FIT', 'Di gedung FIT', 1, '2022-11-10 06:56:49', '2022-11-10 06:56:49', NULL);
+(4, 'R4', 'Ruang FIT', 'Di gedung FIT', 1, '2022-11-10 06:56:49', '2022-11-10 06:56:49', NULL),
+(5, 'R5', 'Ruangan Aula', 'Aula di Lt 4 FIT', 1, '2023-06-13 02:23:43', '2023-06-13 02:23:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -1292,13 +1202,6 @@ CREATE TABLE `sidang` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sidang`
---
-
-INSERT INTO `sidang` (`id`, `pendaftaran_sidang_id`, `mahasiswa_id`, `pembimbing1_id`, `pembimbing2_id`, `penguji1_id`, `penguji2_id`, `periode_id`, `judul_indo`, `judul_inggris`, `tahun_ajaran`, `semester`, `bulan`, `jumlah_penguji`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, 2, 2, 1, 2, 1, 5, 'Test', 'Test', '2023-2024', 'Genap', NULL, 2, '2022-08-16 14:21:10', '2022-08-16 14:21:10', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -1320,9 +1223,9 @@ CREATE TABLE `tahun_ajaran` (
 
 INSERT INTO `tahun_ajaran` (`id`, `tahun_ajaran`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '2020-2021', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
-(2, '2021-2022', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
-(3, '2022-2023', 1, '2023-04-22 15:51:56', '2023-04-22 17:53:07', NULL),
-(4, '2023-2024', 1, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL),
+(2, '2021-2022', 0, '2023-04-22 15:51:56', '2023-06-13 04:28:22', NULL),
+(3, '2022-2023', 1, '2023-04-22 15:51:56', '2023-06-13 04:28:18', NULL),
+(4, '2023-2024', 0, '2023-04-22 15:51:56', '2023-06-13 01:52:37', NULL),
 (5, '2024-2025', 0, '2023-04-22 15:51:56', '2023-04-22 15:51:56', NULL);
 
 -- --------------------------------------------------------
@@ -1366,42 +1269,36 @@ INSERT INTO `users` (`id`, `role_id`, `prodi_id`, `username`, `email`, `password
 (15, 2, 1, 'mutia', 'mutia@tass.telkomuniversity.ac.id', '$2y$10$gJ7Lyg/RP6ocoPkPXyMCo.peqNiQWjeHIs1NOKAtoRgrI/R1gLdGS', NULL, '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
 (16, 2, 1, 'wahyuhidayat', 'wahyuhidayat@telkomuniversity.ac.id', '$2y$10$TV2kpfqM4hXacOSpslbGAuFvKfv6.KbE8cDWoqCi5ThkSMVd2TQj.', NULL, '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
 (17, 2, 1, 'robbi', 'robbi@tass.telkomuniversity.ac.id', '$2y$10$dvoO3hV1Ih0.6hNSIGu2iOhsyZhhZ9Gi8A8aVSp9Hc9R9fH8ydDnW', NULL, '2022-08-16 09:34:31', '2022-08-16 09:34:31', NULL),
-(18, 3, 1, 'olivia', 'oliviaistianah9@gmail.com', '$2y$10$6BxmDS8jUJeD/F0EwRNkge2KtTKqMv8qz.TwcNiJThDmTF3bZddui', NULL, '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(19, 3, 1, 'rania', 'rania.athala28@gmail.com', '$2y$10$S/fbCOUt95VAOaDOX8exAuNE1ZJE1tH9RFbZH/Lw2rd7byS0tQRhy', NULL, '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(20, 3, 1, 'hanif', 'rusydahanifan@gmail.com', '$2y$10$DGWwPj5EJFncy8.sbJVvwuFgCAgvBUx7dAnC4JokCw.pg3RmSLK1S', NULL, '2022-08-16 10:34:27', '2022-08-16 10:34:27', NULL),
-(22, 2, 3, 'opi', 'olivia@gmail.com', '$2y$10$Ku82mSWifSJCTvbRTxC8FuQoUHx7u9sAxhl4pIiSo9pLxu8ToJtPS', NULL, '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(23, 2, 3, 'tata', 'rania@gmail.com', '$2y$10$VJ./BvpIdk0SDg9yZbxMzuA0ZUVyLkpVBP.74tYBN7Z6FngDU789K', NULL, '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(24, 2, 3, 'hanip', 'hanip@gmail.com', '$2y$10$7JikKT1fZis/okSN2Sf2f.p6Ibu7Neu9SHGqFYZtwPG7sfDCamOta', NULL, '2022-08-16 10:53:00', '2022-08-16 10:53:00', NULL),
-(25, 2, 1, 'ejak', 'ejak@gmail.com', '$2y$10$6F6twwKfhMVhR4/Ei8QX5.aAw0Iz6NRLS0u/MbfzJSk1ltUgS9jsS', NULL, '2022-08-16 11:37:53', '2022-08-16 11:37:53', NULL),
-(26, 3, 1, 'emung', 'emung@gmail.com', '$2y$10$xdtKdinCs/eFO9BlPyWvCO7VENp3K/DePxdA2agcMeVpDED5H8K6u', NULL, '2022-11-10 04:52:40', '2022-11-10 04:52:40', NULL),
-(27, 3, 1, 'esya', 'esya@gmail.com', '$2y$10$7Kjdvhjwq4Do6U/XK1U/WOIeR7.atXd74/qJQ1TVq26ldMZjSNo1e', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(28, 3, 1, 'ridho', 'ridho@gmail.com', '$2y$10$SKo18i/kYcTg.yc0sioVkucfRR/Fpp0es2zX5KJkst9GmwH2vEHG.', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(29, 3, 1, 'anggun', 'anggun@gmail.com', '$2y$10$sJyeCV.58Y1790cj1dWJyOPRhJUFgx8SJ6PQiyXgcDILrNRUDYQhC', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(30, 3, 1, 'derisa', 'derisa@gmail.com', '$2y$10$FH6XCmi6B9iYCx3g.Giz1OPuSD2nHjv03tdQLgeSnxdbmjqkOspZ2', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(31, 3, 1, 'nabilah', 'nabilah@gmail.com', '$2y$10$fye4tNDbkwByit3T.Entl.hJP5w1Xhrl1JPfo77IlKJWj.TN3rfLi', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(32, 3, 1, 'rahma', 'rahma@gmail.com', '$2y$10$A9MpYIMKTedIeBVsIFU6VOm4P8pWbvRWd17ry5tZ91/TcBL.KjGtS', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(33, 3, 1, 'gabriella', 'gabriella@gmail.com', '$2y$10$EMtnOovfxzDajGwqZ4pv.O95aoYc7pXP1aD2lMaeqZ9ymqZiqnLA6', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(34, 3, 1, 'abdullah', 'abdullah@gmail.com', '$2y$10$4zXs11UDSfcGWQDPhrrGruypvdeP8rj63WjLin2hd4qySMeWOmdxm', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(35, 3, 1, 'gusnita', 'gusnita@gmail.com', '$2y$10$i0u.Tg8ZH0PRLXuIAG6Sv.ZGZMGkJNqkXH9sRaKCIgugWc0pOSM4u', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(36, 3, 1, 'najla', 'najla@gmail.com', '$2y$10$XgaiMQc5je0XIqYuurj3kOS2Kj9pNpGIFJoqYqLDqnN.y6EoM501O', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(37, 3, 1, 'alya', 'alya@gmail.com', '$2y$10$OePJq21HCZyQ0t8EyFxF.O/njGn2o1Y0aNaLv.STHJg4bHe6tAaJq', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(38, 3, 1, 'diego', 'diego@gmail.com', '$2y$10$FOFSMrrAuagAYSEdJ/Y0GucDK5ffX0l6X1hUm0.qhmNdorBbbEAxC', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(39, 3, 1, 'amelia', 'amelia@gmail.com', '$2y$10$PxeyBpgNeBmTRozopZjJeO0lggq2qo4uFXuKgP2OvEnq.g6q2fSTy', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(40, 3, 1, 'fayza', 'fayza@gmail.com', '$2y$10$zT6RzPzv46lfmvb16EpcoOuSlFfDmLp9rYXSOkooko5ZO6VxKUAeO', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(41, 3, 1, 'destiny', 'destiny@gmail.com', '$2y$10$.Li5q8DTVWyXIso6flly9uFC.42PuDAS2cUYeBQM39nvDPS7h/acq', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(42, 3, 1, 'kumbara', 'kumbara@gmail.com', '$2y$10$/jcEEioOXNTC/MUoiAvMneNPp7YHppau1NbrLnVf56eJmUKoJmmMu', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(43, 3, 1, 'kamilia', 'kamilia@gmail.com', '$2y$10$EBS305x3pepBzJM7rRvvie358XiK3pKEebCE9dgmmLtIvjRudcNe2', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(44, 3, 1, 'fachry', 'fachry@gmail.com', '$2y$10$gkTzLEtx01kO0MopPcM3s.QwWsvPiY7IxWV5iOH3hwKUGa/pv9.7y', NULL, '2022-11-10 04:52:41', '2022-11-10 04:52:41', NULL),
-(45, 3, 1, 'fauzi', 'fauzi@gmail.com', '$2y$10$Hwj0TKObcXmt3XEVH18saOtIuWRhBfcjjw0KdYkDAxjbdFeEvpK2O', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(46, 3, 1, 'fachrur', 'fachrur@gmail.com', '$2y$10$zTPq3NBZQCGJR6ooLT7V/u1yyysBMugYLrjJSsf9HYML.ZsTNilpy', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(47, 3, 1, 'endar', 'endar@gmail.com', '$2y$10$WsBfFBsTD5ci9X3rGd63v.Blb8ocjwhbX2X1z87VQAbmykhtsb1Ce', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(48, 3, 1, 'husni', 'husni@gmail.com', '$2y$10$njk8fsCWmIXgQ14mwG99aOy8fXij1FHaP8/Gw3GzEfj5ylRVOsHB6', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(49, 3, 1, 'zitha', 'zitha@gmail.com', '$2y$10$e13wiGOZrlfM5bxrsRXHkOfePM3iF4ONFxvR0TAk3AY2RcEfggaqi', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(50, 3, 1, 'viona', 'viona@gmail.com', '$2y$10$tbVPaql0JJ/ugGP07urxW.1M89l/E2Y/Pz8KrynQBV2EsHRWfZhT6', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(51, 3, 1, 'anggreyani', 'anggreyani@gmail.com', '$2y$10$rUKIFkLfxrPKFa048fsUX.OxIJKHrbV6gLWxBSbOthxO3XkMwg9K.', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(52, 3, 1, 'fadhilah', 'fadhilah@gmail.com', '$2y$10$ae92/bC6E0dlAB/Sks4el.fhJAl1KDlHB7zJKds3H6/jZ5IU2/y0a', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(53, 3, 1, 'maulana', 'maulana@gmail.com', '$2y$10$xcIU63rtGDW5sJZjuJE8EumKz/hmxFBteMPf5qvx3citvF5DvvC4y', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL),
-(54, 3, 1, 'fitrananda', 'fitrananda@gmail.com', '$2y$10$ALVoZPNPy3WNatnXAEF9jOSUcF8GIQKibfkjqDTYvazYdXxygX/be', NULL, '2022-11-10 04:52:42', '2022-11-10 04:52:42', NULL);
+(84, 3, 1, 'agustine', 'agustinesalvatru@gmail.com', '$2y$10$inpFOOzpPp05Tw14Ufni8eqqMsqkw.hX7M.57hbrcSmsJtbQi8jAe', NULL, '2023-06-14 15:24:35', '2023-06-14 15:24:35', NULL),
+(86, 3, 1, 'emung', 'emung@gmail.com', '$2y$10$wWu.hQ6sKcXer0p9MutfeO348QKT8QhSuhEwYbkuwcZsLcEEEwjXW', NULL, '2023-06-14 15:34:22', '2023-06-14 15:34:22', NULL),
+(87, 3, 1, 'esya', 'esya@gmail.com', '$2y$10$y78nZTm2uDe42wtZ39XFYuxqk/qB1uKlUSK8.PtsJ/3wR/Cul3Pb6', NULL, '2023-06-14 15:34:22', '2023-06-14 15:34:22', NULL),
+(88, 3, 1, 'ridho', 'ridho@gmail.com', '$2y$10$0vt8KkBkCxowtE1pt4zG8OyhQD3.G8YIbFrB8q678/abTVl6fLe1W', NULL, '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(89, 3, 1, 'anggun', 'anggun@gmail.com', '$2y$10$OtU1UWTh/QXnFq4DG09A8.WGuPs1b2rfmBEmzPAQzKP1iFUY.XgBG', NULL, '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(90, 3, 1, 'derisa', 'derisa@gmail.com', '$2y$10$10v.9ReUxTCDgHrh/WE7euc9eLsgMoT.7CFITm9HR30z6S5kWMHry', NULL, '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(91, 3, 1, 'nabilah', 'nabilah@gmail.com', '$2y$10$ue9DOMUIl9c1yWdGwyTzdOeL.tqKd/6GVVhpX4kihjOK6YI1ZURy2', NULL, '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(92, 3, 1, 'rahma', 'rahma@gmail.com', '$2y$10$l3gc9WOus0Cdz6P1K8tLT.uxvQ.6IA9pdp0teHK1Ba6m.Qabets6i', NULL, '2023-06-14 15:34:23', '2023-06-14 15:34:23', NULL),
+(93, 3, 1, 'gabriella', 'gabriella@gmail.com', '$2y$10$1gAjFNuEwDe5kpU2CgoIm.qONyB.XYwbJ8ei0SXZR2MFfzDbJDHyS', NULL, '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(94, 3, 1, 'abdullah', 'abdullah@gmail.com', '$2y$10$Bf.SozOzbcSGImYUPzJ/ZeOjIu4BEY/bQXb3o0ePAG0XZSONHhcF6', NULL, '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(95, 3, 1, 'gusnita', 'gusnita@gmail.com', '$2y$10$arxjlUPhkPMNJg2125Iqm.OhKpU5OaNuQzqVAbUUxqBKjLpcHSase', NULL, '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(96, 3, 1, 'najla', 'najla@gmail.com', '$2y$10$MGTFYh5C2/yrw9xk/3nd0.9cTYXufy9LHtFzE5d/ubsGzWkelRKvm', NULL, '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(97, 3, 1, 'alya', 'alya@gmail.com', '$2y$10$VazrzoZHBd8La3cwtvBPCu4GR6UrUtWjU2MG3IppWB3XewVXzL4Fq', NULL, '2023-06-14 15:34:24', '2023-06-14 15:34:24', NULL),
+(98, 3, 1, 'diego', 'diego@gmail.com', '$2y$10$xlxTm5kEH21hPT/Zv8fXm.oc8IdOHdBRYc/zcGldrFicMs79JsHYW', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(99, 3, 1, 'amelia', 'amelia@gmail.com', '$2y$10$bF83VGgwgktC9./BMHYVruqDPHIO7vwTqssYCt4KOhbopx/i0Xdsu', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(100, 3, 1, 'fayza', 'fayza@gmail.com', '$2y$10$.I0NmaFhKRgKFxgfYppG4elx1u7ivTxK3XATRlEz29oyABqTKNvZO', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(101, 3, 1, 'destiny', 'destiny@gmail.com', '$2y$10$n2BfVnD8WZjny64x4nFR4OJ5Mif71xym9wktiKd//UiHXyR6jUToK', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(102, 3, 1, 'kumbara', 'kumbara@gmail.com', '$2y$10$V1Z73qvKIokAbxraI3ejzOYUwJcmQAgV8CRvFoAqx6OVB0jLGykWG', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(103, 3, 1, 'kamilia', 'kamilia@gmail.com', '$2y$10$PAkxwgCD7nJb/0jj0WP0hO0Xp82fCmS7FqyIRYtNIQF.hzkQ7/DTK', NULL, '2023-06-14 15:34:25', '2023-06-14 15:34:25', NULL),
+(104, 3, 1, 'fachry', 'fachry@gmail.com', '$2y$10$jIJNhgWkp7VqN.pNjcO2TeRzIFlKA9EjkkjgPbzn5AC0QfpjIPCHy', NULL, '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(105, 3, 1, 'fauzi', 'fauzi@gmail.com', '$2y$10$wzPDu6qeh94RLCPDz1lMju10Ekv.wBTlKANdhDZebHII6wRE1BMS2', NULL, '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(106, 3, 1, 'fachrur', 'fachrur@gmail.com', '$2y$10$9lp/9rBsJvlm4MJx2dWuJuxk6lzgqPeu0hJMzhIQ46WfHfsdjiM8K', NULL, '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(107, 3, 1, 'endar', 'endar@gmail.com', '$2y$10$FKSun8d/CW04XdyKK0lMd.pOUq5eTeDHa1TpQkQjGBM9ongg7GOQ2', NULL, '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(108, 3, 1, 'husni', 'husni@gmail.com', '$2y$10$nCWPlYuuw2MrIZDpkABQXu/tXmRVLZiqpjTxdeSbn607nQK.XbUQO', NULL, '2023-06-14 15:34:26', '2023-06-14 15:34:26', NULL),
+(109, 3, 1, 'zitha', 'zitha@gmail.com', '$2y$10$66Qo6oh8Kc41PgrCbXWa/ud3JoWyV6QOF6VMxIkocbpArPF7pF4j2', NULL, '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(110, 3, 1, 'viona', 'viona@gmail.com', '$2y$10$u9s7F6d72KK1ovNY3ZZYH.rOQ/gVMAV1bv11XIJGnpgCaWymFdpM6', NULL, '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(111, 3, 1, 'anggreyani', 'anggreyani@gmail.com', '$2y$10$dd2jVoyJi7nSrQXTWlScXO9dEfBvkEepO43FvNj.Mt/HiF2jUgs9q', NULL, '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(112, 3, 1, 'fadhilah', 'fadhilah@gmail.com', '$2y$10$zW7wzmLYO23Z86wbjdwA5uZAPFvdAf5F7qOd8GDrRyDQ4xtvfKVH2', NULL, '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(113, 3, 1, 'maulana', 'maulana@gmail.com', '$2y$10$AWBSXG76EW/VXTKF5f43X.SnEkJBr5ezqkmxdx4W7h7J0R26waURy', NULL, '2023-06-14 15:34:27', '2023-06-14 15:34:27', NULL),
+(114, 3, 1, 'fitrananda', 'fitrananda@gmail.com', '$2y$10$xHz3ZYU/Tz1Et8GzjQxT/u0aViVzTqRXeCn7oVK54YCZ9VI0tvjya', NULL, '2023-06-14 15:34:28', '2023-06-14 15:34:28', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1795,19 +1692,19 @@ ALTER TABLE `current_semester`
 -- AUTO_INCREMENT for table `deadline_prasidang`
 --
 ALTER TABLE `deadline_prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `deadline_proposal`
 --
 ALTER TABLE `deadline_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `deadline_sidang`
 --
 ALTER TABLE `deadline_sidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_prasidang`
@@ -1819,7 +1716,7 @@ ALTER TABLE `detail_nilai_prasidang`
 -- AUTO_INCREMENT for table `detail_nilai_proposal`
 --
 ALTER TABLE `detail_nilai_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `detail_nilai_sidang`
@@ -1843,13 +1740,13 @@ ALTER TABLE `dosen_import`
 -- AUTO_INCREMENT for table `dosen_kaprodi`
 --
 ALTER TABLE `dosen_kaprodi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dosen_koordinator_pa`
 --
 ALTER TABLE `dosen_koordinator_pa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1891,31 +1788,31 @@ ALTER TABLE `komponen`
 -- AUTO_INCREMENT for table `komponen_prasidang`
 --
 ALTER TABLE `komponen_prasidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `komponen_proposal`
 --
 ALTER TABLE `komponen_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `komponen_sidang`
 --
 ALTER TABLE `komponen_sidang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa_import`
 --
 ALTER TABLE `mahasiswa_import`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1927,7 +1824,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nilai_mutu`
 --
 ALTER TABLE `nilai_mutu`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `nilai_prasidang`
@@ -1945,7 +1842,7 @@ ALTER TABLE `nilai_prasidang_final`
 -- AUTO_INCREMENT for table `nilai_proposal`
 --
 ALTER TABLE `nilai_proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nilai_proposal_final`
@@ -1975,7 +1872,7 @@ ALTER TABLE `pendaftaran_sidang`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `periode_semester`
@@ -1999,7 +1896,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `revisi`
@@ -2023,7 +1920,7 @@ ALTER TABLE `role_dosen`
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ruangan_terpakai`
@@ -2047,7 +1944,7 @@ ALTER TABLE `tahun_ajaran`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- Constraints for dumped tables
