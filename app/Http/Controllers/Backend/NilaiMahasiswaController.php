@@ -105,7 +105,7 @@ class NilaiMahasiswaController extends Controller
             DetailNilaiProposal::where('id', $key)->update([
                 'nilai' => $value
             ]);
-            $id_terakhir = $value;
+            $id_terakhir = $key;
         }
         $detail_nilai_proposal = DetailNilaiProposal::find($id_terakhir);
 

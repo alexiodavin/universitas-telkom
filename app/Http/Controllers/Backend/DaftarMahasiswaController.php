@@ -46,20 +46,20 @@ class DaftarMahasiswaController extends Controller
 
 
         foreach ($proposal_final as $proposal) {
-            if ($proposal->pembimbing1_id == auth()->user()->dosen->id || $proposal->pembimbing2_id == auth()->user()->dosen->id || $proposal->penguji1_id == auth()->user()->dosen->id || $proposal->penguji1_id == auth()->user()->dosen->id) {
+            if ($proposal->pembimbing1_id == auth()->user()->dosen->id || $proposal->pembimbing2_id == auth()->user()->dosen->id) {
                 $proposal['tipe'] = 'Proposal';
                 array_push($item_proposal, $proposal);
             }
         }
 
         foreach ($prasidang_final as $prasidang) {
-            if ($prasidang->pembimbing1_id == auth()->user()->dosen->id || $prasidang->pembimbing2_id == auth()->user()->dosen->id || $prasidang->penguji1_id == auth()->user()->dosen->id || $prasidang->penguji1_id == auth()->user()->dosen->id) {
+            if ($prasidang->pembimbing1_id == auth()->user()->dosen->id || $prasidang->pembimbing2_id == auth()->user()->dosen->id) {
                 $prasidang['tipe'] = 'Prasidang';
                 array_push($item_prasidang, $prasidang);
             }
         }
         foreach ($sidang_final as $sidang) {
-            if ($sidang->pembimbing1_id == auth()->user()->dosen->id || $sidang->pembimbing2_id == auth()->user()->dosen->id || $sidang->penguji1_id == auth()->user()->dosen->id || $sidang->penguji1_id == auth()->user()->dosen->id) {
+            if ($sidang->pembimbing1_id == auth()->user()->dosen->id || $sidang->pembimbing2_id == auth()->user()->dosen->id) {
                 $sidang['tipe'] = 'Prasidang';
                 array_push($item_sidang, $sidang);
             }
