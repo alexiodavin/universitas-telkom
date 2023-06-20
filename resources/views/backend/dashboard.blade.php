@@ -82,7 +82,7 @@
                                                                 data-tahun_ajaran="{{ $tahun_ajaran->id }}">
                                                         </div>
                                                     </td>
-                                                    <td><a href="badge badge-primary">Edit</a></td>
+                                                    <td><a href="#" class="badge badge-primary">Edit</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
