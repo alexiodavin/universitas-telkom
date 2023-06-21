@@ -55,7 +55,7 @@
                                             <th>Nama Prodi</th>
                                             <th style="width: 150px">Singkatan Prodi</th>
                                             {{-- <th style="width: 150px">Semester</th> --}}
-                                            {{-- <th style="width: 150px; text-align: center">Aksi</th> --}}
+                                            <th style="width: 150px; text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,10 +69,10 @@
                                                 <td>{{ $item->prodi->nama }}</td>
                                                 <td>{{ $item->prodi->singkatan }}</td>
                                                 {{-- <td>{{ $item->semester }}</td> --}}
-                                                {{-- <td style="text-align: center">
+                                                <td style="text-align: center">
                                                     <a href="{{ route('backend.admin.dosen.edit', ['id' => $item->id]) }}" class="btn btn-primary shadow bg-primary"> <i class="fa fa-edit"></i> Edit</a>
                                                     <a href="{{ route('backend.admin.dosen.delete', ['id' => $item->id]) }}" class="btn btn-primary shadow bg-primary" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini ?')"> <i class="fa fa-trash"></i> Delete</a>
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

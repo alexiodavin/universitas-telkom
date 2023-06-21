@@ -60,7 +60,34 @@
                                 </div>
                             </form>
                             <h3>Tahun ajaran Aktif</h3>
-                            <button class="btn btn-primary mb-2">Tambah Tahun Ajaran</button>
+                            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambahTahunAjaranModal">Tambah Tahun Ajaran</button>
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="tambahTahunAjaranModal" tabindex="-1" aria-labelledby="tambahTahunAjaranModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="tambahTahunAjaranModalLabel">Tambah Data Tahun Ajaran</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="/admin/tahun_ajaran/store" method="post">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="tahun_ajaran">Tahun Ajaran</label>
+                                                    <input type="text" class="form-control" name="tahun_ajaran" id="tahun_ajaran" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <table class="table table-hover" id="example1">
@@ -82,7 +109,7 @@
                                                                 data-tahun_ajaran="{{ $tahun_ajaran->id }}">
                                                         </div>
                                                     </td>
-                                                    <td><a href="#" class="badge badge-primary">Edit</a></td>
+                                                    <td><a href="#" class="badge badge-primary"  data-toggle="modal" data-target="#tambahTahunAjaranModal{{ $tahun_ajaran->id }}">Edit</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -126,6 +153,33 @@
             </div>
         </section>
     </div>
+    @foreach ($list_tahun_ajaran as $row)
+        <div class="modal fade" id="tambahTahunAjaranModal{{ $row->id }}" tabindex="-1" aria-labelledby="tambahTahunAjaranModal{{ $row->id }}Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahTahunAjaranModal{{ $row->id }}Label">Edit Data Tahun Ajaran</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/admin/tahun_ajaran/store" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="tahun_ajaran">Tahun Ajaran</label>
+                                <input type="text" class="form-control" name="tahun_ajaran" id="tahun_ajaran" value="{{ $row->tahun_ajaran }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @section('js')
