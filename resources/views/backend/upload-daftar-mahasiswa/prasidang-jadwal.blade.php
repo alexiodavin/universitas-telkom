@@ -82,7 +82,7 @@
                                         method="POST" enctype="multipart/form-data">
                                     @else
                                         <form
-                                            action="{{ route('backend.admin.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang.update', ['id' => $item->id, 'jadwal_id' => $jadwal_prasidang->id]) }}"
+                                            action="{{ route('backend.admin.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang.update', ['id' => $item->id, 'jadwal_id' => (isset($jadwal_prasidang->id))? $jadwal_prasidang->id : '']) }}"
                                             method="POST" enctype="multipart/form-data">
                                 @endif
                                 @csrf
@@ -120,7 +120,7 @@
                                             <input type="date"
                                                 class="form-control @error('tanggal_prasidang') is-invalid @enderror"
                                                 name="tanggal_prasidang"
-                                                value="{{ old('judul', $jadwal_prasidang->tanggal_prasidang) ?? null }}"
+                                                value="{{ old('judul', (isset($jadwal_prasidang->tanggal_prasidang))? $jadwal_prasidang->tanggal_prasidang : '') }}"
                                                 required>
                                             @error('tanggal_prasidang')
                                                 <span style="color:red;">{{ $errors->first('tanggal_prasidang') }}</span>
@@ -140,7 +140,7 @@
                                                 <input style="width: 200px;" type="time"
                                                     class="form-control @error('jam_mulai_prasidang') is-invalid @enderror mr-3"
                                                     name="jam_mulai_prasidang"
-                                                    value="{{ old('judul', $jadwal_prasidang->jam_mulai_prasidang) ?? null }}"
+                                                    value="{{ old('judul', (isset($jadwal_prasidang->jam_mulai_prasidang))? $jadwal_prasidang->jam_mulai_prasidang : '') }}"
                                                     required>
                                                 @error('jam_mulai_prasidang')
                                                     <span style="color:red;">{{ $errors->first('jam_mulai_prasidang') }}</span>
@@ -151,7 +151,7 @@
                                                 <input style="width: 200px;" type="time"
                                                     class="form-control @error('jam_selesai_prasidang') is-invalid @enderror"
                                                     name="jam_selesai_prasidang"
-                                                    value="{{ old('judul', $jadwal_prasidang->jam_selesai_prasidang) ?? null }}"
+                                                    value="{{ old('judul', (isset($jadwal_prasidang->jam_selesai_prasidang))? $jadwal_prasidang->jam_selesai_prasidang : '') }}"
                                                     required>
                                                 @error('jam_selesai_prasidang')
                                                     <span
@@ -172,11 +172,11 @@
                                             <select name="ruangan_id"
                                                 class="form-control @error('ruangan_id') is-invalid @enderror" required>
                                                 <option value="">Pilih Ruangan</option>
-                                                <option value="" @if (str_contains($jadwal_prasidang->ruangan ?? '', 'http')) selected @endif>
+                                                <option value="" @if (str_contains((isset($jadwal_prasidang->ruangan))? $jadwal_prasidang->ruangan : '' ?? '', 'http')) selected @endif>
                                                     Online</option>
                                                 @foreach ($ruangans as $ruangan)
                                                     <option value="{{ $ruangan->id }}"
-                                                        @if ($jadwal_prasidang->ruangan_id ?? 0 == $ruangan->id) selected @endif>
+                                                        @if ((isset($jadwal_prasidang->ruangan_id))? $jadwal_prasidang->ruangan_id : '' ?? 0 == $ruangan->id) selected @endif>
                                                         {{ $ruangan->nama }}</option>
                                                 @endforeach
                                             </select>
@@ -195,10 +195,11 @@
                                         <label class="col-sm-2 col-form-label font-weight-bold">Link Zoom / Google
                                             Meet</label>
                                         <div class="col-sm-10">
-                                            @if ($jadwal_prasidang)
-                                                <input type="text"
+                                            @if ((isset($jadwal_prasidang)
+                                                <input))? $jadwal_prasidang)
+                                                <input : '' type="text"
                                                     class="form-control" @error('ruangan') is-invalid @enderror name="ruangan"
-                                                    value="{{ old('judul', $jadwal_prasidang->ruangan_id) == null ? $jadwal_prasidang->ruangan : '' }}">
+                                                    value="{{ old('judul', (isset($jadwal_prasidang->ruangan_id))? $jadwal_prasidang->ruangan_id : '') == null ? (isset($jadwal_prasidang->ruangan))? $jadwal_prasidang->ruangan : '' : '' }}">
                                             @else
                                                 <input type="text"
                                                     class="form-control @error('ruangan') is-invalid @enderror"
