@@ -291,7 +291,7 @@ class UploadDaftarMahasiswaController extends Controller
                 // array_push($array_proposal, $proposal_data);
                 // dd($proposal_data);
                 $check = Proposal::whereMahasiswaId($proposal_data->mahasiswa_id)->first();
-                if (!$check) {
+                if ($check) {
                     $inserted_data = [
                         'mahasiswa_id' => $proposal_data->mahasiswa_id,
                         'pembimbing1_id' => $proposal_data->pembimbing1_id,
