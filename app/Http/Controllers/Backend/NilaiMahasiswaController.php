@@ -217,10 +217,14 @@ class NilaiMahasiswaController extends Controller
     {
         $item = Proposal::find($id);
         $nilai_akhir = ($item->nilai_penguji1->nilai_akhir + $item->nilai_penguji2->nilai_akhir) / 2;
-        foreach (NilaiMutu::wherePeriodeId($item->periode_id)->get() as $nm) {
+        foreach (NilaiMutu::where('tahun_ajaran', $item->tahun_ajaran)->where('semester', $item->semester)->get() as $nm) {
             if ($nilai_akhir >= $nm->nilai_min && $nilai_akhir <= $nm->nilai_maks) {
                 $nilai_mutu = $nm->index;
             }
+        }
+
+        if (!isset($nilai_mutu)) {
+            return redirect()->back()->with('warning', 'Data Nilai Mutu Tidak Tersedia, Silahkan menginput Nilai Mutu Terlebih dahulu');
         }
         NilaiProposalFinal::create([
             'proposal_id' => $item->id,
@@ -373,9 +377,12 @@ class NilaiMahasiswaController extends Controller
         $item = Prasidang::find($id);
 
         $nilai_akhir = ($item->nilai_penguji1->nilai_akhir + $item->nilai_penguji2->nilai_akhir) / 2;
-        foreach (NilaiMutu::wherePeriodeId($item->periode_id)->get() as $nm) {
+        foreach (NilaiMutu::where('tahun_ajaran', $item->tahun_ajaran)->where('semester', $item->semester)->get() as $nm) {
             if ($nilai_akhir >= $nm->nilai_min && $nilai_akhir <= $nm->nilai_maks) {
                 $nilai_mutu = $nm->index;
+                if (!isset($nilai_mutu)) {
+                    return redirect()->back()->with('warning', 'Data Nilai Mutu Tidak Tersedia, Silahkan menginput Nilai Mutu Terlebih dahulu');
+                }
                 NilaiPrasidangFinal::create([
                     'prasidang_id' => $item->id,
                     'tanggal' => date('Y-m-d'),

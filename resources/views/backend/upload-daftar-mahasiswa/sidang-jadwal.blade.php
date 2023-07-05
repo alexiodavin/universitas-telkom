@@ -76,30 +76,30 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 @if(session('auth_login') == 'koordinator_pa')
-                                    <form action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update', ['id' => $item->id, 'jadwal_id' => $jadwal_sidang->id]) }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update', ['id' => $item->id, 'jadwal_id' => (isset($jadwal_sidang->id))? $jadwal_sidang->id : null]) }}" method="POST" enctype="multipart/form-data">
                                 @else
-                                    <form action="{{ route('backend.admin.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update', ['id' => $item->id, 'jadwal_id' => $jadwal_sidang->id]) }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('backend.admin.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update', ['id' => $item->id, 'jadwal_id' => (isset($jadwal_sidang->id))? $jadwal_sidang->id : null]) }}" method="POST" enctype="multipart/form-data">
                                 @endif
                                 @csrf
                                     @if(session('auth_login') == 'koordinator_pa')
                                         <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label  font-weight-bold">Periode</label>
-                                        <div class="col-sm-10">
-                                            <select onchange="selectedPeriode(this.value)" class="form-control col-2" style="">
-                                                @foreach ($periodes as $periode)
-                                                    <option value="{{ $periode->semester }}" selected >{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label class="col-sm-2 col-form-label  font-weight-bold">Periode</label>
+                                            <div class="col-sm-10">
+                                                <select onchange="selectedPeriode(this.value)" class="form-control col-2" style="">
+                                                    @foreach ($periodes as $periode)
+                                                        <option value="{{ $periode->semester }}" selected >{{ $periode->tahun_ajaran }} - {{ $periode->semester }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label  font-weight-bold">Bulan</label>
-                                        <div class="col-sm-10">
-                                            <select name="bulan" class="form-control col-2" style="" id="bulan_opsi">
-                                                
-                                            </select>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label  font-weight-bold">Bulan</label>
+                                            <div class="col-sm-10">
+                                                <select name="bulan" class="form-control col-2" style="" id="bulan_opsi">
+                                                    
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="form-group row">
                                         <label class="col-sm-2 col-form-label font-weight-bold">Tanggal</label>
                                             <div class="col-sm-10">
