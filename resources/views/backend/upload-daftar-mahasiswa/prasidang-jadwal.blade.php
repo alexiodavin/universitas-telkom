@@ -195,9 +195,8 @@
                                         <label class="col-sm-2 col-form-label font-weight-bold">Link Zoom / Google
                                             Meet</label>
                                         <div class="col-sm-10">
-                                            @if ((isset($jadwal_prasidang)
-                                                <input))? $jadwal_prasidang)
-                                                <input : '' type="text"
+                                            @if ((isset($jadwal_prasidang)))
+                                                <input type="text"
                                                     class="form-control" @error('ruangan') is-invalid @enderror name="ruangan"
                                                     value="{{ old('judul', (isset($jadwal_prasidang->ruangan_id))? $jadwal_prasidang->ruangan_id : '') == null ? (isset($jadwal_prasidang->ruangan))? $jadwal_prasidang->ruangan : '' : '' }}">
                                             @else
