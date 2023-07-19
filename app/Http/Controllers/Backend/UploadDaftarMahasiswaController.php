@@ -12,6 +12,7 @@ use App\Imports\ImportJadwalSidang;
 use App\Exports\ExportPrasidang;
 use App\Exports\ExportSidang;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 // use DB;
 use Illuminate\Support\Facades\DB;
@@ -101,10 +102,10 @@ class UploadDaftarMahasiswaController extends Controller
             ->orderBy('nama', 'ASC')
             ->get();
 
-        // dd($dosen_prodi);
+        // dd(Periode::whereNull('bulan')->get());
 
         return view('backend.upload-daftar-mahasiswa.proposal-create', [
-            'periodes' => Periode::whereNull('bulan')->get(),
+            'periodes' => Periode::whereNotNull('bulan')->get(),
             'list_tahun_ajaran' => TahunAjaran::where('is_active', 1)->get(),
             'periode_koor' => Periode::find($request->periode_id),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
@@ -150,6 +151,8 @@ class UploadDaftarMahasiswaController extends Controller
             return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.proposal')->with('success', 'Berhasil menambahkan data');
         } catch (\Exception $e) {
             DB::rollback();
+            dd($e);
+
             return redirect()->back()->with('warning', 'Gagal menambah data, silahkan cek kembali file anda');
         }
     }
@@ -261,7 +264,7 @@ class UploadDaftarMahasiswaController extends Controller
             ->get();
 
         return view('backend.upload-daftar-mahasiswa.prasidang-create', [
-            'periodes' => Periode::whereNull('bulan')->get(),
+            'periodes' => Periode::whereNotNull('bulan')->get(),
             'list_tahun_ajaran' => TahunAjaran::where('is_active', 1)->get(),
             'mahasiswas' => Mahasiswa::orderBy('nama', 'ASC')->get(),
             'pembimbing_1' => $dosen_prodi,

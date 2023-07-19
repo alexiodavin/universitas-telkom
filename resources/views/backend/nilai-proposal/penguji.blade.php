@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -182,6 +182,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header">Nilai Rata-Rata Keseluruhan Penguji</div>
+                            <div class="card-body table-responsive">
+                                <div class="row">
+                                    <div class="col-4">
+                                        @php
+                                            $average = '-';
+                                            $grades = [[80, 'A'], [70, 'AB'], [65, 'B'], [60, 'BC'], [50, 'C'], [40, 'D'], [0, 'E']];
+                                            if ($item->nilai_penguji1 && $item->nilai_penguji2) {
+                                                $average = number_format(($item->nilai_penguji1->nilai_akhir + $item->nilai_penguji2->nilai_akhir) / 2, 1);
+                                                foreach ($grades as $grade) {
+                                                    if ($average >= $grade[0]) {
+                                                        $letterGrade = $grade[1];
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        <b>Nilai Proposal (Rata-Rata) : {{ $average }} ({{ $letterGrade ?? '' }})</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @if ($item->nilai_final)
                     <div class="row">
                         <div class="col-12">
@@ -193,7 +220,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-6">
-                                            <b>Nilai Mutu : 
+                                            <b>Nilai Mutu :
                                                 @if ($item->nilai_final->nilai_final >= 80)
                                                     A
                                                 @elseif($item->nilai_final->nilai_final >= 70 && $item->nilai_final->nilai_final < 80)

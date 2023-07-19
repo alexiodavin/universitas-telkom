@@ -44,7 +44,7 @@
                                             @if ($errors->has('tahun_ajaran'))
                                                 <span style="color:red;">{{ $errors->first('tahun_ajaran') }}</span>
                                             @endif
-                                            <select name="semester" class="form-control my-2" required>
+                                            <select name="semester" id="semester" class="form-control my-2" required>
                                                 <option value="">Pilih Semester</option>
                                                 <option value="Ganjil">Ganjil</option>
                                                 <option value="Genap">Genap</option>
@@ -52,7 +52,7 @@
                                             @if ($errors->has('semester'))
                                                 <span style="color:red;">{{ $errors->first('semester') }}</span>
                                             @endif
-                                            <select name="bulan" class="form-control my-2" required>
+                                            <select name="bulan" id="bulan" class="form-control my-2" required disabled>
                                                 <option value="">Pilih Bulan</option>
                                                 <option value="Januari">Januari</option>
                                                 <option value="Februari">Februari</option>
@@ -65,7 +65,7 @@
                                                 <option value="September">September</option>
                                                 <option value="Oktober">Oktober</option>
                                                 <option value="November">November</option>
-                                                <option value="Desembar">Desembar</option>
+                                                <option value="Desember">Desember</option>
                                             </select>
                                             @if ($errors->has('bulan'))
                                                 <span style="color:red;">{{ $errors->first('bulan') }}</span>
@@ -264,6 +264,7 @@
                                 <th style="width: 10px; border-right: 2px solid #dee2e6;">ID</th>
                                 <th style="border-right: 2px solid #dee2e6;">Tahun Ajaran</th>
                                 <th style="border-right: 2px solid #dee2e6;">Semester</th>
+                                <th style="border-right: 2px solid #dee2e6;">Bulan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -272,6 +273,7 @@
                                     <td style="border-right: 2px solid #dee2e6;">{{ $periode->id }}</td>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $periode->tahun_ajaran }}</td>
                                     <td style="border-right: 2px solid #dee2e6;">{{ $periode->semester }}</td>
+                                    <td style="border-right: 2px solid #dee2e6;">{{ $periode->bulan }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -464,5 +466,36 @@
                 }
             })
         }
+    </script>
+
+    {{-- Start select bulan by semester --}}
+    <script>
+        $(document).ready(function() {
+            $('#semester').change(function() {
+                var selectedSemester = $(this).val();
+                if (selectedSemester === 'Ganjil') {
+                    $('#bulan').prop('disabled', false);
+                    $('#bulan option').each(function() {
+                        if ($(this).val() === 'Oktober' || $(this).val() === 'November' || $(this).val() === 'Desember' || $(this).val() === 'Januari' || $(this).val() === 'Februari' || $(this).val() === 'Maret') {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                } else if (selectedSemester === 'Genap') {
+                    $('#bulan').prop('disabled', false);
+                    $('#bulan option').each(function() {
+                        if ($(this).val() === 'April' || $(this).val() === 'Mei' || $(this).val() === 'Juni' || $(this).val() === 'Juli' || $(this).val() === 'Agustus' || $(this).val() === 'September') {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                } else {
+                    $('#bulan').prop('disabled', true);
+                    $('#bulan option').hide();
+                }
+            });
+        });
     </script>
 @endsection

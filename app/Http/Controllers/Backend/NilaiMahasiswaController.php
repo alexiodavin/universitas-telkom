@@ -32,7 +32,8 @@ class NilaiMahasiswaController extends Controller
             $proposal['deadline'] = KomponenProposal::whereProdiId($proposal->mahasiswa->mahasiswa_import->prodi->id)->wherePeriodeId($proposal->periode_id)->first()->tanggal_deadline_input_nilai ?? null;
         }
         return view('backend.nilai-mahasiswa.proposal', [
-            'items' => $items
+            'items' => $items,
+            'auth_dosen_id' => auth()->user()->dosen->id
         ]);
     }
 
@@ -246,7 +247,8 @@ class NilaiMahasiswaController extends Controller
             $prasidang['deadline'] = KomponenPrasidang::whereProdiId($prasidang->mahasiswa->mahasiswa_import->prodi->id)->wherePeriodeId($prasidang->periode_id)->first()->tanggal_deadline_input_nilai ?? null;
         }
         return view('backend.nilai-mahasiswa.prasidang', [
-            'items' => $items
+            'items' => $items,
+            'auth_dosen_id' => auth()->user()->dosen->id
         ]);
     }
 

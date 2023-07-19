@@ -9,6 +9,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
+
 class ImportMahasiswaProposal implements ToCollection
 {
     public function collection(Collection $rows)
@@ -20,6 +21,7 @@ class ImportMahasiswaProposal implements ToCollection
                     if ($check) {
                         $check->delete();
                     }
+                    // dd(Dosen::whereKode($row[4])->first()->id);
                     Proposal::create([
                         'mahasiswa_id' => Mahasiswa::whereNim($row[0])->first()->id,
                         'pembimbing1_id' => Dosen::whereKode($row[4])->first()->id,

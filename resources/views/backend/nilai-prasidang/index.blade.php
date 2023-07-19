@@ -19,19 +19,19 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Nama Mahasiswa</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Nama Mahasiswa</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ auth()->user()->mahasiswa->nama }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">NIM</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">NIM</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ auth()->user()->mahasiswa->nim }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Judul</label>
+                                    <label class="col-sm-2 col-form-label font-weight-bold">Judul</label>
                                     <div class="col-sm-10">
                                         <span class="form-control-plaintext">: {{ $item->judul_indo ?? '-' }}</span>
                                     </div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <span>Penilaian :</span>  
+                <span>Penilaian :</span>
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow">
@@ -58,19 +58,19 @@
                                         <tr>
                                             <td style="text-align: center;">100</td>
                                             <td style="text-align: center;">
-                                                @if($item->nilai_penguji1)
+                                                @if ($item->nilai_penguji1)
                                                     {{ $item->nilai_penguji1->nilai_akhir }}
                                                     {{-- <a class="btn btn-sm btn-primary" href="{{ route('backend.mahasiswa.nilai-prasidang.penguji1') }}"><i class="fas fa-search"></i></a> --}}
                                                 @endif
                                             </td>
                                             <td style="text-align: center;">
-                                                @if($item->nilai_penguji2)
+                                                @if ($item->nilai_penguji2)
                                                     {{ $item->nilai_penguji2->nilai_akhir }}
                                                     {{-- <a class="btn btn-sm btn-primary" href="{{ route('backend.mahasiswa.nilai-prasidang.penguji2') }}"><i class="fas fa-search"></i></a> --}}
                                                 @endif
                                             </td>
                                             <td style="text-align: center;">
-                                                @if($item->nilai_penguji1 && $item->nilai_penguji2)
+                                                @if ($item->nilai_penguji1 && $item->nilai_penguji2)
                                                     <a class="btn btn-sm btn-primary" href="{{ route('backend.mahasiswa.nilai-prasidang.penguji') }}"><i class="fas fa-search"></i></a>
                                                 @endif
                                             </td>
@@ -81,22 +81,39 @@
                         </div>
                     </div>
                 </div>
-                <p><h4><b>Nilai Prasidang (Rata-Rata) : @if($item->nilai_final) {{ $item->nilai_final->nilai_final }} ({{ $item->nilai_final->nilai_mutu }}) @endif</b></h4></p>
+                <p>
+                    @php
+                        $average = '-';
+                        $grades = [[80, 'A'], [70, 'AB'], [65, 'B'], [60, 'BC'], [50, 'C'], [40, 'D'], [0, 'E']];
+                        if ($item->nilai_penguji1 && $item->nilai_penguji2) {
+                            $average = number_format(($item->nilai_penguji1->nilai_akhir + $item->nilai_penguji2->nilai_akhir) / 2, 1);
+                            foreach ($grades as $grade) {
+                                if ($average >= $grade[0]) {
+                                    $letterGrade = $grade[1];
+                                    break;
+                                }
+                            }
+                        }
+                    @endphp
+                <h4>
+                    <b>Nilai Proposal (Rata-Rata) : {{ $average }} ({{ $letterGrade ?? '' }})</b>
+                </h4>
+                </p>
                 <span>Pengesahan Berita Acara :</span><br>
-                @if($item->nilai_penguji1)
+                @if ($item->nilai_penguji1)
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disetujui Oleh Penguji 1 Pada Tanggal {{ date('d/m/Y', strtotime($item->nilai_penguji1->tanggal_penilaian)) }}</span><br>
                 @endif
-                @if($item->nilai_penguji2)
+                @if ($item->nilai_penguji2)
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disetujui Oleh Penguji 2 Pada Tanggal {{ date('d/m/Y', strtotime($item->nilai_penguji2->tanggal_penilaian)) }}</span><br>
                 @endif
                 <br>
-                @if($item->nilai_penguji1)
+                @if ($item->nilai_penguji1)
                     <br>
-                    <a download href="{{ asset('file/'.$item->nilai_penguji1->file) }}" class="btn btn-primary mt-2">Download Dokumen Prasidang Penguji 1</a>
+                    <a download href="{{ asset('file/' . $item->nilai_penguji1->file) }}" class="btn btn-primary mt-2">Download Dokumen Prasidang Penguji 1</a>
                 @endif
-                @if($item->nilai_penguji2)
+                @if ($item->nilai_penguji2)
                     <br>
-                    <a download href="{{ asset('file/'.$item->nilai_penguji2->file) }}" class="btn btn-primary mt-2">Download Dokumen Prasidang Penguji 2</a>
+                    <a download href="{{ asset('file/' . $item->nilai_penguji2->file) }}" class="btn btn-primary mt-2">Download Dokumen Prasidang Penguji 2</a>
                 @endif
                 <hr>
                 <a href="{{ route('backend.mahasiswa.nilai-prasidang.print') }}" class="btn btn-primary print">Print</a>
