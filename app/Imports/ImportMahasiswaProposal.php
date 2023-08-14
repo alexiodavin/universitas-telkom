@@ -21,22 +21,30 @@ class ImportMahasiswaProposal implements ToCollection
                     if ($check) {
                         $check->delete();
                     }
-                    // dd(Dosen::whereKode($row[4])->first()->id);
+                    
+                    $mahasiswa = Mahasiswa::whereNim($row[0])->firstOrFail();
+                    $pembimbing1 = Dosen::whereKode($row[4])->firstOrFail();
+                    $pembimbing2 = Dosen::whereKode($row[5])->firstOrFail();
+                    $penguji1 = Dosen::whereKode($row[6])->firstOrFail();
+                    $penguji2 = Dosen::whereKode($row[7])->firstOrFail();
+                    $periode = \App\Models\Periode::findOrFail($row[8]);
+    
                     Proposal::create([
-                        'mahasiswa_id' => Mahasiswa::whereNim($row[0])->first()->id,
-                        'pembimbing1_id' => Dosen::whereKode($row[4])->first()->id,
-                        'pembimbing2_id' => Dosen::whereKode($row[5])->first()->id,
-                        'penguji1_id' => Dosen::whereKode($row[6])->first()->id,
-                        'penguji2_id' => Dosen::whereKode($row[7])->first()->id,
-                        'periode_id' => $row[8],
+                        'mahasiswa_id' => $mahasiswa->id,
+                        'pembimbing1_id' => $pembimbing1->id,
+                        'pembimbing2_id' => $pembimbing2->id,
+                        'penguji1_id' => $penguji1->id,
+                        'penguji2_id' => $penguji2->id,
+                        'periode_id' => $periode->id,
                         'judul_indo' => $row[2],
                         'judul_inggris' => $row[3],
-                        'tahun_ajaran' => \App\Models\Periode::find($row[8])->tahun_ajaran,
-                        'semester' => \App\Models\Periode::find($row[8])->semester,
+                        'tahun_ajaran' => $periode->tahun_ajaran,
+                        'semester' => $periode->semester,
                         'jumlah_penguji' => 2,
                     ]);
                 }
             }
         }
     }
+    
 }

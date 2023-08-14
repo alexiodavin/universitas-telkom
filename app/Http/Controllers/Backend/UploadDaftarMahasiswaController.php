@@ -151,8 +151,6 @@ class UploadDaftarMahasiswaController extends Controller
             return redirect()->route('backend.koordinator-pa.upload-daftar-mahasiswa.proposal')->with('success', 'Berhasil menambahkan data');
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
-
             return redirect()->back()->with('warning', 'Gagal menambah data, silahkan cek kembali file anda');
         }
     }

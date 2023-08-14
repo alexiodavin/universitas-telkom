@@ -476,7 +476,7 @@
                 if (selectedSemester === 'Ganjil') {
                     $('#bulan').prop('disabled', false);
                     $('#bulan option').each(function() {
-                        if ($(this).val() === 'Oktober' || $(this).val() === 'November' || $(this).val() === 'Desember' || $(this).val() === 'Januari' || $(this).val() === 'Februari' || $(this).val() === 'Maret') {
+                        if ($(this).val() === 'Desember' || $(this).val() === 'Januari' || $(this).val() === 'Maret') {
                             $(this).show();
                         } else {
                             $(this).hide();
@@ -485,7 +485,7 @@
                 } else if (selectedSemester === 'Genap') {
                     $('#bulan').prop('disabled', false);
                     $('#bulan option').each(function() {
-                        if ($(this).val() === 'April' || $(this).val() === 'Mei' || $(this).val() === 'Juni' || $(this).val() === 'Juli' || $(this).val() === 'Agustus' || $(this).val() === 'September') {
+                        if ($(this).val() === 'Februari' || $(this).val() === 'Mei' || $(this).val() === 'Juni' || $(this).val() === 'Juli' || $(this).val() === 'Agustus') {
                             $(this).show();
                         } else {
                             $(this).hide();
