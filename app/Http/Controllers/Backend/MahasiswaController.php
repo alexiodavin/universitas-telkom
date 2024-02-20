@@ -74,9 +74,16 @@ class MahasiswaController extends Controller
         $data = [
             'periode_id' => $periode->id,
             'prodi_id' => $request->prodi_id,
-            'tahun_ajaran' => "$request->tahun_ajaran",
+            'tahun_ajaran' => $request->tahun_ajaran,
             'semester' => $request->semester,
         ];
+            $existingData = MahasiswaImport::where('prodi_id', $request->prodi_id)
+            ->where('tahun_ajaran', $request->tahun_ajaran)
+            ->where('semester', $request->semester)
+            ->exists();
+            if ($existingData) {
+                return redirect()->back()->with('warning', 'Data mahasiswa untuk prodi, periode, dan semester yang sama sudah ada dalam database.');
+            }
 
         DB::beginTransaction();
         try {
@@ -85,7 +92,7 @@ class MahasiswaController extends Controller
             DB::commit();
             return redirect()->route('backend.admin.mahasiswa')->with('success', 'Berhasil menambahkan data');
         } catch (\Exception $e) {
-            DB::rollback();
+             DB::rollback();
             return redirect()->back()->with('warning', 'Gagal menambah data, silahkan cek kembali file anda');
         }
     }

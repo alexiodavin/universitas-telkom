@@ -563,6 +563,7 @@ CREATE TABLE `mahasiswa` (
   `alamat` text DEFAULT NULL,
   `foto` longtext DEFAULT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `madusem` BOOLEAN DEFAULT false,
   `semester` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -690,7 +691,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2022_04_22_195731_create_nilai_sidang_final_table', 1),
 (42, '2022_04_23_113708_create_jadwal_prasidang_table', 1),
 (43, '2022_08_13_184141_create_histori_judul_proposals_table', 1),
-(44, '2022_08_13_184514_create_histori_judul_prasidangs_table', 1);
+(44, '2022_08_13_184514_create_histori_judul_prasidangs_table', 1),
+(45, '2022_08_13_184515_create_nilai_madusem', 1),
+(46, '2022_08_13_184516_create_komponen_madusem', 1),
+(47, '2022_08_13_184517_create_komponen_madusem_pivot', 1);
 
 -- --------------------------------------------------------
 
@@ -739,6 +743,8 @@ INSERT INTO `nilai_mutu` (`id`, `periode_id`, `index`, `nilai_min`, `nilai_maks`
 (22, 12, 'E', 0, 40, '2022-2023', 'Genap', '2023-06-13 04:38:41', '2023-06-13 04:38:41', NULL);
 
 -- --------------------------------------------------------
+
+
 
 --
 -- Table structure for table `nilai_prasidang`
@@ -2213,6 +2219,55 @@ ALTER TABLE `users`
   ADD CONSTRAINT `users_prodi_id_foreign` FOREIGN KEY (`prodi_id`) REFERENCES `prodi` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE;
 COMMIT;
+
+CREATE TABLE madusem (
+    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    mahasiswa_id bigint(20) UNSIGNED,
+    pbb_1_id bigint(20) UNSIGNED,
+    pbb_2_id bigint(20) UNSIGNED,
+    puj_1_id bigint(20) UNSIGNED,
+    puj_2_id bigint(20) UNSIGNED,
+    tanggal_selesai DATE,
+    keterangan TEXT,
+    file_revisi VARCHAR(255),
+    created_at timestamp NULL DEFAULT NULL,
+    updated_at timestamp NULL DEFAULT NULL,
+    deleted_at timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    INDEX (mahasiswa_id),
+    INDEX (pbb_1_id),
+    INDEX (pbb_2_id),
+    INDEX (puj_1_id),
+    INDEX (puj_2_id),
+    FOREIGN KEY (mahasiswa_id) REFERENCES mahasiswa(id) ON DELETE CASCADE,
+    FOREIGN KEY (pbb_1_id) REFERENCES dosen(id) ON DELETE CASCADE,
+    FOREIGN KEY (pbb_2_id) REFERENCES dosen(id) ON DELETE CASCADE,
+    FOREIGN KEY (puj_1_id) REFERENCES dosen(id) ON DELETE CASCADE,
+    FOREIGN KEY (puj_2_id) REFERENCES dosen(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE komponen_madusem (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama_komponen VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL,
+    presentase INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    UNIQUE KEY (slug) -- Tambahkan constraint UNIQUE pada kolom slug
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE komponen_madusem_pivot (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    madusem_id bigint(20) UNSIGNED,
+    komponen_madusem_id INT,
+    nilai_komponen INT NULL DEFAULT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    FOREIGN KEY (madusem_id) REFERENCES madusem(id) ON DELETE CASCADE,
+    FOREIGN KEY (komponen_madusem_id) REFERENCES komponen_madusem(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

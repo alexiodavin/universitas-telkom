@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Sidang;
-use App\Models\Proposal;
+use Exception;
+use App\Models\Dosen;
 
+use App\Models\Sidang;
+use App\Models\Madusem;
+use App\Models\Proposal;
 use App\Models\Prasidang;
 use Illuminate\Http\Request;
+use App\Models\NilaiProposal;
 use App\Models\KomponenSidang;
+use App\Models\KomponenMadusem;
 use App\Models\KomponenProposal;
 use App\Models\NilaiSidangFinal;
 use App\Models\KomponenPrasidang;
 use App\Models\NilaiProposalFinal;
 use Illuminate\Support\Facades\DB;
 use App\Models\NilaiPrasidangFinal;
+use Facade\FlareClient\Http\Client;
 use App\Http\Controllers\Controller;
-use App\Models\NilaiProposal;
+use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\Calculation\Web\Service;
 
 class DaftarMahasiswaController extends Controller
 {
@@ -192,4 +199,70 @@ class DaftarMahasiswaController extends Controller
             'items' => $items
         ]);
     }
+
+
+    public function madusem($madusemId)
+    {
+        // Mengambil ID dosen yang sedang login
+        $dosenId = Auth::id();
+    
+        // Mengambil data madusem berdasarkan pbb_1_id atau pbb_2_id yang sama dengan ID dosen
+        $madusem = Madusem::where('pbb_1_id', $dosenId)
+                        ->orWhere('pbb_2_id', $dosenId)
+                        ->get();
+    
+        // Mengambil data detail madusem jika $madusemId tersedia
+        $madusemDetails = [];
+        if ($madusemId) {
+            $madusemDetails = Madusem::all();
+        }
+        // Mengambil daftar komponen nilai
+        $komponenNilai = KomponenMadusem::all();
+        $previewLink = 'URL_PREVIEW_DOCUMENT';
+    
+        return view('backend.daftar-mahasiswa.madusem', compact('komponenNilai', 'madusem', 'madusemDetails', 'previewLink'));
+    }
+
+    public function print($madusemId)
+    {
+        // Mengambil ID dosen yang sedang login
+        $dosenId = Auth::id();
+    
+        // Mengambil data madusem berdasarkan pbb_1_id atau pbb_2_id yang sama dengan ID dosen
+        $madusem = Madusem::where('pbb_1_id', $dosenId)
+                        ->orWhere('pbb_2_id', $dosenId)
+                        ->get();
+    
+        // Mengambil data detail madusem jika $madusemId tersedia
+ 
+           $madusemDetails = [];
+        if ($madusemId) {
+            $madusemDetails = Madusem::findOrFail($madusemId);
+            // Jika ingin mengambil mahasiswa terkait dengan madusem tertentu
+            $mahasiswa = $madusemDetails->mahasiswa; // Asumsi bahwa ada relasi antara Madusem dan Mahasiswa
+        }
+        // Mengambil daftar komponen nilai
+        $komponenNilai = KomponenMadusem::all();
+    
+        return view('backend.daftar-mahasiswa.print-madusem', compact('komponenNilai', 'madusem', 'madusemDetails', 'mahasiswa'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'madusem_id' => 'required|exists:madusem,id',
+            'keterangan' => 'nullable|string',
+            'tanggal_selesai' => 'required|date',
+        ]);
+
+        $madusem = Madusem::findOrFail($request->madusem_id);
+
+        $madusem->update([
+            'keterangan' => $request->keterangan,
+            'tanggal_selesai' => $request->tanggal_selesai,
+        ]);
+        return redirect()->back()->with('success', 'Catatan revisi berhasil ditambahkan.');
+    }
+    
+    
 }

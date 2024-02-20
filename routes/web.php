@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MadusemController;
+use App\Http\Controllers\Backend\DaftarMahasiswaController;
 
 Auth::routes([
     'register' => false,
@@ -145,90 +147,6 @@ Route::group(['middleware' => ['auth:web']], function () {
                 Route::post('mahasiswa', [\App\Http\Controllers\Backend\ViewNilaiAdminController::class, 'index'])->name('backend.admin.nilai');
             });
 
-            Route::prefix('upload-daftar-mahasiswa')->group(function () {
-                Route::prefix('prasidang')->group(function () {
-                    Route::get('input-jadwal-prasidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'inputJadwalPrasidangPrasidang'])->name('backend.admin.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang');
-                    Route::post('input-jadwal-prasidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'UpdateInputJadwalPrasidangPrasidang'])->name('backend.admin.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang.update');
-                });
-
-                Route::prefix('sidang')->group(function () {
-                    Route::get('input-jadwal-sidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'inputJadwalSidangSidang'])->name('backend.admin.upload-daftar-mahasiswa.sidang.input-jadwal-sidang');
-                    Route::post('input-jadwal-sidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'UpdateInputJadwalSidangSidang'])->name('backend.admin.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update');
-                });
-            });
-        });
-    });
-
-    Route::group(['middleware' => ['auth.mahasiswa']], function () {
-        Route::prefix('mahasiswa')->group(function () {
-            Route::prefix('nilai-proposal')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'index'])->name('backend.mahasiswa.nilai-proposal');
-                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji1'])->name('backend.mahasiswa.nilai-proposal.penguji1');
-                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji2'])->name('backend.mahasiswa.nilai-proposal.penguji2');
-                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji'])->name('backend.mahasiswa.nilai-proposal.penguji');
-                Route::get('print', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'print'])->name('backend.mahasiswa.nilai-proposal.print');
-            });
-            Route::prefix('nilai-prasidang')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'index'])->name('backend.mahasiswa.nilai-prasidang');
-                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji'])->name('backend.mahasiswa.nilai-prasidang.penguji');
-                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji1'])->name('backend.mahasiswa.nilai-prasidang.penguji1');
-                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji2'])->name('backend.mahasiswa.nilai-prasidang.penguji2');
-                Route::get('print', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'print'])->name('backend.mahasiswa.nilai-prasidang.print');
-            });
-            Route::prefix('nilai-sidang')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'index'])->name('backend.mahasiswa.nilai-sidang');
-                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji'])->name('backend.mahasiswa.nilai-sidang.penguji');
-                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji1'])->name('backend.mahasiswa.nilai-sidang.penguji1');
-                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji2'])->name('backend.mahasiswa.nilai-sidang.penguji2');
-            });
-            Route::prefix('jadwal-prasidang')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\JadwalPrasidangController::class, 'index'])->name('backend.mahasiswa.jadwal-prasidang');
-            });
-            Route::prefix('jadwal-sidang')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\JadwalSidangController::class, 'index'])->name('backend.mahasiswa.jadwal-sidang');
-            });
-            Route::prefix('ta')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\TAController::class, 'index'])->name('backend.mahasiswa.ta');
-                Route::post('update', [\App\Http\Controllers\Backend\TAController::class, 'update'])->name('backend.mahasiswa.ta.update');
-            });
-            Route::prefix('histori-ta')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\TAController::class, 'histori'])->name('backend.mahasiswa.histori-ta');
-            });
-        });
-    });
-
-    Route::group(['middleware' => ['auth.dosen']], function () {
-        Route::prefix('dosen')->group(function () {
-            Route::prefix('daftar-mahasiswa')->group(function () {
-                Route::get('/', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'index'])->name('backend.dosen.daftar-mahasiswa');
-                Route::get('bimbingan', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'bimbingan'])->name('backend.dosen.daftar-mahasiswa.bimbingan');
-                Route::get('sidang', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'sidang'])->name('backend.dosen.daftar-mahasiswa.sidang');
-            });
-
-            Route::prefix('nilai-mahasiswa')->group(function () {
-                Route::prefix('proposal')->group(function () {
-                    Route::get('/', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'proposal'])->name('backend.dosen.nilai-mahasiswa.proposal');
-                    Route::get('/{id}/editDetail', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit-detail');
-                    Route::get('/{id}/edit', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit');
-
-                    Route::post('/{id}/update-detail-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-detail-nilai');
-
-                    Route::post('/{id}/update-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-nilai');
-
-                    Route::post('/{id}/update', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update');
-                    Route::get('/{id}/set-nilai-akhir', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'setNilaiAkhirProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.set-nilai-akhir');
-                });
-
-                Route::prefix('prasidang')->group(function () {
-                    Route::get('/', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'prasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang');
-                    Route::get('/{id}/edit', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.edit');
-                    Route::post('/{id}/update-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateNilaiPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.update-nilai');
-                    Route::post('/{id}/update', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updatePrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.update');
-                    Route::get('/{id}/set-nilai-akhir', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'setNilaiAkhirPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.set-nilai-akhir');
-                });
-            });
-        });
-
         Route::prefix('koordinator-pa')->group(function () {
             Route::prefix('komponen-nilai')->group(function () {
                 Route::prefix('proposal')->group(function () {
@@ -242,6 +160,8 @@ Route::group(['middleware' => ['auth:web']], function () {
                     Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload');
                     Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload.store');
                     Route::get('delete/{id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'deleteProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.delete');
+
+
                 });
 
                 Route::prefix('prasidang')->group(function () {
@@ -268,6 +188,23 @@ Route::group(['middleware' => ['auth:web']], function () {
                     Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload');
                     Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload.store');
                     Route::get('delete/{id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'deleteSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.delete');
+                });
+
+                Route::prefix('madusem')->group(function() {
+                    Route::get('/', [MadusemController::class, 'inputNilaiForm'])->name('backend.koordinator-pa.komponen-nilai.input-nilai-form');
+                    Route::get('/detail-mahasiswa/{id}', [MadusemController::class, 'detail'])->name('backend.koordinator-pa.komponen-nilai.input-nilai-form.detail');
+                    Route::get('/detail/{id}', [MadusemController::class, 'inputNilaiDetail'])->name('backend.input-nilai.detail');
+                    Route::get('/input', [MadusemController::class, 'inputNilai'])->name('backend.koordinator-pa.komponen-nilai.input-nilai');
+                    Route::put('/backend/koordinator-pa/komponen-nilai/{id}/update-madusem', [MadusemController::class, 'updateMadusem'])
+                    ->name('backend.koordinator-pa.komponen-nilai.update-madusem');                    
+                    Route::post('/add', [MadusemController::class, 'addKomponenNilai'])->name('backend.koordinator-pa.komponen-nilai.madusem.add');
+                    Route::get('delete/{id}', [MadusemController::class, 'deleteMadusem'])->name('backend.koordinator-pa.komponen-nilai.madusem.delete');
+                    Route::post('/komponen-nilai/upload-excel', [MadusemController::class, 'uploadExcel'])->name('backend.koordinator-pa.komponen-nilai.upload-excel');
+                    Route::get('/komponen-nilai/download-excel', [MadusemController::class, 'downloadExcel'])->name('backend.koordinator-pa.komponen-nilai.download-excel');
+                    Route::get('print/{mahasiswa_id}', [MadusemController::class, 'print'])->name('backend.koordinator-pa.nilai-madusem.print');
+                    Route::post('/input-nilai/store', [MadusemController::class, 'store'])->name('backend.input-nilai.store');
+                    Route::put('/input-nilai/update/{id}', [MadusemController::class, 'update'])->name('backend.input-nilai.update');
+                    Route::resource('/madusem', MadusemController::class);
                 });
             });
 
@@ -359,6 +296,242 @@ Route::group(['middleware' => ['auth:web']], function () {
                 Route::get('download', [\App\Http\Controllers\Backend\ViewNilaiSidangController::class, 'download'])->name('backend.koordinator-pa.view-nilai-sidang.download');
             });
         });
+
+
+        });
+    });
+
+    Route::group(['middleware' => ['auth.mahasiswa']], function () {
+        Route::prefix('mahasiswa')->group(function () {
+            Route::prefix('nilai-proposal')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'index'])->name('backend.mahasiswa.nilai-proposal');
+                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji1'])->name('backend.mahasiswa.nilai-proposal.penguji1');
+                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji2'])->name('backend.mahasiswa.nilai-proposal.penguji2');
+                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'penguji'])->name('backend.mahasiswa.nilai-proposal.penguji');
+                Route::get('print', [\App\Http\Controllers\Backend\NilaiProposalController::class, 'print'])->name('backend.mahasiswa.nilai-proposal.print');
+            });
+            Route::prefix('nilai-prasidang')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'index'])->name('backend.mahasiswa.nilai-prasidang');
+                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji'])->name('backend.mahasiswa.nilai-prasidang.penguji');
+                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji1'])->name('backend.mahasiswa.nilai-prasidang.penguji1');
+                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'penguji2'])->name('backend.mahasiswa.nilai-prasidang.penguji2');
+                Route::get('print', [\App\Http\Controllers\Backend\NilaiPrasidangController::class, 'print'])->name('backend.mahasiswa.nilai-prasidang.print');
+            });
+            Route::prefix('nilai-sidang')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'index'])->name('backend.mahasiswa.nilai-sidang');
+                Route::get('penguji', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji'])->name('backend.mahasiswa.nilai-sidang.penguji');
+                Route::get('penguji1', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji1'])->name('backend.mahasiswa.nilai-sidang.penguji1');
+                Route::get('penguji2', [\App\Http\Controllers\Backend\NilaiSidangController::class, 'penguji2'])->name('backend.mahasiswa.nilai-sidang.penguji2');
+            });
+
+            Route::prefix('nilai-madusem')->group(function () {
+                Route::get('/', [MadusemController::class, 'nilaiMadusem'])->name('backend.mahasiswa.nilai-madusem');
+                Route::post('/madusem/upload-revisi', [MadusemController::class, 'uploadRevisi'])->name('backend.dosen.daftar-mahasiswa.madusem.upload-revisi');
+
+            });
+            
+            Route::prefix('jadwal-prasidang')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\JadwalPrasidangController::class, 'index'])->name('backend.mahasiswa.jadwal-prasidang');
+            });
+            Route::prefix('jadwal-sidang')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\JadwalSidangController::class, 'index'])->name('backend.mahasiswa.jadwal-sidang');
+            });
+            Route::prefix('ta')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\TAController::class, 'index'])->name('backend.mahasiswa.ta');
+                Route::post('update', [\App\Http\Controllers\Backend\TAController::class, 'update'])->name('backend.mahasiswa.ta.update');
+            });
+            Route::prefix('histori-ta')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\TAController::class, 'histori'])->name('backend.mahasiswa.histori-ta');
+            });
+        });
+    });
+
+    Route::group(['middleware' => ['auth.dosen']], function () {
+        Route::prefix('dosen')->group(function () {
+            Route::prefix('daftar-mahasiswa')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'index'])->name('backend.dosen.daftar-mahasiswa');
+                Route::get('madusem/{madusemId}', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'madusem'])->name('backend.dosen.daftar-mahasiswa.madusem');
+                Route::post('/madusem', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'store'])->name('backend.dosen.daftar-mahasiswa.madusem.store');
+                Route::get('madusem/{madusemId}/print', [DaftarMahasiswaController::class, 'print'])->name('backend.dosen.daftar-mahasiswa.madusem.print');
+                Route::get('bimbingan', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'bimbingan'])->name('backend.dosen.daftar-mahasiswa.bimbingan');
+                Route::get('sidang', [\App\Http\Controllers\Backend\DaftarMahasiswaController::class, 'sidang'])->name('backend.dosen.daftar-mahasiswa.sidang');
+            });
+
+            Route::prefix('nilai-mahasiswa')->group(function () {
+                Route::prefix('proposal')->group(function () {
+                    Route::get('/', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'proposal'])->name('backend.dosen.nilai-mahasiswa.proposal');
+                    Route::get('/{id}/editDetail', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit-detail');
+                    Route::get('/{id}/edit', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.edit');
+
+                    Route::post('/{id}/update-detail-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateDetailNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-detail-nilai');
+
+                    Route::post('/{id}/update-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateNilaiProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update-nilai');
+
+                    Route::post('/{id}/update', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.update');
+                    Route::get('/{id}/set-nilai-akhir', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'setNilaiAkhirProposal'])->name('backend.dosen.nilai-mahasiswa.proposal.set-nilai-akhir');
+                });
+
+                Route::prefix('prasidang')->group(function () {
+                    Route::get('/', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'prasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang');
+                    Route::get('/{id}/edit', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'editPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.edit');
+                    Route::post('/{id}/update-nilai', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updateNilaiPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.update-nilai');
+                    Route::post('/{id}/update', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'updatePrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.update');
+                    Route::get('/{id}/set-nilai-akhir', [\App\Http\Controllers\Backend\NilaiMahasiswaController::class, 'setNilaiAkhirPrasidang'])->name('backend.dosen.nilai-mahasiswa.prasidang.set-nilai-akhir');
+                });
+            });
+        });
+        // Route::prefix('koordinator-pa')->group(function () {
+        //     Route::prefix('komponen-nilai')->group(function () {
+        //         Route::prefix('proposal')->group(function () {
+        //             Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'proposal'])->name('backend.koordinator-pa.komponen-nilai.proposal');
+        //             Route::get('list', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'proposal'])->name('backend.koordinator-pa.komponen-nilai.proposal');
+        //             Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlineProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.update-deadline');
+        //             Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.store');
+        //             Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.edit');
+        //             Route::get('edit', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.edit');
+        //             Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.update');
+        //             Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload');
+        //             Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.upload.store');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'deleteProposal'])->name('backend.koordinator-pa.komponen-nilai.proposal.delete');
+
+
+        //         });
+
+        //         Route::prefix('prasidang')->group(function () {
+        //             Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'prasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang');
+        //             Route::get('list/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'prasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang');
+        //             Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlinePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.update-deadline');
+        //             Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.store');
+        //             Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.edit');
+        //             Route::get('edit/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.edit');
+        //             Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updatePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.update');
+        //             Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.upload');
+        //             Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadPrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.upload.store');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'deletePrasidang'])->name('backend.koordinator-pa.komponen-nilai.prasidang.delete');
+        //         });
+
+        //         Route::prefix('sidang')->group(function () {
+        //             Route::get('list/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'sidang'])->name('backend.koordinator-pa.komponen-nilai.sidang');
+        //             Route::get('list/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'sidang'])->name('backend.koordinator-pa.komponen-nilai.sidang');
+        //             Route::post('update-deadline', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateDeadlineSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.update-deadline');
+        //             Route::post('store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.store');
+        //             Route::get('edit/{periode_id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.edit');
+        //             Route::get('edit/', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'editSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.edit');
+        //             Route::post('update', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'updateSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.update');
+        //             Route::get('upload', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'uploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload');
+        //             Route::post('upload/store', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'storeUploadSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.upload.store');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\KomponenNilaiController::class, 'deleteSidang'])->name('backend.koordinator-pa.komponen-nilai.sidang.delete');
+        //         });
+
+        //         Route::prefix('madusem')->group(function() {
+        //             Route::get('/', [MadusemController::class, 'inputNilaiForm'])->name('backend.koordinator-pa.komponen-nilai.input-nilai-form');
+        //             Route::get('/detail-mahasiswa/{id}', [MadusemController::class, 'detail'])->name('backend.koordinator-pa.komponen-nilai.input-nilai-form.detail');
+        //             Route::get('/detail/{id}', [MadusemController::class, 'inputNilaiDetail'])->name('backend.input-nilai.detail');
+        //             Route::get('/input', [MadusemController::class, 'inputNilai'])->name('backend.koordinator-pa.komponen-nilai.input-nilai');
+        //             Route::post('/update-madusem/{id}', [YourController::class, 'updateMadusem']);
+        //             Route::post('/add', [MadusemController::class, 'addKomponenNilai'])->name('backend.koordinator-pa.komponen-nilai.madusem.add');
+        //             Route::get('delete/{id}', [MadusemController::class, 'deleteMadusem'])->name('backend.koordinator-pa.komponen-nilai.madusem.delete');
+        //             Route::post('/komponen-nilai/upload-excel', [MadusemController::class, 'uploadExcel'])->name('backend.koordinator-pa.komponen-nilai.upload-excel');
+        //             // Route::get('/komponen-nilai/download-excel', [MadusemController::class, 'downloadExcel'])
+        //             //         ->name('backend.koordinator-pa.komponen-nilai.download-excel');
+        //             // Route::post('/import-madusem', [YourController::class, 'importMadusem']);
+        //             Route::post('/input-nilai/store', [MadusemController::class, 'store'])->name('backend.input-nilai.store');
+        //             Route::put('/input-nilai/update/{id}', [MadusemController::class, 'update'])->name('backend.input-nilai.update');
+
+
+
+
+        //         });
+        //     });
+
+
+        //     Route::prefix('upload-daftar-mahasiswa')->group(function () {
+        //         Route::prefix('proposal')->group(function () {
+        //             Route::get('/', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'proposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal');
+        //             Route::get('create', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'createProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.create');
+        //             Route::post('create', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'createProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.create');
+        //             Route::post('store', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'storeProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.store');
+        //             Route::post('upload', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'uploadProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.upload');
+        //             Route::get('edit/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'editProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.edit');
+        //             Route::post('update/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'updateProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.update');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'deleteProposal'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.proposal.delete');
+        //         });
+
+        //         Route::prefix('prasidang')->group(function () {
+        //             Route::get('/', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'prasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang');
+        //             Route::post('/', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'prasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang');
+        //             Route::get('create', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'createPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.create');
+        //             Route::post('store', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'storePrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.store');
+        //             Route::post('upload', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'uploadPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.upload');
+        //             Route::get('edit/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'editPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.edit');
+        //             Route::post('update/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'updatePrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.update');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'deletePrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.delete');
+        //             Route::get('input-jadwal-prasidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'inputJadwalPrasidangPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang');
+        //             Route::post('input-jadwal-prasidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'UpdateInputJadwalPrasidangPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.input-jadwal-prasidang.update');
+        //             Route::get('upload-jadwal', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'uploadJadwalPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.upload-jadwal');
+        //             Route::post('upload-jadwal', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'storeUploadJadwalPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.upload-jadwal.store');
+        //             Route::get('download', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'downloadPrasidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang.download');
+        //         });
+
+        //         Route::prefix('sidang')->group(function () {
+        //             Route::get('/', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'sidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang');
+        //             Route::get('create', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'createSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.create');
+        //             Route::post('create', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'createSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.create');
+        //             Route::post('store', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'storeSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.store');
+        //             Route::post('upload', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'uploadSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.upload');
+        //             Route::get('edit/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'editSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.edit');
+        //             Route::post('update/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'updateSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.update');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'deleteSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.delete');
+        //             Route::get('input-jadwal-sidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'inputJadwalSidangSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.input-jadwal-sidang');
+        //             Route::post('input-jadwal-sidang/{id}', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'UpdateInputJadwalSidangSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.input-jadwal-sidang.update');
+        //             Route::get('upload-jadwal', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'uploadJadwalSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.upload-jadwal');
+        //             Route::post('upload-jadwal', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'storeUploadJadwalSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.upload-jadwal.store');
+        //             Route::get('download', [\App\Http\Controllers\Backend\UploadDaftarMahasiswaController::class, 'downloadSidang'])->name('backend.koordinator-pa.upload-daftar-mahasiswa.sidang.download');
+        //         });
+        //     });
+
+        //     Route::prefix('jadwal')->group(function () {
+        //         Route::prefix('prasidang')->group(function () {
+        //             Route::get('/', [\App\Http\Controllers\Backend\JadwalController::class, 'prasidang'])->name('backend.koordinator-pa.jadwal.prasidang');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\JadwalController::class, 'deletePrasidang'])->name('backend.koordinator-pa.jadwal.prasidang.delete');
+        //         });
+        //         Route::prefix('sidang')->group(function () {
+        //             Route::get('/', [\App\Http\Controllers\Backend\JadwalController::class, 'sidang'])->name('backend.koordinator-pa.jadwal.sidang');
+        //             Route::get('delete/{id}', [\App\Http\Controllers\Backend\JadwalController::class, 'deleteSidang'])->name('backend.koordinator-pa.jadwal.sidang.delete');
+        //         });
+        //     });
+
+        //     Route::get('view-jadwal-prasidang', [\App\Http\Controllers\Backend\ViewJadwalPrasidangController::class, 'index'])->name('backend.koordinator-pa.view-jadwal-prasidang');
+        //     Route::get('view-jadwal-prasidang/edit/{id}', [\App\Http\Controllers\Backend\ViewJadwalPrasidangController::class, 'edit'])->name('backend.koordinator-pa.view-jadwal-prasidang.edit');
+        //     Route::post('view-jadwal-prasidang/update/{id}', [\App\Http\Controllers\Backend\ViewJadwalPrasidangController::class, 'update'])->name('backend.koordinator-pa.view-jadwal-prasidang.update');
+        //     Route::get('view-jadwal-prasidang/delete/{id}', [\App\Http\Controllers\Backend\ViewJadwalPrasidangController::class, 'delete'])->name('backend.koordinator-pa.view-jadwal-prasidang.delete');
+
+        //     Route::get('view-jadwal-sidang', [\App\Http\Controllers\Backend\ViewJadwalSidangController::class, 'index'])->name('backend.koordinator-pa.view-jadwal-sidang');
+        //     Route::get('view-jadwal-sidang/edit/{id}', [\App\Http\Controllers\Backend\ViewJadwalSidangController::class, 'edit'])->name('backend.koordinator-pa.view-jadwal-sidang.edit');
+        //     Route::post('view-jadwal-sidang/update/{id}', [\App\Http\Controllers\Backend\ViewJadwalSidangController::class, 'update'])->name('backend.koordinator-pa.view-jadwal-sidang.update');
+        //     Route::get('view-jadwal-sidang/delete/{id}', [\App\Http\Controllers\Backend\ViewJadwalSidangController::class, 'delete'])->name('backend.koordinator-pa.view-jadwal-sidang.delete');
+
+        //     Route::get('view-progress-mahasiswa', [\App\Http\Controllers\Backend\ViewProgressMahasiswaController::class, 'index'])->name('backend.koordinator-pa.view-progress-mahasiswa');
+        //     Route::get('view-tidak-lulus-sidang', [\App\Http\Controllers\Backend\ViewTidakLulusSidangController::class, 'index'])->name('backend.koordinator-pa.view-tidak-lulus-sidang');
+
+        //     Route::prefix('view-nilai-proposal')->group(function () {
+        //         Route::get('/', [\App\Http\Controllers\Backend\ViewNilaiProposalController::class, 'index'])->name('backend.koordinator-pa.view-nilai-proposal');
+        //         Route::post('/', [\App\Http\Controllers\Backend\ViewNilaiProposalController::class, 'index'])->name('backend.koordinator-pa.view-nilai-proposal');
+        //         Route::get('download', [\App\Http\Controllers\Backend\ViewNilaiProposalController::class, 'download'])->name('backend.koordinator-pa.view-nilai-proposal.download');
+        //     });
+
+        //     Route::prefix('view-nilai-prasidang')->group(function () {
+        //         Route::get('/', [\App\Http\Controllers\Backend\ViewNilaiPrasidangController::class, 'index'])->name('backend.koordinator-pa.view-nilai-prasidang');
+        //         Route::post('/', [\App\Http\Controllers\Backend\ViewNilaiPrasidangController::class, 'index'])->name('backend.koordinator-pa.view-nilai-prasidang');
+        //         Route::get('download', [\App\Http\Controllers\Backend\ViewNilaiPrasidangController::class, 'download'])->name('backend.koordinator-pa.view-nilai-prasidang.download');
+        //     });
+
+        //     Route::prefix('view-nilai-sidang')->group(function () {
+        //         Route::get('/', [\App\Http\Controllers\Backend\ViewNilaiSidangController::class, 'index'])->name('backend.koordinator-pa.view-nilai-sidang');
+        //         Route::post('/', [\App\Http\Controllers\Backend\ViewNilaiSidangController::class, 'index'])->name('backend.koordinator-pa.view-nilai-sidang');
+        //         Route::get('download', [\App\Http\Controllers\Backend\ViewNilaiSidangController::class, 'download'])->name('backend.koordinator-pa.view-nilai-sidang.download');
+        //     });
+        // });
 
         Route::prefix('kaprodi')->group(function () {
             Route::prefix('data-mahasiswa')->group(function () {

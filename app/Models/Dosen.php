@@ -55,4 +55,10 @@ class Dosen extends Model
     {
         return $this->belongsTo('App\Models\DosenImport', 'dosen_import_id')->withTrashed();
     }
+
+    public function madusems()
+    {
+        return $this->hasMany(Madusem::class);
+    }
+
 }

@@ -5,36 +5,38 @@
             {{-- <img src="{{ auth()->user()->foto ? asset('photo/user/'.auth()->user()->foto) : asset('photo/user.png') }}" class="" alt="User Image" style="width:50%;">
                 <br>
                 <br> --}}
-            <span style="color :white;">
-                @if (auth()->user()->dosen)
-                    {{ auth()->user()->dosen->nama }}<br>
-                    {{ auth()->user()->dosen->nip }}<br>
-                    @if (session('auth_login') == 'dosen')
-                        @if (session('role_dosen') == null)
-                            {{ LIST_STRING_ROLE[auth()->user()->role->id] }}
-                        @elseif(session('role_dosen') == 'pembimbing')
-                            DOSEN PEMBIMBING
-                        @elseif(session('role_dosen') == 'penguji')
-                            DOSEN PENGUJI
-                        @elseif(session('role_dosen') == 'wali')
-                            DOSEN WALI
+                <span style="color: white;">
+                    @if (auth()->user()->dosen)
+                        {{ auth()->user()->dosen->nama }}<br>
+                        {{ auth()->user()->dosen->nip }}<br>
+                        @if (session('auth_login') == 'dosen')
+                            @if (session('role_dosen') == null)
+                                {{ LIST_STRING_ROLE[auth()->user()->role->id] }}
+                            @elseif(session('role_dosen') == 'pembimbing')
+                                DOSEN PEMBIMBING
+                            @elseif(session('role_dosen') == 'penguji')
+                                DOSEN PENGUJI
+                            @elseif(session('role_dosen') == 'wali')
+                                DOSEN WALI
+                            @endif
                         @endif
-                    @elseif(session('auth_login') == 'koordinator_pa')
+                    @elseif (auth()->user()->mahasiswa)
+                        {{ auth()->user()->mahasiswa->nama }}<br>
+                        {{ auth()->user()->mahasiswa->nim }}<br>
+                        {{ LIST_STRING_ROLE[auth()->user()->role->id] }}
+                    @else
+                        Patrick Adolf Telnoni
+                        <br>
+                        5171<br>
+                        {{-- {{ auth()->user()->admin->nama }}<br> --}}
                         KOORDINATOR PA
-                    @elseif(session('auth_login') == 'kaprodi')
-                        KAPRODI
+                        {{-- {{ LIST_STRING_ROLE[auth()->user()->role->id] }} --}}
                     @endif
-                @elseif (auth()->user()->mahasiswa)
-                    {{ auth()->user()->mahasiswa->nama }}<br>
-                    {{ auth()->user()->mahasiswa->nim }}<br>
-                    {{ LIST_STRING_ROLE[auth()->user()->role->id] }}
-                @else
-                    {{ auth()->user()->admin->nama }}<br>
-                    {{ LIST_STRING_ROLE[auth()->user()->role->id] }}
-                @endif
-                <br>
-                {{ strtoupper(\App\Models\Prodi::find(auth()->user()->prodi_id)->nama ?? '') }}
-            </span>
+                    <br>
+                    {{ strtoupper(optional(\App\Models\Prodi::find(auth()->user()->prodi_id))->nama) }}
+                </span>
+                
+                
         </center>
     </div>
     {{-- </div> --}}
@@ -141,6 +143,181 @@
                         <p>Nilai Mahasiswa</p>
                     </a>
                 </li>
+                <li
+                    class="nav-item {{ Request::is('koordinator-pa/komponen-nilai/proposal*') || Request::is('koordinator-pa/komponen-nilai/prasidang*') || Request::is('koordinator-pa/komponen-nilai/sidang*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::is('koordinator-pa/komponen-nilai/proposal*') || Request::is('koordinator-pa/komponen-nilai/prasidang*') || Request::is('koordinator-pa/komponen-nilai/sidang*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>
+                            Kelola Komponen Nilai
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.komponen-nilai.proposal') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Proposal</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.komponen-nilai.prasidang') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Prasidang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.komponen-nilai.sidang') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sidang</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ Request::is('koordinator-pa/upload-daftar-mahasiswa/proposal*') || Request::is('koordinator-pa/upload-daftar-mahasiswa/prasidang*') || Request::is('koordinator-pa/upload-daftar-mahasiswa/sidang*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::is('koordinator-pa/upload-daftar-mahasiswa/proposal*') || Request::is('koordinator-pa/upload-daftar-mahasiswa/prasidang*') || Request::is('koordinator-pa/upload-daftar-mahasiswa/sidang*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>
+                            Upload Daftar Mahasiswa
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.proposal') }}"
+                                class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Proposal</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.prasidang') }}"
+                                class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Prasidang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.upload-daftar-mahasiswa.sidang') }}"
+                                class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sidang</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ Request::is('koordinator-pa/jadwal/prasidang*') || Request::is('koordinator-pa/jadwal/sidang*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::is('koordinator-pa/jadwal/prasidang*') || Request::is('koordinator-pa/jadwal/sidang*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>
+                            Jadwal
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.jadwal.prasidang') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Prasidang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.jadwal.sidang') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sidang</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ Request::is('koordinator-pa.input-nilai-form.*') || Request::is('koordinator-pa.input-nilai-form.*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::is('koordinator-pa.input-nilai-form.') || Request::is('koordinator-pa.input-nilai-form.*') ? 'active' : '' }}"
+                        data-toggle="collapse" data-target="#collapse-madusem" aria-expanded="false">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>Madusem <span class="badge badge-warning badge-xs">New</span></p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <!-- Item 1 -->
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.komponen-nilai.input-nilai-form') }}"
+                                class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Input Data Mahasiswa Madusem</p>
+                            </a>
+                        </li>
+                        <!-- Item 2 -->
+                        <li class="nav-item">
+                            <a href="{{ route('backend.koordinator-pa.komponen-nilai.input-nilai') }}"
+                                class="nav-link {{ Request::is('koordinator-pa/input-nilai-form') || Request::is('koordinator-pa/input-nilai-form/*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Input Nilai Mahasiswa Madusem</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-jadwal-prasidang') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-jadwal-prasidang') || Request::is('koordinator-pa/view-jadwal-prasidang/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Jadwal Prasidang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-jadwal-sidang') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-jadwal-sidang') || Request::is('koordinator-pa/view-jadwal-sidang/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Jadwal Sidang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-progress-mahasiswa') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-progress-mahasiswa') || Request::is('koordinator-pa/view-progress-mahasiswa/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Progress Mahasiswa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-tidak-lulus-sidang') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-tidak-lulus-sidang') || Request::is('koordinator-pa/view-tidak-lulus-sidang/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Tidak Lulus Sidang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-nilai-proposal') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-nilai-proposal') || Request::is('koordinator-pa/view-nilai-proposal/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Nilai Proposal</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-nilai-prasidang') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-nilai-prasidang') || Request::is('koordinator-pa/view-nilai-prasidang/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Nilai Prasidang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('backend.koordinator-pa.view-nilai-sidang') }}"
+                        class="nav-link {{ Request::is('koordinator-pa/view-nilai-sidang') || Request::is('koordinator-pa/view-nilai-sidang/*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>View Nilai Sidang</p>
+                    </a>
+                </li>
+                <li
+                class="nav-item {{ Request::is('dosen/daftar-mahasiswa/bimbingan*') || Request::is('dosen/daftar-mahasiswa/sidang*') ? 'menu-open' : '' }}">
+                <a href="#"
+                    class="nav-link {{ Request::is('dosen/daftar-mahasiswa/bimbingan*') || Request::is('dosen/daftar-mahasiswa/sidang*') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>
+                        Daftar Mahasiswa
+
+                    </p>
+                </a>
+            </li>
             @endif
             @if (auth()->user()->role_id == IS_MAHASISWA)
                 <li
@@ -169,6 +346,21 @@
                                 <p>Nilai Sidang</p>
                             </a>
                         </li>
+                        @php
+                            // Mendapatkan data mahasiswa yang sedang login melalui model User
+                            $user = Auth::user(); // Menggunakan Auth facade untuk mendapatkan pengguna yang sedang login
+
+                            // Memastikan bahwa pengguna yang sedang login memiliki data mahasiswa
+                            $mahasiswa = $user ? $user->mahasiswa : null;
+                        @endphp
+                        @if ($mahasiswa && $mahasiswa->madusem)
+                            <li class="nav-item">
+                                <a href="{{ route('backend.mahasiswa.nilai-madusem') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nilai Madusem</p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 <li
@@ -267,6 +459,36 @@
                                     </a>
                                 </li>
                             </ul>
+                            @php
+                            $dosen = auth()->user()->dosen()->first();
+                            if ($dosen) {
+                                $dosenId = $dosen->id;
+                            } else {
+                                // Logika untuk menangani jika objek dosen tidak ditemukan
+                                // Misalnya, jika user tidak terautentikasi sebagai dosen
+                            }
+                            $madusemExists = DB::table('madusem')
+                                ->where('pbb_1_id', $dosenId)
+                                ->orWhere('pbb_2_id', $dosenId)
+                                ->exists();
+                            @endphp
+                            @if($madusemExists)
+                            @php
+                            // Misalnya, Anda dapat mendapatkan id madusem pertama yang sesuai dengan pbb_1_id atau pbb_2_id
+                            $madusemId = DB::table('madusem')
+                                ->where('pbb_1_id', $dosenId)
+                                ->orWhere('pbb_2_id', $dosenId)
+                                ->value('id');
+                                @endphp
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.dosen.daftar-mahasiswa.madusem', ['madusemId' => $madusemId]) }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Madusem</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endif
                         </li>
                     @endif
                     @if (session('role_dosen') == 'penguji')

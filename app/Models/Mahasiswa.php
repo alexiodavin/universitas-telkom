@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Madusem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mahasiswa extends Model
 {
@@ -24,6 +25,7 @@ class Mahasiswa extends Model
         'foto',
         'tahun_ajaran',
         'semester',
+        'madusem',
     ];
 
     protected $casts = [
@@ -45,4 +47,18 @@ class Mahasiswa extends Model
     public function mahasiswa_import(){
         return $this->belongsTo('App\Models\MahasiswaImport','mahasiswa_import_id')->withTrashed();
     }
+
+    public function komponenmadusem()
+    {
+        return $this->hasMany(KomponenMadusem::class, 'mahasiswa_id');
+    }
+    public function madusems()
+    {
+        return $this->hasMany(Madusem::class, 'mahasiswa_id');
+    }
+    public function madusem()
+    {
+        return $this->hasOne(Madusem::class, 'mahasiswa_id');
+    }
+
 }

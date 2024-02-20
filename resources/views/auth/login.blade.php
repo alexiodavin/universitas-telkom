@@ -233,7 +233,7 @@
         @endphp
     @else
         @php
-            session(['auth_login' => null]);
+              session(['auth_login' => 'dosen']);
         @endphp
     @endif
 </body>

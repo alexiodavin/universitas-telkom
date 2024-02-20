@@ -45,4 +45,7 @@ class MahasiswaImport extends Model
     public function prodi(){
         return $this->belongsTo('App\Models\Prodi','prodi_id')->withTrashed();
     }
+    public function mahasiswa(){
+        return $this->belongsTo('App\Models\Mahasiswa','mahasiswa_id')->withTrashed();
+    }
 }
